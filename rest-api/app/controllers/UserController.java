@@ -3,6 +3,7 @@ package controllers;
 import actions.JWTAuthenticated;
 import com.fasterxml.jackson.databind.JsonNode;
 import payload.LoginPayload;
+import payload.RegistrationPayload;
 import play.libs.Json;
 import play.mvc.Http;
 import play.mvc.Result;
@@ -27,10 +28,19 @@ public class UserController {
         return userService.getAll().thenApply(users -> ok(Json.toJson(users)));
     }
 
-    public CompletionStage<Result> create(Http.Request request) {
+    public CompletionStage<Result> register(Http.Request request) {
         JsonNode json = request.body().asJson();
-        LoginPayload loginPayload = Json.fromJson(json, LoginPayload.class);
-        return userService.createUser(loginPayload)
-                .thenApplyAsync(user -> ok(Json.toJson(user)));
+        RegistrationPayload payload = Json.fromJson(json, RegistrationPayload.class);
+        return userService.registerUser(payload)
+                .thenApplyAsync(token -> ok("jwt: " + token))
+                .exceptionally(t -> internalServerError(Json.newObject().put("message", t.getMessage())));
+    }
+
+    public CompletionStage<Result> login(Http.Request request) {
+        JsonNode json = request.body().asJson();
+        LoginPayload payload = Json.fromJson(json, LoginPayload.class);
+        return userService.loginUser(payload)
+                .thenApplyAsync(token -> ok("jwt: " + token))
+                .exceptionally(t -> internalServerError(Json.newObject().put("message", t.getMessage())));
     }
 }

@@ -27,7 +27,6 @@ public class JWTAuthenticationAction extends Action<JWTAuthenticated> {
     private final HttpExecutionContext ec;
     private final UserRepository userRepository;
     private final static TypedKey<User> userTypedKey = TypedKey.create("user");
-    private final String key = TextCodec.BASE64.encode("auction-secret");
 
     @Inject
     public JWTAuthenticationAction(HttpExecutionContext ec, UserRepository userRepository) {
@@ -51,7 +50,7 @@ public class JWTAuthenticationAction extends Action<JWTAuthenticated> {
         String username;
 
         try {
-            jws = Jwts.parser().setSigningKey(key).parseClaimsJws(jwtString);
+            jws = Jwts.parser().setSigningKey(Secret.key).parseClaimsJws(jwtString);
             username = jws.getBody().get("username", String.class);
         } catch (JwtException ex) {
             return supplyAsync(() -> unauthorized(Json.newObject().put("message", "Unauthorized3")));

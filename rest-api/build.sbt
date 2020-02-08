@@ -14,7 +14,8 @@ libraryDependencies ++= Seq(
   "org.hibernate" % "hibernate-core" % "5.4.9.Final",
   "org.postgresql" % "postgresql" % "42.2.9",
   "org.projectlombok" % "lombok" % "1.18.12" % "provided",
-  "io.jsonwebtoken" % "jjwt" % "0.9.1"
+  "io.jsonwebtoken" % "jjwt" % "0.9.1",
+  "org.mindrot" % "jbcrypt" % "0.4"
 )
 
 PlayKeys.externalizeResources := false

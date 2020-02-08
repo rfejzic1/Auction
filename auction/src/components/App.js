@@ -1,11 +1,26 @@
 import React from 'react';
-import styles from '../styles/App.module.scss';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
+import Home from './Home';
+import Login from './Login';
+import Register from './Register';
+import TopBar from './TopBar';
+
+import '../styles/App.scss';
+import Wrapper from './Wrapper';
 
 function App() {
   return (
-    <div className={styles.class}>
-      <p>Auction</p>
-    </div>
+    <Router>
+      <TopBar/>
+      <Switch>
+        <Wrapper>
+          <Route exact path='/' component={Home} />
+          <Route path='/login' component={Login} />
+          <Route path='/register' component={Register} />
+        </Wrapper>
+      </Switch>
+    </Router>
   );
 }
 

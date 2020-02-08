@@ -1,4 +1,5 @@
 GET     /                           controllers.HomeController.index
 GET     /users                      controllers.UserController.index
+POST     /users                     controllers.UserController.create(request: Request)
 
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

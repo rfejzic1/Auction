@@ -1,6 +1,7 @@
 package services;
 
 import models.User;
+import payload.LoginPayload;
 import play.libs.concurrent.HttpExecutionContext;
 import repositories.JPAUserRepository;
 import repositories.UserRepository;
@@ -27,9 +28,11 @@ public class UserService {
                 .thenApplyAsync(userStream -> userStream.collect(Collectors.toList()), ec.current());
     }
 
-    public CompletionStage<User> createDummyUser(String username) {
+    public CompletionStage<User> createUser(LoginPayload payload) {
         User user = new User();
-        user.setUsername(username);
+        user.username = payload.username;
+        user.password = payload.password;
+        user.email = payload.email;
         return userRepository.create(user);
     }
 }

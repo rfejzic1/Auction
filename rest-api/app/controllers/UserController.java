@@ -1,5 +1,6 @@
 package controllers;
 
+import actions.JWTAuthenticated;
 import com.fasterxml.jackson.databind.JsonNode;
 import payload.LoginPayload;
 import play.libs.Json;
@@ -21,6 +22,7 @@ public class UserController {
         this.userService = userService;
     }
 
+    @JWTAuthenticated
     public CompletionStage<Result> index() {
         return userService.getAll().thenApply(users -> ok(Json.toJson(users)));
     }

@@ -13,7 +13,8 @@ libraryDependencies ++= Seq(
   javaJdbc,
   "org.hibernate" % "hibernate-core" % "5.4.9.Final",
   "org.postgresql" % "postgresql" % "42.2.9",
-  "org.projectlombok" % "lombok" % "1.18.12" % "provided"
+  "org.projectlombok" % "lombok" % "1.18.12" % "provided",
+  "io.jsonwebtoken" % "jjwt" % "0.9.1"
 )
 
 PlayKeys.externalizeResources := false

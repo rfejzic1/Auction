@@ -1,7 +1,10 @@
 $dark-1: #2a2a2a;
+$primary: #9400d8;
+$gmail-red: #d74437;
+$facebook-blue: #504693;
 
 .wrapper {
-    max-width: 1100px;
+    max-width: 920px;
     width: 100%;
     margin: 0px auto;
 }
@@ -9,9 +12,9 @@ $dark-1: #2a2a2a;
 .topBar {
     background-color: $dark-1;
     color: #9b9b9b;
-    padding: 8px 0px;
-    font-size: 14px;
-    word-spacing: 20px;
+    padding: 4px 0px;
+    font-size: 12px;
+    word-spacing: 14px;
 
     div {
         @extend .wrapper;
@@ -28,8 +31,105 @@ $dark-1: #2a2a2a;
     }
 }
 
+%input-basic {
+    border-radius: 0px;
+    padding: 8px;
+    margin: 4px 0px;
+    outline: none;
+    background-color: #fcfcfc;
+    border: 1px solid #d8d8d8;
+    font-size: 14px;
+    transition: border-color 50ms ease-in-out;
+    
+    &:focus, &:hover {
+        border-color: $primary;
+    }
+}
+
+.label {
+    display: block;
+    margin: 8px 0px;
+}
+
+.select-field {
+    @extend %input-basic;
+    appearance: none;
+    padding-right: 24px;
+    background: url('../resources/angle-down-solid.svg') no-repeat;
+    background-position: right 8px top 10px;
+    background-size: 10px;
+}
+
+.text-field {
+    @extend %input-basic;
+}
+
+.button {
+    @extend %input-basic;
+    min-width: 96px;
+    padding: 10px 20px;
+}
+
+%btn-filled {
+    border: none;
+    color: white;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.btn-primary {
+    @extend %btn-filled;
+    background-color: $primary;   
+}
+
+.btn-gmail {
+    @extend %btn-filled;
+    background-color: $gmail-red;
+}
+
+.btn-facebook {
+    @extend %btn-filled;
+    background-color: $facebook-blue;
+}
+
+.outlined {
+    border: 2px solid $primary;
+}
+
+.outlined-primary {
+    border: 2px solid $primary;
+}
+
+.text-light {
+    font-weight: 300;
+}
+
+.text-regular {
+    font-weight: 400;
+}
+
+.text-bold {
+    font-weight: 700;
+}
+
+.full-width {
+    width: 100%;
+    max-width: 100%;
+}
+
+.login-form {
+    max-width: 480px;
+}
+
 .social {
     a {
+        font-size: 24px;
+        color: rgba($color: white, $alpha: 0.4);
         margin-right: 4px;
     }
+}
+
+h1 {
+    font-size: 46px;
+    font-weight: 400;
 }

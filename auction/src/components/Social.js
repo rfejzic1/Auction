@@ -9,27 +9,21 @@ import {
     faInstagram
 } from '@fortawesome/free-brands-svg-icons';
 
-const IconLink = ({ icon, color, link }) => {
+const IconLink = ({ icon, link }) => {
     return (
         <a href={link} target='blank'>
-            <FontAwesomeIcon className='social' color={color} icon={icon} mask={faCircle} transform='shrink-6'/>
+            <FontAwesomeIcon className='social' icon={icon} mask={faCircle} transform='shrink-6'/>
         </a>
     );
 }
 
-const style = {
-    fontSize: 24
-};
-
 const Social = () => {
-    const color='rgba(255,255,255,0.5)';
-
     return (
-        <span className='social' style={style}>
-            <IconLink icon={faFacebookF} color={color} link='https://facebook.com' />
-            <IconLink icon={faInstagram} color={color} link='https://instagram.com' />
-            <IconLink icon={faTwitter} color={color} link='https://twitter.com' />
-            <IconLink icon={faGooglePlusG} color={color} link='https://plus.google.com' />
+        <span className='social'>
+            <IconLink icon={faFacebookF} link='https://facebook.com' />
+            <IconLink icon={faInstagram} link='https://instagram.com' />
+            <IconLink icon={faTwitter} link='https://twitter.com' />
+            <IconLink icon={faGooglePlusG} link='https://plus.google.com' />
         </span>
     )
 }

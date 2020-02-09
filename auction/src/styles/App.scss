@@ -133,3 +133,25 @@ h1 {
     font-size: 46px;
     font-weight: 400;
 }
+
+.container {
+    max-width: 700px;
+    margin: 0px auto;
+    // border: 1px solid #d8d8d8;
+    color: $dark-1;
+    box-shadow: 0px 0px 2px 1px rgba($color: $dark-1, $alpha: 0.1);
+}
+
+.container-header {
+    background: #fafafa;
+    padding: 8px;
+    text-align: center;
+
+    h2 {
+        font-size: 20px;
+    }
+}
+
+.container-body {
+    padding: 32px;
+}

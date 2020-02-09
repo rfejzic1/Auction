@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 
 import Social from './Social';
+import Wrapper from './Wrapper';
 
 const Links = () => 
     <span>
@@ -11,10 +12,10 @@ const Links = () =>
 const TopBar = () => {
     return (
         <div className='topBar'>
-            <div>
+            <Wrapper flex>
                 <Social/>
                 <Links/>
-            </div>
+            </Wrapper>
         </div>
     )
 }

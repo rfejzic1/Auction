@@ -9,19 +9,19 @@ $facebook-blue: #504693;
     margin: 0px auto;
 }
 
+.wrapper-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
 .topBar {
     background-color: $dark-1;
     color: #9b9b9b;
     padding: 4px 0px;
     font-size: 12px;
     word-spacing: 14px;
-
-    div {
-        @extend .wrapper;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
 
     a {
         color: white;
@@ -33,7 +33,7 @@ $facebook-blue: #504693;
 
 %input-basic {
     border-radius: 0px;
-    padding: 8px;
+    padding: 12px;
     margin: 4px 0px;
     outline: none;
     background-color: #fcfcfc;
@@ -48,7 +48,6 @@ $facebook-blue: #504693;
 
 .label {
     display: block;
-    margin: 8px 0px;
 }
 
 .select-field {
@@ -67,7 +66,7 @@ $facebook-blue: #504693;
 .button {
     @extend %input-basic;
     min-width: 96px;
-    padding: 10px 20px;
+    padding: 12px 20px;
 }
 
 %btn-filled {
@@ -85,11 +84,15 @@ $facebook-blue: #504693;
 .btn-gmail {
     @extend %btn-filled;
     background-color: $gmail-red;
+    max-width: 225px;
+    width: 100%;
 }
 
 .btn-facebook {
     @extend %btn-filled;
     background-color: $facebook-blue;
+    max-width: 225px;
+    width: 100%;
 }
 
 .outlined {
@@ -135,11 +138,11 @@ h1 {
 }
 
 .container {
-    max-width: 700px;
+    max-width: 550px;
     margin: 0px auto;
-    // border: 1px solid #d8d8d8;
+    border: 1px solid #d8d8d8;
     color: $dark-1;
-    box-shadow: 0px 0px 2px 1px rgba($color: $dark-1, $alpha: 0.1);
+    box-shadow: 0px 0px 1px 1px rgba($color: $dark-1, $alpha: 0.1);
 }
 
 .container-header {
@@ -154,4 +157,8 @@ h1 {
 
 .container-body {
     padding: 32px;
+}
+
+hr {
+    margin: 16px;
 }

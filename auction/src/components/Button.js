@@ -1,12 +1,6 @@
 import React from 'react'
 import classNames from 'classnames';
 
-// With icon left/right
-// Solid gray/purple
-// With outline gray/purple filled white/
-// uppercase
-
-
 const Button = props => {
     const { type, fullWidth } = props;
     const classes = classNames(

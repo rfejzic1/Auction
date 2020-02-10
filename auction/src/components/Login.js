@@ -7,6 +7,9 @@ import Button from './Button';
 import Container from './Container';
 import Wrapper from './Wrapper';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGooglePlus, faFacebookSquare } from '@fortawesome/free-brands-svg-icons';
+
 const Login = () => {
     return (
         <Container title='LOGIN'>
@@ -16,8 +19,14 @@ const Login = () => {
             <TextField name='password' fullWidth password />
             <Button type='primary' fullWidth>Login</Button>
             <Wrapper flex>
-                <Button type='gmail'>Login with Gmail</Button>
-                <Button type='facebook'>Login with facebook</Button>
+                <Button type='gmail'>
+                    <FontAwesomeIcon icon={faGooglePlus}/>
+                    <span>{'       Login with Gmail'}</span>
+                </Button>
+                <Button type='facebook'>
+                    <FontAwesomeIcon icon={faFacebookSquare}/>
+                    <span>{'       Login with Facebook'}</span>
+                </Button>
             </Wrapper>
             <Wrapper flex>
                 <Link to='/'>Forgot password?</Link>

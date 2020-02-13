@@ -9,11 +9,15 @@ $facebook-blue: #504693;
     margin: 0px auto;
 }
 
-.wrapper-flex {
+.flex {
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
+}
+
+.flex-around {
+    justify-content: space-around;
 }
 
 .topBar {
@@ -39,7 +43,7 @@ $facebook-blue: #504693;
     background-color: #fcfcfc;
     border: 1px solid #d8d8d8;
     font-size: 14px;
-    transition: border-color 50ms ease-in-out;
+    transition: border-color 100ms ease-in-out;
     
     &:focus, &:hover {
         border-color: $primary;
@@ -74,6 +78,15 @@ $facebook-blue: #504693;
     color: white;
     text-transform: uppercase;
     font-weight: 700;
+    transition: opacity 100ms ease-in-out;
+
+    &:hover {
+        opacity: 0.8;
+    }
+
+    &:focus {
+        opacity: 0.9;
+    }
 }
 
 .btn-primary {
@@ -122,6 +135,10 @@ $facebook-blue: #504693;
 
 .login-form {
     max-width: 480px;
+}
+
+.form-group {
+    margin: 24px 0px;
 }
 
 .social {

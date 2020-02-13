@@ -1,13 +1,12 @@
 import React from 'react'
 import classNames from 'classnames';
 
-const Wrapper = ({ children, flex, around }) => {
+const FormGroup = ({ children, flex, around }) => {
     const classes = classNames(
-        'wrapper',
+        'form-group',
         { 'flex': flex },
         { 'flex-around': around }
-    );
-
+    )
     return (
         <div className={classes}>
             {children}
@@ -15,4 +14,4 @@ const Wrapper = ({ children, flex, around }) => {
     )
 }
 
-export default Wrapper;
+export default FormGroup;

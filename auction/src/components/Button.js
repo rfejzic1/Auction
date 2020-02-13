@@ -2,7 +2,7 @@ import React from 'react'
 import classNames from 'classnames';
 
 const Button = props => {
-    const { type, fullWidth } = props;
+    const { type, fullWidth, onClick } = props;
     const classes = classNames(
         'button',
         {'btn-primary': type === 'primary'},
@@ -12,7 +12,7 @@ const Button = props => {
     );
 
     return (
-        <button className={classes} type="button" >
+        <button onClick={onClick} className={classes} type="button" >
             {props.children}
         </button>
     )

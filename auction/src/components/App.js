@@ -7,7 +7,7 @@ import Register from './Register';
 import TopBar from './TopBar';
 
 import '../styles/App.scss';
-import Wrapper from './Wrapper';
+import Wrapper from './Common/Wrapper';
 
 function App() {
   return (

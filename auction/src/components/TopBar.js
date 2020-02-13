@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-import Social from './Social';
-import Wrapper from './Wrapper';
+import Social from './Common/Social';
+import Wrapper from './Common/Wrapper';
 
 const Links = () => 
     <span>

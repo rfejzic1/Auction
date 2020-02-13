@@ -1,11 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-import TextField from './TextField';
-import Label from './Label';
-import Button from './Button';
-import Container from './Container';
-import Wrapper from './Wrapper';
+import TextField from './Controls/TextField';
+import Label from './Controls/Label';
+import Button from './Controls/Button';
+import Container from './Common/Container';
+import Wrapper from './Common/Wrapper';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGooglePlus, faFacebookSquare } from '@fortawesome/free-brands-svg-icons';

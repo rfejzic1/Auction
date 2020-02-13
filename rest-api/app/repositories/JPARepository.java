@@ -1,5 +1,6 @@
 package repositories;
 
+import lombok.AllArgsConstructor;
 import models.utils.DatabaseExecutionContext;
 import play.db.jpa.JPAApi;
 
@@ -12,16 +13,11 @@ import java.util.stream.Stream;
 
 import static java.util.concurrent.CompletableFuture.supplyAsync;
 
+@AllArgsConstructor
 public abstract class JPARepository<T, ID> implements Repository<T, ID> {
     private final JPAApi jpaApi;
     private final DatabaseExecutionContext executionContext;
     private final Class<T> genericClassType;
-
-    public JPARepository(JPAApi jpaApi, DatabaseExecutionContext executionContext, Class<T> genericClassType) {
-        this.jpaApi = jpaApi;
-        this.executionContext = executionContext;
-        this.genericClassType = genericClassType;
-    }
 
     @Override
     public CompletionStage<Stream<T>> getAll() {
@@ -53,9 +49,8 @@ public abstract class JPARepository<T, ID> implements Repository<T, ID> {
     }
 
     private Stream<T> findAll(EntityManager em) {
-        // todo: Find a better way :/ SQL injection? naah?
-        String queryString = "select t from " + genericClassType.getSimpleName() + " t";
-        TypedQuery<T> query = em.createQuery(queryString, genericClassType);
+        String findAllQuery = "select t from " + genericClassType.getSimpleName() + " t";
+        TypedQuery<T> query = em.createQuery(findAllQuery, genericClassType);
         return query.getResultList().stream();
     }
 

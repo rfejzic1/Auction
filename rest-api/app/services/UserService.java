@@ -1,17 +1,15 @@
 package services;
 
-import actions.Secret;
-import com.fasterxml.jackson.databind.JsonNode;
+import common.Constants;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.impl.TextCodec;
+import lombok.RequiredArgsConstructor;
 import models.User;
-import models.UserRole;
 import org.mindrot.jbcrypt.BCrypt;
 import payload.LoginPayload;
 import payload.RegistrationPayload;
-import play.libs.Json;
 import play.libs.concurrent.HttpExecutionContext;
-import repositories.JPAUserRepository;
 import repositories.UserRepository;
 
 import javax.inject.Inject;
@@ -21,46 +19,35 @@ import java.util.List;
 import java.util.concurrent.CompletionStage;
 import java.util.stream.Collectors;
 
-import static java.util.concurrent.CompletableFuture.supplyAsync;
+import static common.Constants.KEY;
 
 @Singleton
+@RequiredArgsConstructor(onConstructor=@__(@Inject))
 public class UserService {
     private final UserRepository userRepository;
     private final HttpExecutionContext ec;
-
-    @Inject
-    public UserService(JPAUserRepository userRepository, HttpExecutionContext httpExecutionContext) {
-        this.userRepository = userRepository;
-        this.ec = httpExecutionContext;
-    }
 
     public CompletionStage<List<User>> getAll() {
         return userRepository.getAll()
                 .thenApplyAsync(userStream -> userStream.collect(Collectors.toList()), ec.current());
     }
 
-    public CompletionStage<User> createUser(LoginPayload payload) {
-        User user = new User();
-        user.username = payload.username;
-        user.password = payload.password;
-        user.email = payload.email;
-        return userRepository.create(user);
-    }
-
     public CompletionStage<String> loginUser(LoginPayload payload) {
         return userRepository
                 .findByUsername(payload.username)
                 .thenApplyAsync(user -> {
-                    if(user == null)
-                        throw new RuntimeException("unauthenticated");
+                    if(user == null) {
+                        throw new RuntimeException(Constants.Messages.UNAUTHENTICATED);
+                    }
 
                     boolean passwordsMatch = BCrypt.checkpw(payload.password, user.password);
 
-                    if(passwordsMatch)
+                    if(passwordsMatch) {
                         return createJWT(user);
+                    }
 
-                    throw new RuntimeException("unauthenticated");
-                });
+                    throw new RuntimeException(Constants.Messages.UNAUTHENTICATED);
+                }, ec.current());
     }
 
     public CompletionStage<String> registerUser(RegistrationPayload payload) {
@@ -83,10 +70,10 @@ public class UserService {
     private String createJWT(User user) {
         return Jwts.builder()
                 .setIssuedAt(new Date())
-                .claim("username", user.username)
-                .claim("email", user.email)
-                .claim("role", user.role)
-                .signWith(SignatureAlgorithm.HS256, Secret.key)
+                .claim(Constants.Fields.USERNAME, user.username)
+                .claim(Constants.Fields.EMAIL, user.email)
+                .claim(Constants.Fields.ROLE, user.role)
+                .signWith(SignatureAlgorithm.HS256, TextCodec.BASE64.encode(KEY))
                 .compact();
     }
 }

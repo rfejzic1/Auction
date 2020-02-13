@@ -1,12 +1,11 @@
 package actions;
 
-import actions.JWTAuthenticated;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.impl.TextCodec;
-import jdk.nashorn.internal.runtime.regexp.joni.Regex;
+import lombok.RequiredArgsConstructor;
 import models.User;
 import play.libs.Json;
 import play.libs.concurrent.HttpExecutionContext;
@@ -23,26 +22,26 @@ import java.util.concurrent.CompletionStage;
 import static java.util.concurrent.CompletableFuture.supplyAsync;
 import static play.mvc.Http.HeaderNames.AUTHORIZATION;
 
+import static common.Constants.*;
+import static common.Constants.Messages.*;
+
+@RequiredArgsConstructor(onConstructor=@__(@Inject))
 public class JWTAuthenticationAction extends Action<JWTAuthenticated> {
     private final HttpExecutionContext ec;
     private final UserRepository userRepository;
     private final static TypedKey<User> userTypedKey = TypedKey.create("user");
 
-    @Inject
-    public JWTAuthenticationAction(HttpExecutionContext ec, UserRepository userRepository) {
-        this.ec = ec;
-        this.userRepository = userRepository;
-    }
-
     @Override
     public CompletionStage<Result> call(Http.Request request) {
         Optional<String> authHeader = request.header(AUTHORIZATION);
 
-        if(!authHeader.isPresent())
-            return supplyAsync(() -> unauthorized(Json.newObject().put("message", "Unauthorized")));
+        if(!authHeader.isPresent()) {
+            return supplyAsync(() -> unauthorized(Json.newObject().put(Fields.MESSAGE, UNAUTHORIZED)));
+        }
 
-        if(!authHeader.get().matches("Bearer .+"))
-            return supplyAsync(() -> unauthorized(Json.newObject().put("message", "Unauthorized2")));
+        if(!authHeader.get().matches(BEARER_REGEX)) {
+            return supplyAsync(() -> unauthorized(Json.newObject().put(Fields.MESSAGE, UNAUTHORIZED)));
+        }
 
         String jwtString = authHeader.get().split(" ")[1];
 
@@ -50,10 +49,10 @@ public class JWTAuthenticationAction extends Action<JWTAuthenticated> {
         String username;
 
         try {
-            jws = Jwts.parser().setSigningKey(Secret.key).parseClaimsJws(jwtString);
-            username = jws.getBody().get("username", String.class);
+            jws = Jwts.parser().setSigningKey(TextCodec.BASE64.encode(KEY)).parseClaimsJws(jwtString);
+            username = jws.getBody().get(Fields.USERNAME, String.class);
         } catch (JwtException ex) {
-            return supplyAsync(() -> unauthorized(Json.newObject().put("message", "Unauthorized3")));
+            return supplyAsync(() -> unauthorized(Json.newObject().put(Fields.USERNAME, UNAUTHORIZED)));
         }
 
         return userRepository

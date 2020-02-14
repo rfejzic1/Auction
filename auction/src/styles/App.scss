@@ -3,6 +3,8 @@ $primary: #9400d8;
 $gmail-red: #d74437;
 $facebook-blue: #504693;
 
+$footer-height: 280px;
+
 .wrapper {
     max-width: 968px;
     width: 100%;
@@ -39,7 +41,7 @@ $facebook-blue: #504693;
 %input-basic {
     border-radius: 0px;
     padding: 12px;
-    margin: 4px 0px;
+    margin: 4px;
     outline: none;
     background-color: #fcfcfc;
     border: 1px solid #d8d8d8;
@@ -109,8 +111,20 @@ $facebook-blue: #504693;
     width: 100%;
 }
 
-.outlined {
+.text-field-dark {
+    background-color: #3b3b33;
+    color: rgba($color: white, $alpha: 0.4);
+    border: none;
+}
+
+.btn-dark {
+    @extend %btn-filled;
+    background-color: #3d3d3d;
     border: 2px solid $primary;
+}
+
+.outlined {
+    border: 2px solid gray;
 }
 
 .outlined-primary {
@@ -140,14 +154,6 @@ $facebook-blue: #504693;
 
 .form-group {
     margin: 24px 0px;
-}
-
-.social {
-    a {
-        font-size: 20px;
-        color: rgba($color: white, $alpha: 0.4);
-        margin-right: 4px;
-    }
 }
 
 h1 {
@@ -254,5 +260,56 @@ h1 {
 
     .current {
         color: $dark-1;
+    }
+}
+
+.main {
+    min-height: 80vh;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+
+    background-color: $dark-1;
+    color: white;
+
+    height: $footer-height;
+    padding: 48px;
+    font-size: 14px;
+
+    .column {
+        display: inline-block;
+        min-width: 240px;
+        max-width: 340px;
+        margin: 0px 16px;
+    }
+
+    span, a {
+        color: white;
+        text-decoration: none;
+        display: block;
+        margin-top: 8px;
+        opacity: 0.8;
+    }
+
+    a:hover {
+        opacity: 1;
+    }
+
+    .title {
+        opacity: 0.5;
+        text-transform: uppercase;
+        display: block;
+        margin-bottom: 16px;
+    }
+}
+
+.social {
+    a {
+        display: inline;
+        font-size: 20px;
+        color: rgba($color: white, $alpha: 0.4);
+        margin-right: 4px;
     }
 }

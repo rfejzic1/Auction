@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGooglePlus, faFacebookSquare } from '@fortawesome/free-brands-svg-icons';
+
 import TextField from './Controls/TextField';
 import Label from './Controls/Label';
 import Button from './Controls/Button';
 import Container from './Common/Container';
 import Divider from './Common/Divider';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGooglePlus, faFacebookSquare } from '@fortawesome/free-brands-svg-icons';
 import FormGroup from './Controls/FormGroup';
 import Breadcrumbs from './Common/Breadcrumbs';
 
@@ -18,7 +18,7 @@ const Login = () => {
 
     return (
         <React.Fragment>
-            <Breadcrumbs current='login' path='user/ '/>
+            <Breadcrumbs current='login'/>
             <Divider/>
             <Container title='LOGIN'>
                 <FormGroup>

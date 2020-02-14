@@ -98,14 +98,14 @@ $facebook-blue: #504693;
 .btn-gmail {
     @extend %btn-filled;
     background-color: $gmail-red;
-    max-width: 225px;
+    max-width: 230px;
     width: 100%;
 }
 
 .btn-facebook {
     @extend %btn-filled;
     background-color: $facebook-blue;
-    max-width: 225px;
+    max-width: 230px;
     width: 100%;
 }
 
@@ -144,7 +144,7 @@ $facebook-blue: #504693;
 
 .social {
     a {
-        font-size: 24px;
+        font-size: 20px;
         color: rgba($color: white, $alpha: 0.4);
         margin-right: 4px;
     }
@@ -204,14 +204,54 @@ h1 {
 .logo {
     color: $primary;
     font-weight: 300;
-    font-size: 24px;
+    font-size: 20px;
     text-decoration: none;
     max-width: 200px;
     width: 100%;
+    text-transform: uppercase;
+    letter-spacing: 0.84px;
 }
 
 .search-bar {
+    display: inline-block;
+    position: relative;
     justify-self: center;
     align-self: center;
-    width: 320px;
+    width: 420px;
+
+    .search-field {
+        width: 100%;
+        padding-right: 42px;
+        box-shadow: 0 0 2px 1px rgba($color: $dark-1, $alpha: 0.1);    
+    }
+
+    svg {
+        transform-origin: center;
+        position: absolute;
+        right: 16px;
+        top: 18px
+    }
+}
+
+.breadcrumbs-bar {
+    background-color: #fafafa;
+    padding: 12px;
+    color: $dark-1;
+    text-transform: uppercase;
+
+    h2 {
+        display: inline-block;
+        font-weight: 400;
+        font-size: 16px;
+        letter-spacing: 0.63px;
+    }
+
+    span {
+        color: #9B9B9B;
+        font-size: 14px;
+    }
+
+    .current {
+        color: $dark-1;
+    }
 }

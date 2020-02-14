@@ -4,9 +4,10 @@ $gmail-red: #d74437;
 $facebook-blue: #504693;
 
 .wrapper {
-    max-width: 920px;
+    max-width: 968px;
     width: 100%;
     margin: 0px auto;
+    padding: 0px 24px;
 }
 
 .flex {
@@ -176,7 +177,41 @@ h1 {
     padding: 32px;
 }
 
-hr {
+.divider {
     opacity: 0;
     margin: 32px 0px;
+}
+
+.nav-bar {
+    padding: 4px 0px;
+}
+
+.nav-links {
+    a {
+        text-decoration: none;
+        color: $dark-1;
+        font-weight: 300;
+        margin-left: 24px;
+        font-size: 14px;
+    }
+
+    .active {
+        color: $primary;
+        font-weight: 700;
+    }
+}
+
+.logo {
+    color: $primary;
+    font-weight: 300;
+    font-size: 24px;
+    text-decoration: none;
+    max-width: 200px;
+    width: 100%;
+}
+
+.search-bar {
+    justify-self: center;
+    align-self: center;
+    width: 320px;
 }

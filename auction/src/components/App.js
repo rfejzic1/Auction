@@ -4,18 +4,21 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './Home';
 import Login from './Login';
 import Register from './Register';
-import TopBar from './TopBar';
+import TopBar from './Common/TopBar';
+import NavBar from './Common/NavBar';
+import Wrapper from './Common/Wrapper';
+import Divider from './Common/Divider';
 
 import '../styles/App.scss';
-import Wrapper from './Common/Wrapper';
 
 function App() {
   return (
     <Router>
       <TopBar/>
+      <NavBar/>
       <Switch>
         <Wrapper>
-          <hr/>
+          <Divider/>
           <Route exact path='/' component={Home} />
           <Route path='/login' component={Login} />
           <Route path='/register' component={Register} />

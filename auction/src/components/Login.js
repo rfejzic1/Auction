@@ -21,7 +21,7 @@ const Login = () => {
                 <TextField onChange={e => setEmail(e.target.value)} name='email' placeholder='e.g. johndoe@mail.com' fullWidth />
             </FormGroup>
             <FormGroup>
-                <Label isFor='email' label='Password' />
+                <Label isFor='password' label='Password' />
                 <TextField onChange={e => setPassword(e.target.value)} name='password' fullWidth password />
             </FormGroup>
             <FormGroup>

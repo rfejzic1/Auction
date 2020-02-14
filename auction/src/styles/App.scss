@@ -270,11 +270,12 @@ h1 {
 .footer {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 
     background-color: $dark-1;
     color: white;
 
-    height: $footer-height;
+    min-height: $footer-height;
     padding: 48px;
     font-size: 14px;
 
@@ -283,6 +284,7 @@ h1 {
         min-width: 240px;
         max-width: 340px;
         margin: 0px 16px;
+        min-height: 160px;
     }
 
     span, a {

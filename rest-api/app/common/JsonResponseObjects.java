@@ -6,7 +6,7 @@ import play.libs.Json;
 import static common.Constants.*;
 import static play.mvc.Http.Status.*;
 
-public class JsonErrorObjects {
+public class JsonResponseObjects {
     public static JsonNode jsonStatus(Integer status, String message) {
         return Json
                 .newObject()
@@ -20,6 +20,14 @@ public class JsonErrorObjects {
 
     public static JsonNode json404(String message) {
         return jsonStatus(NOT_FOUND, message);
+    }
+
+    public static JsonNode json401(String message) {
+        return jsonStatus(UNAUTHORIZED, message);
+    }
+
+    public static JsonNode jsonUnauthorized() {
+        return json401(Messages.UNAUTHORIZED);
     }
 
     public static JsonNode error(String message) {

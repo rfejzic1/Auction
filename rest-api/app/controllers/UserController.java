@@ -15,7 +15,7 @@ import services.UserService;
 import javax.inject.Inject;
 import java.util.concurrent.CompletionStage;
 
-import static common.JsonErrorObjects.json500;
+import static common.JsonResponseObjects.json500;
 
 @AllArgsConstructor(onConstructor=@__(@Inject))
 public class UserController extends Controller {

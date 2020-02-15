@@ -7,7 +7,6 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.impl.TextCodec;
 import lombok.RequiredArgsConstructor;
 import models.User;
-import play.libs.Json;
 import play.libs.concurrent.HttpExecutionContext;
 import play.libs.typedmap.TypedKey;
 import play.mvc.Action;
@@ -23,7 +22,7 @@ import static java.util.concurrent.CompletableFuture.supplyAsync;
 import static play.mvc.Http.HeaderNames.AUTHORIZATION;
 
 import static common.Constants.*;
-import static common.Constants.Messages.*;
+import static common.JsonResponseObjects.*;
 
 @RequiredArgsConstructor(onConstructor=@__(@Inject))
 public class JWTAuthenticationAction extends Action<JWTAuthenticated> {
@@ -36,11 +35,11 @@ public class JWTAuthenticationAction extends Action<JWTAuthenticated> {
         Optional<String> authHeader = request.header(AUTHORIZATION);
 
         if(!authHeader.isPresent()) {
-            return supplyAsync(() -> unauthorized(Json.newObject().put(Fields.MESSAGE, UNAUTHORIZED)));
+            return supplyAsync(() -> unauthorized(jsonUnauthorized()));
         }
 
         if(!authHeader.get().matches(BEARER_REGEX)) {
-            return supplyAsync(() -> unauthorized(Json.newObject().put(Fields.MESSAGE, UNAUTHORIZED)));
+            return supplyAsync(() -> unauthorized(jsonUnauthorized()));
         }
 
         String jwtString = authHeader.get().split(" ")[1];
@@ -52,7 +51,7 @@ public class JWTAuthenticationAction extends Action<JWTAuthenticated> {
             jws = Jwts.parser().setSigningKey(TextCodec.BASE64.encode(KEY)).parseClaimsJws(jwtString);
             username = jws.getBody().get(Fields.USERNAME, String.class);
         } catch (JwtException ex) {
-            return supplyAsync(() -> unauthorized(Json.newObject().put(Fields.USERNAME, UNAUTHORIZED)));
+            return supplyAsync(() -> unauthorized(jsonUnauthorized()));
         }
 
         return userRepository
@@ -63,4 +62,3 @@ public class JWTAuthenticationAction extends Action<JWTAuthenticated> {
                 }, ec.current());
     }
 }
-

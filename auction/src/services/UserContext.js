@@ -1,17 +1,24 @@
 import React, { createContext, useReducer } from 'react'
+import axios from 'axios';
 
 export const UserContext = createContext();
+
+function setAuthorizationHeaderDefault(token) {
+    axios.defaults.headers.common['Authorization'] = token;
+}
 
 const userDataReducer = (state, action) => {
     switch(action.type) {
         case 'LOGIN':
-            const { email, role } = action;
+            const { user, token } = action;
+            setAuthorizationHeaderDefault(token);
+            
             return {
                 loggedIn: true,
-                email,
-                role
+                user
             }
         case 'LOGOUT':
+            setAuthorizationHeaderDefault(null);
             return {
                 loggedIn: false
             };

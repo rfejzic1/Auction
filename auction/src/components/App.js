@@ -9,21 +9,24 @@ import NavBar from './Common/NavBar';
 import Footer from './Common/Footer';
 
 import '../styles/App.scss';
+import UserContextProvider from '../services/UserContext';
 
 function App() {
   	return (
-		<Router>
-			<div className="main">
-				<TopBar/>
-				<NavBar/>
-				<Switch>
-					<Route exact path='/' component={Home} />
-					<Route path='/login' component={Login} />
-					<Route path='/register' component={Register} />
-				</Switch>
-			</div>
+		<UserContextProvider>
+			<Router>
+				<div className="main">
+					<TopBar/>
+					<NavBar/>
+					<Switch>
+						<Route exact path='/' component={Home} />
+						<Route path='/login' component={Login} />
+						<Route path='/register' component={Register} />
+					</Switch>
+				</div>
 				<Footer/>
-		</Router>
+			</Router>
+		</UserContextProvider>
 	);
 }
 

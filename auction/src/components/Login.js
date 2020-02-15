@@ -1,8 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Link } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGooglePlus, faFacebookSquare } from '@fortawesome/free-brands-svg-icons';
+
+import { UserContext } from '../services/UserContext';
+import { login } from '../services/SessionService';
 
 import TextField from './Controls/TextField';
 import Label from './Controls/Label';
@@ -13,6 +16,8 @@ import FormGroup from './Controls/FormGroup';
 import Breadcrumbs from './Common/Breadcrumbs';
 
 const Login = () => {
+    const {dispatch} = useContext(UserContext);
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -31,7 +36,7 @@ const Login = () => {
                 </FormGroup>
                 <FormGroup>
                     <Button 
-                        onClick={(e) => console.log(`email: ${email}\npassword: ${password}`)} 
+                        onClick={() => login(dispatch, { email, password })} 
                         type='primary' 
                         fullWidth>
                             Login
@@ -48,7 +53,7 @@ const Login = () => {
                     </Button>
                 </FormGroup>
                 <FormGroup flex around>
-                    <Link to='/'>Forgot password?</Link>
+                    <Link to='#'>Forgot password?</Link>
                 </FormGroup>
             </Container>
             <Divider/>

@@ -9,6 +9,7 @@ import models.User;
 import org.mindrot.jbcrypt.BCrypt;
 import payload.LoginPayload;
 import payload.RegistrationPayload;
+import payload.UserTokenResponse;
 import play.libs.concurrent.HttpExecutionContext;
 import repositories.UserRepository;
 
@@ -32,7 +33,7 @@ public class UserService {
                 .thenApplyAsync(userStream -> userStream.collect(Collectors.toList()), ec.current());
     }
 
-    public CompletionStage<String> loginUser(LoginPayload payload) {
+    public CompletionStage<UserTokenResponse> loginUser(LoginPayload payload) {
         return userRepository
                 .findByEmail(payload.email)
                 .thenApplyAsync(user -> {
@@ -43,14 +44,14 @@ public class UserService {
                     boolean passwordsMatch = BCrypt.checkpw(payload.password, user.password);
 
                     if(passwordsMatch) {
-                        return createJWT(user);
+                        return new UserTokenResponse(createJWT(user), user);
                     }
 
                     throw new RuntimeException(Constants.Messages.UNAUTHENTICATED);
                 }, ec.current());
     }
 
-    public CompletionStage<String> registerUser(RegistrationPayload payload) {
+    public CompletionStage<UserTokenResponse> registerUser(RegistrationPayload payload) {
         User user = new User();
         String passwordHash = BCrypt.hashpw(payload.password, BCrypt.gensalt());
 
@@ -63,7 +64,9 @@ public class UserService {
         user.gender = payload.gender;
         user.birthday = payload.birthday;
 
-        return userRepository.create(user).thenApplyAsync(this::createJWT, ec.current());
+        return userRepository
+                .create(user)
+                .thenApplyAsync(u -> new UserTokenResponse(createJWT(u), u), ec.current());
     }
 
     private String createJWT(User user) {

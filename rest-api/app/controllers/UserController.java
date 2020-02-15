@@ -6,6 +6,7 @@ import common.Constants;
 import lombok.AllArgsConstructor;
 import payload.LoginPayload;
 import payload.RegistrationPayload;
+import payload.UserTokenResponse;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Http;
@@ -31,7 +32,7 @@ public class UserController extends Controller {
         RegistrationPayload payload = Json.fromJson(json, RegistrationPayload.class);
 
         return userService.registerUser(payload)
-                .thenApplyAsync(token -> ok(jsonResponse(token)))
+                .thenApplyAsync(userToken -> ok(jsonResponse(userToken)))
                 .exceptionally(t -> internalServerError(json500(t.getMessage())));
     }
 
@@ -44,7 +45,9 @@ public class UserController extends Controller {
                 .exceptionally(t -> internalServerError(json500(t.getLocalizedMessage())));
     }
 
-    private JsonNode jsonResponse(String token) {
-        return Json.newObject().put(Constants.Fields.TOKEN, token);
+    private JsonNode jsonResponse(UserTokenResponse userTokenResponse) {
+        return Json.newObject()
+                .put(Constants.Fields.TOKEN, userTokenResponse.token)
+                .putPOJO(Constants.Fields.USER, userTokenResponse.user);
     }
 }

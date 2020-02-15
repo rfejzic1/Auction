@@ -17,7 +17,7 @@ import java.util.UUID;
 @Entity
 @Table(
     name = "users",
-    uniqueConstraints = {@UniqueConstraint(columnNames = {"username", "email"})}
+    uniqueConstraints = {@UniqueConstraint(columnNames = {"email"})}
 )
 public class User {
     @Id
@@ -26,17 +26,14 @@ public class User {
     @GeneratedValue(generator = "UUID")
     public UUID uuid;
 
+    @Email
     @NotBlank
-    @Size(min = 6, max = 30)
-    public String username;
+    public String email;
 
     @JsonIgnore
     @NotBlank
     @Size(min = 8, max = 100)
     public String password;
-
-    @Email
-    public String email;
 
     @Enumerated(EnumType.STRING)
     public UserRole role;

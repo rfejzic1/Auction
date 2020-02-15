@@ -34,7 +34,7 @@ public class UserService {
 
     public CompletionStage<String> loginUser(LoginPayload payload) {
         return userRepository
-                .findByUsername(payload.username)
+                .findByEmail(payload.email)
                 .thenApplyAsync(user -> {
                     if(user == null) {
                         throw new RuntimeException(Constants.Messages.UNAUTHENTICATED);
@@ -54,7 +54,6 @@ public class UserService {
         User user = new User();
         String passwordHash = BCrypt.hashpw(payload.password, BCrypt.gensalt());
 
-        user.username = payload.username;
         user.email = payload.email;
         user.password = passwordHash;
         user.firstName = payload.firstName;
@@ -70,7 +69,6 @@ public class UserService {
     private String createJWT(User user) {
         return Jwts.builder()
                 .setIssuedAt(new Date())
-                .claim(Constants.Fields.USERNAME, user.username)
                 .claim(Constants.Fields.EMAIL, user.email)
                 .claim(Constants.Fields.ROLE, user.role)
                 .signWith(SignatureAlgorithm.HS256, TextCodec.BASE64.encode(KEY))

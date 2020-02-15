@@ -5,5 +5,5 @@ import java.util.UUID;
 import java.util.concurrent.CompletionStage;
 
 public interface UserRepository extends Repository<User, UUID> {
-    CompletionStage<User> findByUsername(String username);
+    CompletionStage<User> findByEmail(String email);
 }

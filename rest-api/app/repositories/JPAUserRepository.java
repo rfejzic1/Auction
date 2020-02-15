@@ -15,7 +15,7 @@ import static java.util.concurrent.CompletableFuture.supplyAsync;
 
 @Singleton
 public class JPAUserRepository extends JPARepository<User, UUID> implements UserRepository {
-    private final String findByUsernameQuery = "select u from User u where username=:username";
+    private final String findByEmailQuery = "select u from User u where email=:email";
 
     @Inject
     public JPAUserRepository(JPAApi jpaApi, DatabaseExecutionContext executionContext) {
@@ -23,10 +23,10 @@ public class JPAUserRepository extends JPARepository<User, UUID> implements User
     }
 
     @Override
-    public CompletionStage<User> findByUsername(String username) {
+    public CompletionStage<User> findByEmail(String email) {
         return supplyAsync(() -> with(em -> {
-            TypedQuery<User> query = em.createQuery(findByUsernameQuery, User.class);
-            query.setParameter(Constants.Fields.USERNAME, username);
+            TypedQuery<User> query = em.createQuery(findByEmailQuery, User.class);
+            query.setParameter(Constants.Fields.EMAIL, email);
             return query.getSingleResult();
         })).exceptionally(error -> null);
     }

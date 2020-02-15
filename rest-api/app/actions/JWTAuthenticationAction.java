@@ -45,17 +45,17 @@ public class JWTAuthenticationAction extends Action<JWTAuthenticated> {
         String jwtString = authHeader.get().split(" ")[1];
 
         Jws<Claims> jws;
-        String username;
+        String email;
 
         try {
             jws = Jwts.parser().setSigningKey(TextCodec.BASE64.encode(KEY)).parseClaimsJws(jwtString);
-            username = jws.getBody().get(Fields.USERNAME, String.class);
+            email = jws.getBody().get(Fields.EMAIL, String.class);
         } catch (JwtException ex) {
             return supplyAsync(() -> unauthorized(jsonUnauthorized()));
         }
 
         return userRepository
-                .findByUsername(username)
+                .findByEmail(email)
                 .thenApplyAsync(user -> {
                     request.addAttr(userTypedKey, user);
                     return delegate.call(request).toCompletableFuture().join();

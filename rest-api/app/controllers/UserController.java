@@ -41,7 +41,7 @@ public class UserController extends Controller {
 
         return userService.loginUser(payload)
                 .thenApplyAsync(token -> ok(jsonResponse(token)))
-                .exceptionally(t -> internalServerError(json500(t.getMessage())));
+                .exceptionally(t -> internalServerError(json500(t.getLocalizedMessage())));
     }
 
     private JsonNode jsonResponse(String token) {

@@ -1,4 +1,5 @@
 import React, { createContext, useReducer } from 'react'
+import Cookies from 'js-cookie';
 
 export const UserContext = createContext();
 
@@ -18,9 +19,13 @@ const userDataReducer = (state, action) => {
     }
 };
 
+function isUserLoggedIn() {
+    return Cookies.get('token') != null;
+}
+
 const UserContextProvider = ({ children }) => {
     const [userData, dispatch] = useReducer(userDataReducer, {
-        loggedIn: false
+        loggedIn: isUserLoggedIn()
     });
 
     return (

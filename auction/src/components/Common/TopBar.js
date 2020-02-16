@@ -17,7 +17,9 @@ const TopBar = () => {
                 {
                     loggedIn ?
                     <span>
-                        <Link onClick={e => {
+                        <Link 
+                        to='#'
+                        onClick={e => {
                             e.preventDefault();
                             logout(dispatch);
                         }}>Logout</Link>

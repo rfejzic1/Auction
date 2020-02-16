@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGooglePlus, faFacebookSquare } from '@fortawesome/free-brands-svg-icons';
@@ -15,14 +15,21 @@ import Divider from './Common/Divider';
 import FormGroup from './Controls/FormGroup';
 import Breadcrumbs from './Common/Breadcrumbs';
 
-const Login = () => {
-    const {dispatch} = useContext(UserContext);
+const Login = ({ location }) => {
+    const { userData, dispatch} = useContext(UserContext);
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const refferer = location.state && location.state.referrer;
+    const redirectPath = refferer ? refferer.path : '/';
+
     return (
-        <React.Fragment>
+        <>
+            {userData.loggedIn ?
+            <Redirect to={redirectPath} />
+            :
+            <>
             <Breadcrumbs current='login'/>
             <Divider/>
             <Container title='LOGIN'>
@@ -57,7 +64,9 @@ const Login = () => {
                 </FormGroup>
             </Container>
             <Divider/>
-        </React.Fragment>
+            </>
+            }
+        </>
     )
 }
 

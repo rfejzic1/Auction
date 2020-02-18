@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Home from './Home';
@@ -11,10 +11,18 @@ import NavBar from './Common/NavBar';
 import Footer from './Common/Footer';
 
 import '../styles/App.scss';
+
 import UserContextProvider from '../services/UserContext';
 import SecureRoute from './Common/SecureRoute';
 
+import { setAPIBaseURL } from '../services/SessionService';
+import config from '../config';
+
 function App() {
+	useEffect(() => {
+		setAPIBaseURL(config.API_URL);
+	}, []);
+
   	return (
 		<UserContextProvider>
 			<Router>

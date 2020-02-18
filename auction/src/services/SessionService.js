@@ -1,12 +1,16 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
+export const setAPIBaseURL = domain => {
+    axios.defaults.baseURL = domain;
+}
+
 function setAuthorizationHeaderDefault(token) {
     axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 }
 
 export const login = (dispatch, loginData) => {
-    axios.post('http://localhost:9000/login', loginData)
+    axios.post('/login', loginData)
     .then(res => {
         const { user, token } = res.data;
 

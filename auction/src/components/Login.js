@@ -24,6 +24,10 @@ const Login = ({ location }) => {
     const refferer = location.state && location.state.referrer;
     const redirectPath = refferer ? refferer.path : '/';
 
+    const handleEmailChange = e => setEmail(e.target.value);
+    const handlePasswordChange = e => setPassword(e.target.value);
+    const handleLogin = () => login(dispatch, { email, password });
+
     return (
         <>
             {userData.loggedIn ?
@@ -35,15 +39,15 @@ const Login = ({ location }) => {
             <Container title='LOGIN'>
                 <FormGroup>
                     <Label isFor='email' label='Email' />
-                    <TextField onChange={e => setEmail(e.target.value)} name='email' placeholder='e.g. johndoe@mail.com' fullWidth />
+                    <TextField onChange={handleEmailChange} name='email' placeholder='e.g. johndoe@mail.com' fullWidth />
                 </FormGroup>
                 <FormGroup>
                     <Label isFor='password' label='Password' />
-                    <TextField onChange={e => setPassword(e.target.value)} name='password' fullWidth password />
+                    <TextField onChange={handlePasswordChange} name='password' fullWidth password />
                 </FormGroup>
                 <FormGroup>
                     <Button 
-                        onClick={() => login(dispatch, { email, password })} 
+                        onClick={handleLogin} 
                         type='primary' 
                         fullWidth>
                             Login

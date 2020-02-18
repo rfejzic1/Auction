@@ -7,7 +7,9 @@ const SelectField = props => {
 
     return (
         <select onChange={onChange} className={classes} name={name} id={id}>
-            {options.map((option, index) => <option value={index}>{option}</option>)}
+            { options.map((option, index) => {
+                return <option value={index}>{option}</option>
+            })}
         </select>
     )
 }

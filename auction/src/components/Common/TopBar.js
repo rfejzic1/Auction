@@ -10,6 +10,11 @@ import Wrapper from './Wrapper';
 const TopBar = () => {
     const { userData, dispatch } = useContext(UserContext);
     const { loggedIn } = userData;
+    const logoutHandler = e => {
+        e.preventDefault();
+        logout(dispatch);
+    };
+
     return (
         <div className='topBar'>
             <Wrapper flex>
@@ -17,12 +22,7 @@ const TopBar = () => {
                 {
                     loggedIn ?
                     <span>
-                        <Link 
-                        to='#'
-                        onClick={e => {
-                            e.preventDefault();
-                            logout(dispatch);
-                        }}>Logout</Link>
+                        <Link to='#' onClick={logoutHandler}>Logout</Link>
                     </span>
                     :
                     <span>

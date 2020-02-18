@@ -1,5 +1,6 @@
 package repositories;
 
+import common.Constants;
 import lombok.AllArgsConstructor;
 import models.utils.DatabaseExecutionContext;
 import play.db.jpa.JPAApi;
@@ -49,7 +50,7 @@ public abstract class JPARepository<T, ID> implements Repository<T, ID> {
     }
 
     private Stream<T> findAll(EntityManager em) {
-        String findAllQuery = "select t from " + genericClassType.getSimpleName() + " t";
+        String findAllQuery = String.format(Constants.Queries.FIND_ALL, genericClassType.getSimpleName());
         TypedQuery<T> query = em.createQuery(findAllQuery, genericClassType);
         return query.getResultList().stream();
     }

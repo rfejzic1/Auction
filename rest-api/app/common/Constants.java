@@ -15,6 +15,10 @@ public class Constants {
         public static final String USER = "user";
     }
 
+    public static final class Queries {
+        public static final String FIND_ALL = "select t from %s t";
+    }
+
     public static final String KEY = "auction-secret";
     public static final String BEARER_REGEX = "Bearer .+";
 }

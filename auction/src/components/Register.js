@@ -33,51 +33,52 @@ const Register = () => {
 
     return (
         <>
-        {userData.loggedIn ?
-        <Redirect to={redirectPath} />
-        :
-        <PageLayout>
-            <Breadcrumbs current='register'/>
-            <Divider/>
-            <Container title='REGISTER'>
-                <FormGroup>
-                    <Label isFor='firstName' label='First Name' />
-                    <TextField onChange={handleFirstNameChange} name='firstName' placeholder='e.g. John' fullWidth />
-                </FormGroup>
+            {
+                userData.loggedIn ?
+                    <Redirect to={redirectPath} />
+                :
+                    <PageLayout>
+                        <Breadcrumbs current='register'/>
+                        <Divider/>
+                        <Container title='REGISTER'>
+                            <FormGroup>
+                                <Label isFor='firstName' label='First Name' />
+                                <TextField onChange={handleFirstNameChange} name='firstName' placeholder='e.g. John' fullWidth />
+                            </FormGroup>
 
-                <FormGroup>
-                    <Label isFor='lastName' label='Last Name' />
-                    <TextField onChange={handleLastNameChange} name='lastName' placeholder='e.g. Doe' fullWidth />
-                </FormGroup>
+                            <FormGroup>
+                                <Label isFor='lastName' label='Last Name' />
+                                <TextField onChange={handleLastNameChange} name='lastName' placeholder='e.g. Doe' fullWidth />
+                            </FormGroup>
 
-                <FormGroup>
-                    <Label isFor='email' label='Email' />
-                    <TextField onChange={handleEmailChange} name='email' placeholder='e.g. johndoe@mail.com' fullWidth />
-                </FormGroup>
+                            <FormGroup>
+                                <Label isFor='email' label='Email' />
+                                <TextField onChange={handleEmailChange} name='email' placeholder='e.g. johndoe@mail.com' fullWidth />
+                            </FormGroup>
 
-                <FormGroup>
-                    <Label isFor='password' label='Password' />
-                    <TextField onChange={handlePasswordChange} name='password' fullWidth password />
-                </FormGroup>
+                            <FormGroup>
+                                <Label isFor='password' label='Password' />
+                                <TextField onChange={handlePasswordChange} name='password' fullWidth password />
+                            </FormGroup>
 
-                <FormGroup>
-                    <Button 
-                        onClick={handleRegister}
-                        type='primary' 
-                        fullWidth>
-                            Register
-                    </Button>
-                </FormGroup>
+                            <FormGroup>
+                                <Button 
+                                    onClick={handleRegister}
+                                    type='primary' 
+                                    fullWidth>
+                                        Register
+                                </Button>
+                            </FormGroup>
 
-                <FormGroup flex around>
-                    <span>
-                        Already have an account? <Link to='/login'>Login</Link>
-                    </span>
-                </FormGroup>
-            </Container>
-            <Divider/>
-        </PageLayout>
-        }
+                            <FormGroup flex around>
+                                <span>
+                                    Already have an account? <Link to='/login'>Login</Link>
+                                </span>
+                            </FormGroup>
+                        </Container>
+                        <Divider/>
+                    </PageLayout>
+            }
         </>
     )
 }

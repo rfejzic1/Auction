@@ -3,13 +3,14 @@ import Cookies from 'js-cookie';
 
 export const setAPIBaseURL = domain => {
     axios.defaults.baseURL = domain;
-}
+};
 
 function setAuthorizationHeaderDefault(token) {
-    if(token)
+    if(token) {
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    else
+    } else {
         delete axios.defaults.headers.common['Authorization'];
+    }
 }
 
 function setUserLoginState(res, dispatch) {
@@ -26,14 +27,14 @@ function setUserLoginState(res, dispatch) {
 
 export const register = (dispatch, registerData) => {
     axios.post('/register', registerData)
-    .then(res => setUserLoginState(res, dispatch))
-    .catch(err => console.log(err));
+        .then(res => setUserLoginState(res, dispatch))
+        .catch(err => console.log(err));
 };
 
 export const login = (dispatch, loginData) => {
     axios.post('/login', loginData)
-    .then(res => setUserLoginState(res, dispatch))
-    .catch(err => console.log(err));
+        .then(res => setUserLoginState(res, dispatch))
+        .catch(err => console.log(err));
 };
 
 export const logout = dispatch => {

@@ -32,45 +32,46 @@ const Login = () => {
 
     return (
         <>
-            {userData.loggedIn ?
-            <Redirect to={redirectPath} />
-            :
-            <PageLayout>
-            <Breadcrumbs current='login'/>
-            <Divider/>
-            <Container title='LOGIN'>
-                <FormGroup>
-                    <Label isFor='email' label='Email' />
-                    <TextField onChange={handleEmailChange} name='email' placeholder='e.g. johndoe@mail.com' fullWidth />
-                </FormGroup>
-                <FormGroup>
-                    <Label isFor='password' label='Password' />
-                    <TextField onChange={handlePasswordChange} name='password' fullWidth password />
-                </FormGroup>
-                <FormGroup>
-                    <Button 
-                        onClick={handleLogin} 
-                        type='primary' 
-                        fullWidth>
-                            Login
-                    </Button>
-                </FormGroup>
-                <FormGroup flex>
-                    <Button type='gmail'>
-                        <FontAwesomeIcon icon={faGooglePlus}/>
-                        <span>{' Login with Gmail'}</span>
-                    </Button>
-                    <Button type='facebook'>
-                        <FontAwesomeIcon icon={faFacebookSquare}/>
-                        <span>{' Login with Facebook'}</span>
-                    </Button>
-                </FormGroup>
-                <FormGroup flex around>
-                    <Link to='#'>Forgot password?</Link>
-                </FormGroup>
-            </Container>
-            <Divider/>
-            </PageLayout>
+            {
+                userData.loggedIn ?
+                    <Redirect to={redirectPath}/>
+                :
+                    <PageLayout>
+                        <Breadcrumbs current='login'/>
+                        <Divider/>
+                        <Container title='LOGIN'>
+                            <FormGroup>
+                                <Label isFor='email' label='Email' />
+                                <TextField onChange={handleEmailChange} name='email' placeholder='e.g. johndoe@mail.com' fullWidth />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label isFor='password' label='Password' />
+                                <TextField onChange={handlePasswordChange} name='password' fullWidth password />
+                            </FormGroup>
+                            <FormGroup>
+                                <Button 
+                                    onClick={handleLogin} 
+                                    type='primary' 
+                                    fullWidth>
+                                        Login
+                                </Button>
+                            </FormGroup>
+                            <FormGroup flex>
+                                <Button type='gmail'>
+                                    <FontAwesomeIcon icon={faGooglePlus}/>
+                                    <span>{' Login with Gmail'}</span>
+                                </Button>
+                                <Button type='facebook'>
+                                    <FontAwesomeIcon icon={faFacebookSquare}/>
+                                    <span>{' Login with Facebook'}</span>
+                                </Button>
+                            </FormGroup>
+                            <FormGroup flex around>
+                                <Link to='#'>Forgot password?</Link>
+                            </FormGroup>
+                        </Container>
+                        <Divider/>
+                    </PageLayout>
             }
         </>
     )

@@ -5,9 +5,8 @@ import Home from './Home';
 import Login from './Login';
 import Register from './Register';
 import Shop from './Shop';
+import Page404 from './Page404';
 
-import TopBar from './Common/TopBar';
-import NavBar from './Common/NavBar';
 import Footer from './Common/Footer';
 
 import '../styles/App.scss';
@@ -27,13 +26,12 @@ function App() {
 		<UserContextProvider>
 			<Router>
 				<div className="main">
-					<TopBar/>
-					<NavBar/>
 					<Switch>
 						<Route exact path='/' component={Home} />
 						<Route path='/login' component={Login} />
 						<Route path='/register' component={Register} />
 						<SecureRoute path='/shop' component={Shop} />
+						<Route component={Page404}/>
 					</Switch>
 				</div>
 				<Footer/>

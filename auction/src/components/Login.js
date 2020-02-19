@@ -14,6 +14,7 @@ import Container from './Common/Container';
 import Divider from './Common/Divider';
 import FormGroup from './Controls/FormGroup';
 import Breadcrumbs from './Common/Breadcrumbs';
+import PageLayout from './PageLayout';
 
 const Login = () => {
     const { userData, dispatch } = useContext(UserContext);
@@ -34,7 +35,7 @@ const Login = () => {
             {userData.loggedIn ?
             <Redirect to={redirectPath} />
             :
-            <>
+            <PageLayout>
             <Breadcrumbs current='login'/>
             <Divider/>
             <Container title='LOGIN'>
@@ -69,7 +70,7 @@ const Login = () => {
                 </FormGroup>
             </Container>
             <Divider/>
-            </>
+            </PageLayout>
             }
         </>
     )

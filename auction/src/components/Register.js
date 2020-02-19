@@ -8,6 +8,7 @@ import FormGroup from './Controls/FormGroup';
 import Container from './Common/Container';
 import Divider from './Common/Divider';
 import Breadcrumbs from './Common/Breadcrumbs';
+import PageLayout from './PageLayout';
 
 import { UserContext } from '../services/UserContext';
 import { register } from '../services/SessionService';
@@ -35,7 +36,7 @@ const Register = () => {
         {userData.loggedIn ?
         <Redirect to={redirectPath} />
         :
-        <>
+        <PageLayout>
             <Breadcrumbs current='register'/>
             <Divider/>
             <Container title='REGISTER'>
@@ -75,7 +76,7 @@ const Register = () => {
                 </FormGroup>
             </Container>
             <Divider/>
-        </>
+        </PageLayout>
         }
         </>
     )

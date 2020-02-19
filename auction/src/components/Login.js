@@ -23,7 +23,7 @@ const Login = () => {
     const [password, setPassword] = useState('');
 
     const refferer = location.state && location.state.referrer;
-    const redirectPath = refferer ? refferer.path : '/';
+    const redirectPath = refferer ? refferer.pathname : '/';
 
     const handleEmailChange = e => setEmail(e.target.value);
     const handlePasswordChange = e => setPassword(e.target.value);

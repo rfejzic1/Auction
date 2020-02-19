@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom';
+import React, { useState, useContext } from 'react';
+import { Link, useLocation, Redirect } from 'react-router-dom';
 
 import TextField from './Controls/TextField';
 import Label from './Controls/Label';
@@ -9,7 +9,13 @@ import Container from './Common/Container';
 import Divider from './Common/Divider';
 import Breadcrumbs from './Common/Breadcrumbs';
 
+import { UserContext } from '../services/UserContext';
+import { register } from '../services/SessionService';
+
 const Register = () => {
+    const { userData, dispatch } = useContext(UserContext);
+    const location = useLocation();
+
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
@@ -19,10 +25,17 @@ const Register = () => {
     const handleLastNameChange = e => setLastName(e.target.value);
     const handleEmailChange = e => setEmail(e.target.value);
     const handlePasswordChange = e => setPassword(e.target.value);
-    const handleRegister = () => {};
+    const handleRegister = () => register(dispatch, { firstName, lastName, email, password });
+
+    const refferer = location.state && location.state.referrer;
+    const redirectPath = refferer ? refferer.path : '/';
 
     return (
-        <React.Fragment>
+        <>
+        {userData.loggedIn ?
+        <Redirect to={redirectPath} />
+        :
+        <>
             <Breadcrumbs current='register'/>
             <Divider/>
             <Container title='REGISTER'>
@@ -62,7 +75,9 @@ const Register = () => {
                 </FormGroup>
             </Container>
             <Divider/>
-        </React.Fragment>
+        </>
+        }
+        </>
     )
 }
 

@@ -6,22 +6,33 @@ export const setAPIBaseURL = domain => {
 }
 
 function setAuthorizationHeaderDefault(token) {
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    if(token)
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    else
+        delete axios.defaults.headers.common['Authorization'];
 }
+
+function setUserLoginState(res, dispatch) {
+    const { user, token } = res.data;
+
+    dispatch({
+        type: 'LOGIN',
+        user
+    });
+
+    setAuthorizationHeaderDefault(token);
+    Cookies.set('token', token, { expires: 7 });
+}
+
+export const register = (dispatch, registerData) => {
+    axios.post('/register', registerData)
+    .then(res => setUserLoginState(res, dispatch))
+    .catch(err => console.log(err));
+};
 
 export const login = (dispatch, loginData) => {
     axios.post('/login', loginData)
-    .then(res => {
-        const { user, token } = res.data;
-
-        dispatch({
-            type: 'LOGIN',
-            user
-        });
-
-        setAuthorizationHeaderDefault(token);
-        Cookies.set('token', token, { expires: 7 });
-    })
+    .then(res => setUserLoginState(res, dispatch))
     .catch(err => console.log(err));
 };
 

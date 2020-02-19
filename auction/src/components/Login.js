@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, useLocation } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGooglePlus, faFacebookSquare } from '@fortawesome/free-brands-svg-icons';
@@ -15,8 +15,9 @@ import Divider from './Common/Divider';
 import FormGroup from './Controls/FormGroup';
 import Breadcrumbs from './Common/Breadcrumbs';
 
-const Login = ({ location }) => {
-    const { userData, dispatch} = useContext(UserContext);
+const Login = () => {
+    const { userData, dispatch } = useContext(UserContext);
+    const location = useLocation();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');

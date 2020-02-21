@@ -1,3 +1,7 @@
+import runtimeEnv from '@mars/heroku-js-runtime-env';
+
+const env = runtimeEnv();
+
 export default {
-    API_URL: 'http://localhost:9000'
+    API_URL: env.REACT_APP_API_URL
 }

@@ -2,8 +2,6 @@ package repositories;
 
 import common.Constants;
 import models.Product;
-import models.Subcategory;
-import models.User;
 import models.utils.DatabaseExecutionContext;
 import play.db.jpa.JPAApi;
 
@@ -27,10 +25,10 @@ public class ProductJPARepository extends JPARepository<Product, UUID> implement
     }
 
     @Override
-    public CompletionStage<List<Product>> findBySubcategory(Subcategory subcategory) {
+    public CompletionStage<List<Product>> findBySubcategory(String subcategory) {
         return supplyAsync(() -> with(em -> {
             TypedQuery<Product> query = em.createQuery(findBySubcategoryQuery, Product.class);
-            query.setParameter(Constants.Fields.SUBCATEGORY, subcategory.name);
+            query.setParameter(Constants.Fields.SUBCATEGORY, subcategory);
             return query.getResultList();
         })).exceptionally(error -> new ArrayList<>());
     }

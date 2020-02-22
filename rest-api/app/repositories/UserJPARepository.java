@@ -14,11 +14,11 @@ import java.util.concurrent.CompletionStage;
 import static java.util.concurrent.CompletableFuture.supplyAsync;
 
 @Singleton
-public class JPAUserRepository extends JPARepository<User, UUID> implements UserRepository {
+public class UserJPARepository extends JPARepository<User, UUID> implements UserRepository {
     private final String findByEmailQuery = "select u from User u where email=:email";
 
     @Inject
-    public JPAUserRepository(JPAApi jpaApi, DatabaseExecutionContext executionContext) {
+    public UserJPARepository(JPAApi jpaApi, DatabaseExecutionContext executionContext) {
         super(jpaApi, executionContext, User.class);
     }
 

@@ -29,7 +29,7 @@ public class ProductService {
                 .thenApplyAsync(product -> product.orElse(null), ec.current());
     }
 
-    public CompletionStage<List<Product>> getProductsBySubcategory(Subcategory subcategory) {
+    public CompletionStage<List<Product>> getProductsBySubcategory(String subcategory) {
         return productRepository.findBySubcategory(subcategory);
     }
 

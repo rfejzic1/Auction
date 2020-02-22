@@ -4,4 +4,8 @@ GET     /users                      controllers.UserController.index
 POST    /register                   controllers.UserController.register(request: Request)
 POST    /login                      controllers.UserController.login(request: Request)
 
+GET     /products                   controllers.ProductController.getAll
+GET     /products                   controllers.ProductController.getProductsBySubcategory(subcategory: String)
+GET     /products/:uuidString       controllers.ProductController.get(uuidString: String)
+
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

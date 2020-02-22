@@ -3,7 +3,6 @@ package controllers;
 import common.Constants;
 import common.JsonResponseObjects;
 import lombok.AllArgsConstructor;
-import models.Subcategory;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -19,8 +18,13 @@ import static java.util.concurrent.CompletableFuture.supplyAsync;
 public class ProductController extends Controller {
     private final ProductService productService;
 
-    public CompletionStage<Result> getAll() {
-        return productService.getAll()
+    public CompletionStage<Result> getProducts(String category) {
+        if(category == null) {
+            return productService.getAll()
+                    .thenApply(products -> ok(Json.toJson(products)));
+        }
+
+        return productService.getProductsBySubcategory(category)
                 .thenApply(products -> ok(Json.toJson(products)));
     }
 
@@ -36,10 +40,4 @@ public class ProductController extends Controller {
         return productService.getProduct(uuid)
                 .thenApply(product -> ok(Json.toJson(product)));
     }
-
-    public CompletionStage<Result> getProductsBySubcategory(String subcategory) {
-        return productService.getProductsBySubcategory(subcategory)
-                .thenApply(products -> ok(Json.toJson(products)));
-    }
-
 }

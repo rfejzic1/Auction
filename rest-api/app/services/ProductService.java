@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 public class ProductService {
     private final ProductRepository productRepository;
     private final HttpExecutionContext ec;
+    private final CategorizationService categorizationService;
 
     public CompletionStage<List<Product>> getAll() {
         return productRepository.getAll()
@@ -38,8 +39,6 @@ public class ProductService {
     public CompletionStage<Product> sellProduct(ProductAuctionPayload payload, User user) {
         Product product = new Product();
         Auction auction = new Auction();
-        Category category = new Category();
-        Subcategory subcategory = new Subcategory();
 
         product.name = payload.name;
         product.description = payload.description;
@@ -51,14 +50,7 @@ public class ProductService {
         auction.endDate = payload.endDate;
         auction.status = AuctionStatus.OPEN;
 
-        category.name = payload.category;
-        subcategory.name = payload.subcategory;
-
-        category.subcategories = new HashSet<>();
-        category.subcategories.add(subcategory);
-        subcategory.category = category;
-
-        product.subcategory = subcategory;
+        product.subcategory = categorizationService.findOrCreateSubcategoryWithCategoryByName(payload.subcategory, payload.category).toCompletableFuture().join();
         product.auction = auction;
         product.owner = user;
         auction.product = product;

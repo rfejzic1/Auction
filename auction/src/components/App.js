@@ -6,6 +6,7 @@ import Login from './Login';
 import Register from './Register';
 import Shop from './Shop';
 import Page404 from './Page404';
+import ProductPage from './ProductPage';
 
 import Footer from './Common/Footer';
 
@@ -30,6 +31,7 @@ function App() {
 						<Route exact path='/' component={Home} />
 						<Route path='/login' component={Login} />
 						<Route path='/register' component={Register} />
+						<Route path='/product/:productUUID' component={ProductPage}/>
 						<SecureRoute path='/shop' component={Shop} />
 						<Route component={Page404}/>
 					</Switch>

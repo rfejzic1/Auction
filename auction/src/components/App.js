@@ -29,10 +29,10 @@ function App() {
 				<div className="main">
 					<Switch>
 						<Route exact path='/' component={Home} />
-						<Route path='/login' component={Login} />
-						<Route path='/register' component={Register} />
-						<Route path='/product/:productUUID' component={ProductPage}/>
-						<SecureRoute path='/shop' component={Shop} />
+						<Route exact path='/login' component={Login} />
+						<Route exact path='/register' component={Register} />
+						<Route exact path='/product/:productUUID' component={ProductPage}/>
+						<SecureRoute exact path='/shop' component={Shop} />
 						<Route component={Page404}/>
 					</Switch>
 				</div>

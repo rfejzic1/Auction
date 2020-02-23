@@ -23,6 +23,11 @@ $footer-height: 280px;
     justify-content: space-around;
 }
 
+.flex-normal {
+    justify-content: start;
+    align-items: flex-start;
+}
+
 .topBar {
     background-color: $dark-1;
     color: #9b9b9b;

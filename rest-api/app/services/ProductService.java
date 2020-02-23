@@ -1,13 +1,15 @@
 package services;
 
+import actions.JWTAuthenticated;
 import lombok.RequiredArgsConstructor;
-import models.Product;
-import models.Subcategory;
+import models.*;
+import payload.ProductAuctionPayload;
 import play.libs.concurrent.HttpExecutionContext;
 import repositories.ProductRepository;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CompletionStage;
@@ -33,4 +35,35 @@ public class ProductService {
         return productRepository.findBySubcategory(subcategory);
     }
 
+    public CompletionStage<Product> sellProduct(ProductAuctionPayload payload, User user) {
+        Product product = new Product();
+        Auction auction = new Auction();
+        Category category = new Category();
+        Subcategory subcategory = new Subcategory();
+
+        product.name = payload.name;
+        product.description = payload.description;
+        product.color = payload.color;
+        product.size = payload.size;
+
+        auction.startPrice = payload.startPrice;
+        auction.startDate = payload.startDate;
+        auction.endDate = payload.endDate;
+        auction.status = AuctionStatus.OPEN;
+
+        category.name = payload.category;
+        subcategory.name = payload.subcategory;
+
+        category.subcategories = new HashSet<>();
+        category.subcategories.add(subcategory);
+        subcategory.category = category;
+
+        product.subcategory = subcategory;
+        product.auction = auction;
+        product.owner = user;
+        auction.product = product;
+
+        return productRepository.create(product)
+                .thenApplyAsync(newProduct -> newProduct, ec.current());
+    }
 }

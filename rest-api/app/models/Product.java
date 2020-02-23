@@ -1,5 +1,6 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -40,13 +41,15 @@ public class Product {
     public String size;
 
     @ManyToOne
-    @JoinColumn(name="subcategory_id", nullable=false)
+    @JoinColumn(name="subcategory_id", nullable = false)
     public Subcategory subcategory;
 
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name="owner_id", nullable=false)
+    @JoinColumn(name="owner_id", nullable = false)
     public User owner;
 
-    @OneToOne(mappedBy = "product")
+    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
+    @JsonIgnore
     public Auction auction;
 }

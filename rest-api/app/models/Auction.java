@@ -17,8 +17,7 @@ import java.util.UUID;
 @Table(name = "auctions")
 public class Auction {
     @Id
-    @NotNull
-    private UUID id;
+    private UUID uuid;
 
     @OneToOne
     @MapsId
@@ -37,6 +36,6 @@ public class Auction {
     public BigDecimal startPrice;
 
     @NotBlank
-    @Size(max = 10)
-    public String status;
+    @Enumerated(EnumType.STRING)
+    public AuctionStatus status;
 }

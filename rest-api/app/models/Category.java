@@ -24,6 +24,6 @@ public class Category {
     @Max(30)
     public String name;
 
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category", cascade = CascadeType.PERSIST, orphanRemoval = true)
     public Set<Subcategory> subcategories;
 }

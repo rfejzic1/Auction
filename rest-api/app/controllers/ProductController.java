@@ -1,14 +1,24 @@
 package controllers;
 
+import actions.JWTAuthenticated;
 import common.Constants;
 import common.JsonResponseObjects;
-import lombok.AllArgsConstructor;
-import play.libs.Json;
-import play.mvc.Controller;
-import play.mvc.Result;
+import models.User;
+import payload.ProductAuctionPayload;
+import play.libs.typedmap.TypedMap;
 import services.ProductService;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import lombok.AllArgsConstructor;
+
+import play.libs.Json;
+import play.libs.typedmap.TypedKey;
+import play.mvc.Controller;
+import play.mvc.Http;
+import play.mvc.Result;
+
 import javax.inject.Inject;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.CompletionStage;
 
@@ -39,5 +49,15 @@ public class ProductController extends Controller {
 
         return productService.getProduct(uuid)
                 .thenApply(product -> ok(Json.toJson(product)));
+    }
+
+    @JWTAuthenticated
+    public CompletionStage<Result> sell(Http.Request request) {
+        JsonNode json = request.body().asJson();
+        ProductAuctionPayload payload = Json.fromJson(json, ProductAuctionPayload.class);
+
+        User user = request.attrs().get(Constants.TypedKeys.USER);
+        return productService.sellProduct(payload, user)
+            .thenApply(product -> ok(Json.toJson(product)));
     }
 }

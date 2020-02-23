@@ -5,15 +5,14 @@ import axios from 'axios';
 import Wrapper from './Common/Wrapper';
 import PageLayout from './PageLayout';
 import config from '../config';
+import Page404 from './Page404';
 
-const getProduct = (uuid, setProduct) => {
-    console.log(axios.defaults.baseURL);
-    return axios({
-        url: `/products/4cb9fbe7-5702-4147-b063-7bdd83b4615b`,
+const getProduct = async (uuid, setProduct) => {
+    const res = await axios({
+        url: `/products/${uuid}`,
         baseURL: config.API_URL
-    })
-        .then(res => setProduct(res.data))
-        .catch(err => console.log(err.response))
+    });
+    return setProduct(res.data);
 }
 
 const ProductPage = () => {
@@ -23,18 +22,22 @@ const ProductPage = () => {
     const [product, setProduct] = useState({});
 
     useEffect(() => {
-        console.log(productUUID);
         getProduct(productUUID, setProduct);
     }, [productUUID]);
 
     return (
-        <div>
-            <PageLayout>
-                <Wrapper>
-                    <h1>Product {product.name}</h1>
-                </Wrapper>
-            </PageLayout>
-        </div>
+        <>
+            {
+                product ?
+                    <PageLayout>
+                        <Wrapper>
+                            <h1>Product {product.name}</h1>
+                        </Wrapper>
+                    </PageLayout>
+                :
+                    <Page404 />
+            }
+        </>
     )
 }
 

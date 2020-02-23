@@ -1,5 +1,8 @@
 package common;
 
+import models.User;
+import play.libs.typedmap.TypedKey;
+
 public class Constants {
     public static final class Messages {
         public static final String UNAUTHORIZED = "Unauthorized";
@@ -19,6 +22,10 @@ public class Constants {
 
     public static final class Queries {
         public static final String FIND_ALL = "select t from %s t";
+    }
+
+    public static final class TypedKeys {
+        public final static TypedKey<User> USER = TypedKey.create(Fields.USER);
     }
 
     public static final String KEY = "auction-secret";

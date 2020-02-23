@@ -28,7 +28,7 @@ import static common.JsonResponseObjects.*;
 public class JWTAuthenticationAction extends Action<JWTAuthenticated> {
     private final HttpExecutionContext ec;
     private final UserRepository userRepository;
-    private final static TypedKey<User> userTypedKey = TypedKey.create(Fields.USER);
+
 
     @Override
     public CompletionStage<Result> call(Http.Request request) {
@@ -57,8 +57,12 @@ public class JWTAuthenticationAction extends Action<JWTAuthenticated> {
         return userRepository
                 .findByEmail(email)
                 .thenApplyAsync(user -> {
-                    request.addAttr(userTypedKey, user);
-                    return delegate.call(request).toCompletableFuture().join();
+                    if(user == null) {
+                        return unauthorized(jsonUnauthorized());
+                    }
+
+                    return delegate.call(request.addAttr(TypedKeys.USER, user))
+                            .toCompletableFuture().join();
                 }, ec.current());
     }
 }

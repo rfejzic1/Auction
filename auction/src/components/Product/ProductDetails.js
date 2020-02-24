@@ -20,7 +20,7 @@ const ProductDetails = ({ product }) => {
             <br/>
             <span className='bid-info'>Enter $260.00 or more</span>
             <FormGroup>
-                <span className='bid-info'>Highest bid: <span className='highest-bid' >$260.00</span></span>
+                <span className='bid-info'>Highest bid: <span className='primary-bold' >$260.00</span></span>
                 <br/>
                 <span className="bid-info">No bids: 2</span>
                 <br/>

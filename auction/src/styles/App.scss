@@ -224,7 +224,7 @@ h1 {
 .logo {
     color: $primary;
     font-weight: 300;
-    font-size: 20px;
+    font-size: 22px;
     text-decoration: none;
     text-transform: uppercase;
     letter-spacing: 0.84px;
@@ -240,7 +240,7 @@ h1 {
     .search-field {
         width: 100%;
         padding-right: 42px;
-        box-shadow: 0 0 2px 1px rgba($color: $dark-1, $alpha: 0.1);    
+        box-shadow: 0 0 2px 1px rgba($color: $dark-1, $alpha: 0.1);
     }
 
     svg {
@@ -413,7 +413,45 @@ h1 {
     text-transform: uppercase;
 }
 
-.highest-bid {
+.primary-bold {
     color: $primary;
     font-weight: 700;
+}
+
+.categories {
+    height: 100%;
+    max-width: 240px;
+    background-color: white;
+    box-shadow: 2px 2px 1px 1px rgba($color: $dark-1, $alpha: 0.15);
+
+    %list-item {
+        font-size: 16px;
+        padding: 12px;
+        display: block;
+    }
+
+    .categories-header {
+        @extend %list-item;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: $primary;
+    }
+
+    a {
+        @extend %list-item;
+        color: $dark-1;
+        text-decoration: none;
+        border-bottom: 1px solid #ececec;
+        transition: border 50ms ease-out;
+
+        &:hover {
+            border-left: 2px solid $primary;
+        }
+    }
+}
+
+.jumbotron {
+    min-height: 420px;
+    background-color: #fafafa;
+    padding-bottom: 2px;
 }

@@ -12,11 +12,15 @@ import ProductGallery from './Product/ProductGallery';
 import ProductDetails from './Product/ProductDetails';
 
 const getProduct = async (uuid, setProduct) => {
-    const res = await axios({
-        url: `/products/${uuid}`,
-        baseURL: config.API_URL
-    });
-    return setProduct(res.data);
+    try {
+        const res = await axios({
+            url: `/products/${uuid}`,
+            baseURL: config.API_URL
+        });
+        return setProduct(res.data);
+    } catch {
+        return setProduct(null);
+    }
 }
 
 const ProductPage = () => {
@@ -34,12 +38,14 @@ const ProductPage = () => {
 
     useEffect(() => {
         getProduct(productUUID, setProduct);
-    }, [productUUID]);
+    }, [productUUID, product]);
 
     return (
         <>
             {
-                product ?
+                product == null ?
+                    <Page404 />
+                :
                     <PageLayout>
                         <Breadcrumbs current='Single Product' path='Shop/' />
                         <Divider smaller />
@@ -49,8 +55,6 @@ const ProductPage = () => {
                         </Wrapper>
                         <Divider />
                     </PageLayout>
-                :
-                    <Page404 />
             }
         </>
     )

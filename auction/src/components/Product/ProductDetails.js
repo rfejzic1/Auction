@@ -1,4 +1,6 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronRight, faHeart } from '@fortawesome/free-solid-svg-icons';
 
 import TextField from '../Controls/TextField';
 import Button from '../Controls/Button';
@@ -8,20 +10,26 @@ const ProductDetails = ({ product }) => {
     return (
         <div className='product-details'>
             <h2>{product.name}</h2>
-            <span className='price'>Start from $240.00</span>
+            <p className='price'>Start from $240.00</p>
             <br/>
             <TextField />
-            <Button className='uppercase' >Place bid</Button>
+            <Button className='uppercase outlined-primary'>
+                Place bid
+                <FontAwesomeIcon icon={faChevronRight}/>
+            </Button>
             <br/>
             <span className='bid-info'>Enter $260.00 or more</span>
             <FormGroup>
-                <span className='bid-info'>Highest bid: $260.00</span>
+                <span className='bid-info'>Highest bid: <span className='highest-bid' >$260.00</span></span>
                 <br/>
                 <span className="bid-info">No bids: 2</span>
                 <br/>
                 <span className="bid-info">10 days</span>
             </FormGroup>
-            <Button>Whishlist {'<3'}</Button>
+            <Button>
+                Whishlist
+                <FontAwesomeIcon icon={faHeart}/>
+            </Button>
             <br/>
             <br/>
             <span>Details:</span>

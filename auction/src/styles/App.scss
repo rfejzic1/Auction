@@ -5,6 +5,10 @@ $facebook-blue: #504693;
 
 $footer-height: 280px;
 
+p, span, h1, h2, h3, h4, h5, h6 {
+    color: $dark-1;
+}
+
 .wrapper {
     max-width: 968px;
     width: 100%;
@@ -386,7 +390,7 @@ h1 {
     .price {
         display: inline-block;
         color: $primary;
-        font-size: 24px;
+        font-size: 20px;
         margin-bottom: 16px;
     }
 
@@ -396,10 +400,20 @@ h1 {
     }
 
     hr {
+        background-color: $dark-1;
         margin: 8px 0px;
+    }
+
+    svg {
+        margin-left: 8px;
     }
 }
 
 .uppercase {
     text-transform: uppercase;
+}
+
+.highest-bid {
+    color: $primary;
+    font-weight: 700;
 }

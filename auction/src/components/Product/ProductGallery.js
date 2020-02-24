@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 const Thumbnail = ({ url, selectImage }) => {
     const handleSelectImage = () => selectImage(url);
     return (
-        <img onClick={handleSelectImage} src={url} alt='Product image' />
+        <img onClick={handleSelectImage} src={url} alt='Product' />
     )
 }
 
@@ -17,7 +17,7 @@ const ProductGallery = ({ images }) => {
     return (
         <div className='product-gallery'>
             <div className="main-image">
-                <img src={currentImage} alt='Product image'/>
+                <img src={currentImage} alt='Product'/>
             </div>
             <div className='thumbnails'>
                 { images.map((imageURL, index) => <Thumbnail selectImage={selectImage} key={index} url={imageURL} />) }

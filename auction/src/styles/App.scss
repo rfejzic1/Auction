@@ -193,6 +193,11 @@ h1 {
     margin: 32px 0px;
 }
 
+.divider-smaller {
+    opacity: 0;
+    margin: 16px 0px;
+}
+
 .nav-bar {
     padding: 8px 0px;
 }
@@ -367,4 +372,34 @@ h1 {
             margin: 4px 0px;
         }
     }
+}
+
+.product-details {
+    padding: 16px 32px;
+
+    h2 {
+        font-size: 40px;
+        font-weight: 400;
+        margin-bottom: 16px;
+    }
+
+    .price {
+        display: inline-block;
+        color: $primary;
+        font-size: 24px;
+        margin-bottom: 16px;
+    }
+
+    .bid-info {
+        font-size: 14px;
+        color: #9b9b9b;
+    }
+
+    hr {
+        margin: 8px 0px;
+    }
+}
+
+.uppercase {
+    text-transform: uppercase;
 }

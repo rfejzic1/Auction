@@ -3,10 +3,13 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 import Wrapper from './Common/Wrapper';
+import Breadcrumbs from './Common/Breadcrumbs';
+import Divider from './Common/Divider';
 import PageLayout from './PageLayout';
 import config from '../config';
 import Page404 from './Page404';
 import ProductGallery from './Product/ProductGallery';
+import ProductDetails from './Product/ProductDetails';
 
 const getProduct = async (uuid, setProduct) => {
     const res = await axios({
@@ -38,9 +41,13 @@ const ProductPage = () => {
             {
                 product ?
                     <PageLayout>
-                        <Wrapper>
+                        <Breadcrumbs current='Single Product' path='Shop/' />
+                        <Divider smaller />
+                        <Wrapper flex normal >
                             <ProductGallery images={images}/>
+                            <ProductDetails product={product} />
                         </Wrapper>
+                        <Divider />
                     </PageLayout>
                 :
                     <Page404 />

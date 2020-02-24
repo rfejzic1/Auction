@@ -32,7 +32,7 @@ function App() {
 						<Route exact path='/login' component={Login} />
 						<Route exact path='/register' component={Register} />
 						<SecureRoute exact path='/shop' component={Shop} />
-						<SecureRoute exact path='/shop/product/:productUUID' component={ProductPage}/>
+						<SecureRoute exact path='/shop/:uuid' component={ProductPage}/>
 						<Route component={Page404}/>
 					</Switch>
 				</div>

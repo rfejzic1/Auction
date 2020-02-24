@@ -25,7 +25,7 @@ const getProduct = async (uuid, setProduct) => {
 
 const ProductPage = () => {
     const params = useParams();
-    const { productUUID } = params;
+    const { uuid: productUUID } = params;
 
     const [product, setProduct] = useState({});
 

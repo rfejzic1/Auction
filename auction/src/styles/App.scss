@@ -437,16 +437,38 @@ h1 {
         color: $primary;
     }
 
-    a {
+    & > a, .item-header {
         @extend %list-item;
         color: $dark-1;
         text-decoration: none;
         border-bottom: 1px solid #ececec;
         transition: border 50ms ease-out;
+        cursor: pointer;
 
         &:hover {
             border-left: 2px solid $primary;
         }
+    }
+
+    .subcategories {
+        overflow: hidden;
+        max-height: 0px;
+
+        a {
+            @extend %list-item;
+            text-decoration: none;
+            color: #9b9b9b;
+            padding-left: 18px;
+            transition: color 50ms ease-in-out;
+
+            &:hover {
+                color: $primary;
+            }
+        }
+    }
+
+    .open {
+        max-height: 100%;
     }
 }
 

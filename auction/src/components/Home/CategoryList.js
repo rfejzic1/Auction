@@ -10,7 +10,6 @@ const getCategories = async setCategories => {
             baseURL: config.API_URL,
             url: '/categories'
         });
-        console.log(res.data);
         setCategories(res.data);
     } catch {
         setCategories([]);
@@ -29,7 +28,7 @@ const CategoryList = () => {
             <span className='categories-header'>Categories</span>
             {
                 categories.map((category, index) => {
-                    return <Link key={index} to={`/shop/products?category=${category.name}`} >{category.name}</Link>;
+                    return <Link key={index} to={`/shop?category=${category.name}`} >{category.name}</Link>;
                 })
             }
             <Link to={`/categories`}>All Categories</Link>

@@ -39,5 +39,5 @@ public class Auction {
 
     @NotBlank
     @Enumerated(EnumType.STRING)
-    public AuctionStatus status;
+    public AuctionStatusEnum status;
 }

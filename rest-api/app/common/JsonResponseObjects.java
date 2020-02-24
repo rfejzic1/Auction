@@ -33,4 +33,8 @@ public class JsonResponseObjects {
     public static JsonNode error(String message) {
         return Json.newObject().put(Fields.MESSAGE, message);
     }
+
+    public static JsonNode json422(String message) {
+        return jsonStatus(UNPROCESSABLE_ENTITY, message);
+    }
 }

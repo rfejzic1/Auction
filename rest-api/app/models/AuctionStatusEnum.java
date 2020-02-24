@@ -1,5 +1,5 @@
 package models;
 
-public enum AuctionStatus {
+public enum AuctionStatusEnum {
     OPEN, CLOSED, EXPIRED
 }

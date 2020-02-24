@@ -8,6 +8,8 @@ public class Constants {
         public static final String UNAUTHORIZED = "Unauthorized";
         public static final String UNAUTHENTICATED = "Unauthenticated";
         public static final String NOT_FOUND = "Resource not found";
+        public static final String BAD_UUID = "Bad UUID";
+        public static final String USER_NOT_FOUND = "User not found";
     }
 
     public static final class Fields {

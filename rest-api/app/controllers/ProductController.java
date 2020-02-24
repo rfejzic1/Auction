@@ -5,20 +5,17 @@ import common.Constants;
 import common.JsonResponseObjects;
 import models.User;
 import payload.ProductAuctionPayload;
-import play.libs.typedmap.TypedMap;
 import services.ProductService;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import lombok.AllArgsConstructor;
 
 import play.libs.Json;
-import play.libs.typedmap.TypedKey;
 import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
 
 import javax.inject.Inject;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.CompletionStage;
 
@@ -29,7 +26,7 @@ public class ProductController extends Controller {
     private final ProductService productService;
 
     public CompletionStage<Result> getProducts(String category) {
-        if(category == null) {
+        if (category == null) {
             return productService.getAll()
                     .thenApply(products -> ok(Json.toJson(products)));
         }
@@ -38,17 +35,22 @@ public class ProductController extends Controller {
                 .thenApply(products -> ok(Json.toJson(products)));
     }
 
-    public CompletionStage<Result> get(String uuidString) {
+    public CompletionStage<Result> get(String id) {
         UUID uuid;
 
         try {
-            uuid = UUID.fromString(uuidString);
+            uuid = UUID.fromString(id);
         } catch (IllegalArgumentException e) {
-            return supplyAsync(() -> badRequest(JsonResponseObjects.json404(Constants.Messages.NOT_FOUND)));
+            return supplyAsync(() -> status(UNPROCESSABLE_ENTITY, JsonResponseObjects.json422(Constants.Messages.BAD_UUID)));
         }
 
         return productService.getProduct(uuid)
-                .thenApply(product -> ok(Json.toJson(product)));
+                .thenApply(product -> {
+                    if (product == null) {
+                        return notFound(JsonResponseObjects.json404(Constants.Messages.USER_NOT_FOUND));
+                    }
+                    return ok(Json.toJson(product));
+                });
     }
 
     @JWTAuthenticated

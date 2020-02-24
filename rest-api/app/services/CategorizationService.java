@@ -31,7 +31,7 @@ public class CategorizationService {
     public CompletionStage<Category> findOrCreateCategoryByName(String name) {
         return findCategoryByName(name)
                 .thenApply(category -> {
-                    if(category == null) {
+                    if (category == null) {
                         category = new Category(null, name, new HashSet<>());
                         return categoryRepository.create(category).toCompletableFuture().join();
                     }
@@ -44,7 +44,7 @@ public class CategorizationService {
     public CompletionStage<Subcategory> findOrCreateSubcategoryWithCategoryByName(String subcategoryName, String categoryName) {
         return findSubcategoryByName(subcategoryName)
                 .thenApply(subcategory -> {
-                    if(subcategory == null) {
+                    if (subcategory == null) {
                         Category category = findOrCreateCategoryByName(categoryName).toCompletableFuture().join();
                         Subcategory newSubcategory = new Subcategory(null, subcategoryName, category);
                         category.subcategories.add(newSubcategory);

@@ -1,6 +1,5 @@
 package services;
 
-import actions.JWTAuthenticated;
 import lombok.RequiredArgsConstructor;
 import models.*;
 import payload.ProductAuctionPayload;
@@ -9,7 +8,6 @@ import repositories.ProductRepository;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CompletionStage;
@@ -37,25 +35,36 @@ public class ProductService {
     }
 
     public CompletionStage<Product> sellProduct(ProductAuctionPayload payload, User user) {
+        Product product = makeProduct(payload, user);
+
+        return productRepository.create(product)
+                .thenApplyAsync(newProduct -> newProduct, ec.current());
+    }
+
+    private Product makeProduct(ProductAuctionPayload payload, User user) {
         Product product = new Product();
-        Auction auction = new Auction();
 
         product.name = payload.name;
         product.description = payload.description;
         product.color = payload.color;
         product.size = payload.size;
 
+        product.subcategory = categorizationService.findOrCreateSubcategoryWithCategoryByName(payload.subcategory, payload.category).toCompletableFuture().join();
+        product.owner = user;
+        product.auction = makeAuction(payload, product);
+
+        return product;
+    }
+
+    private Auction makeAuction(ProductAuctionPayload payload, Product product) {
+        Auction auction = new Auction();
+
         auction.startPrice = payload.startPrice;
         auction.startDate = payload.startDate;
         auction.endDate = payload.endDate;
-        auction.status = AuctionStatus.OPEN;
-
-        product.subcategory = categorizationService.findOrCreateSubcategoryWithCategoryByName(payload.subcategory, payload.category).toCompletableFuture().join();
-        product.auction = auction;
-        product.owner = user;
+        auction.status = AuctionStatusEnum.OPEN;
         auction.product = product;
 
-        return productRepository.create(product)
-                .thenApplyAsync(newProduct -> newProduct, ec.current());
+        return auction;
     }
 }

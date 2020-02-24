@@ -51,7 +51,6 @@ public class Product {
     public User owner;
 
     @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
-    @JsonIgnore
     public Auction auction;
 
     @OneToMany(mappedBy = "product", orphanRemoval = true, fetch = FetchType.EAGER)

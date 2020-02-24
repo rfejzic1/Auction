@@ -10,8 +10,10 @@ import repositories.SubcategoryRepository;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.HashSet;
+import java.util.List;
 import java.util.concurrent.CompletionStage;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Singleton
 @RequiredArgsConstructor(onConstructor=@__(@Inject))
@@ -57,4 +59,8 @@ public class CategorizationService {
                 .thenApplyAsync(Function.identity(), ec.current());
     }
 
+    public CompletionStage<List<Category>> getCategories() {
+        return categoryRepository.getAll()
+                .thenApplyAsync(categoryStream -> categoryStream.collect(Collectors.toList()), ec.current());
+    }
 }

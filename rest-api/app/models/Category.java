@@ -26,7 +26,6 @@ public class Category {
     @Max(30)
     public String name;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "category", orphanRemoval = true, fetch = FetchType.EAGER)
     public Set<Subcategory> subcategories;
 }

@@ -5,6 +5,7 @@ import common.Constants;
 import common.JsonResponseObjects;
 import models.User;
 import payload.ProductAuctionPayload;
+import services.CategorizationService;
 import services.ProductService;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -24,6 +25,7 @@ import static java.util.concurrent.CompletableFuture.supplyAsync;
 @AllArgsConstructor(onConstructor=@__(@Inject))
 public class ProductController extends Controller {
     private final ProductService productService;
+    private final CategorizationService categorizationService;
 
     public CompletionStage<Result> getProducts(String category) {
         if (category == null) {
@@ -51,6 +53,11 @@ public class ProductController extends Controller {
                     }
                     return ok(Json.toJson(product));
                 });
+    }
+
+    public CompletionStage<Result> getCategories() {
+        return categorizationService.getCategories()
+                .thenApply(categories -> ok(Json.toJson(categories)));
     }
 
     @JWTAuthenticated

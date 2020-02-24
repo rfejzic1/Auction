@@ -8,4 +8,6 @@ GET     /products                   controllers.ProductController.getProducts(ca
 GET     /products/:id               controllers.ProductController.get(id)
 POST    /products                   controllers.ProductController.sell(request: Request)
 
+GET     /categories                 controllers.ProductController.getCategories
+
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

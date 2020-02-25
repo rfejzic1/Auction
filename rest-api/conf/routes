@@ -1,5 +1,6 @@
 GET     /                           controllers.HomeController.index
 GET     /users                      controllers.UserController.index
+GET     /profile                    controllers.UserController.profile(request: Request)
 
 POST    /register                   controllers.UserController.register(request: Request)
 POST    /login                      controllers.UserController.login(request: Request)

@@ -9,6 +9,7 @@ import models.utils.UUIDGenerator;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.Date;
+import java.util.Set;
 import java.util.UUID;
 
 @Data
@@ -54,4 +55,8 @@ public class User {
 
     @NotBlank
     public String phoneNumber;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    public Set<Bid> bids;
 }

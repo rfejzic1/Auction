@@ -19,7 +19,7 @@ const getCategories = async setCategories => {
 };
 
 const ListSubitem = ({ subcategory, category }) => {
-    const url = `/shop?category=?${category.name}&subcategory=${subcategory.name}`
+    const url = `/shop?category=${category.name}&subcategory=${subcategory.name}`;
     return <Link to={url} >{subcategory.name}</Link>;
 };
 

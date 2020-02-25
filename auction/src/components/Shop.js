@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
+import queryString from 'query-string';
 
 import PageLayout from './PageLayout'
 import Wrapper from './Common/Wrapper';
 import SubcategoryList from './Home/SubcategoryList';
 import config from '../config';
-
-function useQuery() {
-    return new URLSearchParams(useLocation().search);
-}
 
 const getProducts = async ({ category, subcategory }, setProducts) => {
     try {    
@@ -21,34 +18,32 @@ const getProducts = async ({ category, subcategory }, setProducts) => {
                 subcategory
             }
         })
-
         setProducts(res.data);
-    } catch {
+    } catch (err) {
         setProducts([]);
     }
 };
 
 const Shop = () => {
-    const query = useQuery();
-    const categorization = {
-        category: query.get("category").slice(1,-1),
-        subcategory: query.get("subcategory")
-    };
+    const location = useLocation();
+    const { category, subcategory } = queryString.parse(location.search);
 
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        getProducts(categorization, setProducts);
-    }, [categorization]);
+        getProducts({ category, subcategory }, setProducts);
+    }, [category, subcategory]);
 
     return (
         <PageLayout>
             <Wrapper>
-                <SubcategoryList defaultCategory={query.get("category")}/>
+                <SubcategoryList defaultCategory={category}/>
                 <ul>
-                    { products.map((product, index) => {
-                        return <li key={index}>{product.name}</li>
-                    }) }
+                    {
+                        products.map((product, index) => {
+                            return <li key={index}>{product.name}</li>
+                        })
+                    }
                 </ul>
             </Wrapper>
         </PageLayout>

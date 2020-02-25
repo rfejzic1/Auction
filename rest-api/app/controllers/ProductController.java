@@ -27,13 +27,18 @@ public class ProductController extends Controller {
     private final ProductService productService;
     private final CategorizationService categorizationService;
 
-    public CompletionStage<Result> getProducts(String category) {
-        if (category == null) {
-            return productService.getAll()
+    public CompletionStage<Result> getProducts(String category, String subcategory) {
+        if (category != null) {
+            if (subcategory != null) {
+                return productService.getProductsBySubcategory(category, subcategory)
+                        .thenApply(products -> ok(Json.toJson(products)));
+            }
+
+            return productService.getProductsByCategory(category)
                     .thenApply(products -> ok(Json.toJson(products)));
         }
 
-        return productService.getProductsBySubcategory(category)
+        return productService.getAll()
                 .thenApply(products -> ok(Json.toJson(products)));
     }
 

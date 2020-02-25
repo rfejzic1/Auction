@@ -4,7 +4,7 @@ GET     /users                      controllers.UserController.index
 POST    /register                   controllers.UserController.register(request: Request)
 POST    /login                      controllers.UserController.login(request: Request)
 
-GET     /products                   controllers.ProductController.getProducts(category ?= null)
+GET     /products                   controllers.ProductController.getProducts(category ?= null, subcategory ?= null)
 GET     /products/:id               controllers.ProductController.get(id)
 POST    /products                   controllers.ProductController.sell(request: Request)
 

@@ -30,8 +30,12 @@ public class ProductService {
                 .thenApplyAsync(product -> product.orElse(null), ec.current());
     }
 
-    public CompletionStage<List<Product>> getProductsBySubcategory(String subcategory) {
-        return productRepository.findBySubcategory(subcategory);
+    public CompletionStage<List<Product>> getProductsByCategory(String category) {
+        return productRepository.findByCategory(category);
+    }
+
+    public CompletionStage<List<Product>> getProductsBySubcategory(String category, String subcategory) {
+        return productRepository.findBySubcategory(category, subcategory);
     }
 
     public CompletionStage<Product> sellProduct(ProductAuctionPayload payload, User user) {

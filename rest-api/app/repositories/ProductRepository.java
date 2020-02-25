@@ -7,5 +7,6 @@ import java.util.UUID;
 import java.util.concurrent.CompletionStage;
 
 public interface ProductRepository extends Repository<Product, UUID> {
-    CompletionStage<List<Product>> findBySubcategory(String subcategory);
+    CompletionStage<List<Product>> findByCategory(String category);
+    CompletionStage<List<Product>> findBySubcategory(String category, String subcategory);
 }

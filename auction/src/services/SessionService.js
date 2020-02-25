@@ -13,7 +13,7 @@ function setAuthorizationHeaderDefault(token) {
     }
 }
 
-function setUserLoginState(res, dispatch) {
+export const setUserLoginState = (res, dispatch) => {
     const { user, token } = res.data;
 
     dispatch({
@@ -22,8 +22,9 @@ function setUserLoginState(res, dispatch) {
     });
 
     setAuthorizationHeaderDefault(token);
+    console.log(`Token ${token} is set!`);
     Cookies.set('token', token, { expires: 7 });
-}
+};
 
 export const register = (dispatch, registerData) => {
     axios.post('/register', registerData)

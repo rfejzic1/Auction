@@ -58,4 +58,11 @@ public class UserController extends Controller {
         User user = request.attrs().get(Constants.TypedKeys.USER);
         return supplyAsync(() -> ok(Json.toJson(user)));
     }
+
+    @JWTAuthenticated
+    public CompletionStage<Result> refresh(Http.Request request) {
+        User user = request.attrs().get(Constants.TypedKeys.USER);
+        UserTokenResponse response = userService.getUserTokenResponse(user);
+        return supplyAsync(() -> ok(Json.toJson(response)));
+    }
 }

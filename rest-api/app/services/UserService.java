@@ -44,7 +44,7 @@ public class UserService {
                     boolean passwordsMatch = BCrypt.checkpw(payload.password, user.password);
 
                     if(passwordsMatch) {
-                        return new UserTokenResponse(createJWT(user), user);
+                        return getUserTokenResponse(user);
                     }
 
                     throw new RuntimeException(Constants.Messages.UNAUTHENTICATED);
@@ -67,6 +67,10 @@ public class UserService {
         return userRepository
                 .create(user)
                 .thenApplyAsync(u -> new UserTokenResponse(createJWT(u), u), ec.current());
+    }
+
+    public UserTokenResponse getUserTokenResponse(User user) {
+        return new UserTokenResponse(createJWT(user), user);
     }
 
     private String createJWT(User user) {

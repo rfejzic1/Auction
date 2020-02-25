@@ -22,7 +22,6 @@ export const setUserLoginState = (res, dispatch) => {
     });
 
     setAuthorizationHeaderDefault(token);
-    console.log(`Token ${token} is set!`);
     Cookies.set('token', token, { expires: 7 });
 };
 

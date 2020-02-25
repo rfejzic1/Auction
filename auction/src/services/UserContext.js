@@ -25,10 +25,8 @@ const userDataReducer = (state, action) => {
 
 function setInitialSessionState(dispatch) {
     const token = Cookies.get('token');
-    console.log(`Inital token is ${token}`);
 
     if(token == null) {
-        console.log("No token detected");
         dispatch({ type: 'LOGOUT' });
         return;
     }
@@ -41,12 +39,10 @@ function setInitialSessionState(dispatch) {
         }
     })
     .then(res => {
-        console.log(res.data);
         setUserLoginState(res, dispatch);
     })
-    .catch(err => {
+    .catch(() => {
         dispatch({ type: 'LOGOUT' });
-        console.log(err.response);
     });
 }
 
@@ -54,7 +50,6 @@ const UserContextProvider = ({ children }) => {
     const [userData, dispatch] = useReducer(userDataReducer, {});
 
     useEffect(() => {
-        console.log("Initiated!");
         setInitialSessionState(dispatch);
     }, []);
 

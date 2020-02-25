@@ -5,8 +5,11 @@ import queryString from 'query-string';
 
 import PageLayout from './PageLayout'
 import Wrapper from './Common/Wrapper';
+import Grid from './Common/Grid';
 import SubcategoryList from './Home/SubcategoryList';
 import config from '../config';
+import ProductCard from './Shop/ProductCard';
+import Divider from './Common/Divider';
 
 const getProducts = async ({ category, subcategory }, setProducts) => {
     try {    
@@ -36,16 +39,24 @@ const Shop = () => {
 
     return (
         <PageLayout>
+            <Divider smaller/>
             <Wrapper>
-                <SubcategoryList defaultCategory={category}/>
-                <ul>
-                    {
-                        products.map((product, index) => {
-                            return <li key={index}>{product.name}</li>
-                        })
-                    }
-                </ul>
+                <div className='shop'>
+                    <aside>
+                        <SubcategoryList defaultCategory={category}/>
+                    </aside>
+                    <main>
+                        <Grid>
+                            {
+                                products.map((product, index) => {
+                                    return <ProductCard key={index} product={product} />
+                                })
+                            }
+                        </Grid>
+                    </main>
+                </div>
             </Wrapper>
+            <Divider/>
         </PageLayout>
     )
 }

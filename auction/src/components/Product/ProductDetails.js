@@ -1,10 +1,11 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronRight, faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 import TextField from '../Controls/TextField';
 import Button from '../Controls/Button';
 import FormGroup from '../Controls/FormGroup';
+import WishlistButton from '../Common/WishlistButton';
 
 const ProductDetails = ({ product }) => {
     return (
@@ -26,10 +27,7 @@ const ProductDetails = ({ product }) => {
                 <br/>
                 <span className="bid-info">10 days</span>
             </FormGroup>
-            <Button>
-                Whishlist
-                <FontAwesomeIcon icon={faHeart}/>
-            </Button>
+            <WishlistButton product={product}/>
             <br/>
             <br/>
             <span>Details:</span>

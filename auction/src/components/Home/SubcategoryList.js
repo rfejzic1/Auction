@@ -18,8 +18,9 @@ const getCategories = async setCategories => {
     }
 };
 
-const ListSubitem = ({ subcategory }) => {
-    return <Link to={`/shop?subcategory=${subcategory.name}`} >{subcategory.name}</Link>;
+const ListSubitem = ({ subcategory, category }) => {
+    const url = `/shop?category=?${category.name}&subcategory=${subcategory.name}`
+    return <Link to={url} >{subcategory.name}</Link>;
 };
 
 const ListItem = ({ category, isOpen }) => {
@@ -39,7 +40,7 @@ const ListItem = ({ category, isOpen }) => {
         <ul className={classes}>
             {
                 subcategories.map((subcategory, index) => {
-                    return <ListSubitem key={index} subcategory={subcategory}/>
+                    return <ListSubitem key={index} subcategory={subcategory} category={category}/>
                 })
             }
         </ul>

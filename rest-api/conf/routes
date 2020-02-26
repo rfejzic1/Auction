@@ -12,4 +12,8 @@ POST    /products                   controllers.ProductController.sell(request: 
 
 GET     /categories                 controllers.ProductController.getCategories
 
+GET     /bids/product/:id           controllers.BidController.getProductBids(id)
+GET     /bids/user/:id              controllers.BidController.getUserBids(id)
+POST    /bids                       controllers.BidController.placeBid(request: Request)
+
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

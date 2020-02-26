@@ -2,14 +2,13 @@ package services;
 
 import lombok.RequiredArgsConstructor;
 import models.Bid;
-import models.Product;
 import models.User;
+import payload.BidPayload;
 import play.libs.concurrent.HttpExecutionContext;
 import repositories.BidRepository;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.concurrent.CompletionStage;
 import java.util.function.Function;
@@ -21,6 +20,8 @@ public class BiddingService {
     private final BidRepository bidRepository;
     private final HttpExecutionContext ec;
 
+    private final ProductService productService;
+
     public CompletionStage<List<Bid>> getProductBids(String productUUID) {
         return bidRepository.getProductBids(productUUID)
                 .thenApplyAsync(bidStream -> bidStream.collect(Collectors.toList()), ec.current());
@@ -31,9 +32,12 @@ public class BiddingService {
                 .thenApplyAsync(bidStream -> bidStream.collect(Collectors.toList()), ec.current());
     }
 
-    public CompletionStage<Bid> placeBid(Product product, User user, BigDecimal value) {
-        Bid bid = new Bid(null, user, product, value);
-        return bidRepository.create(bid)
+    public CompletionStage<Bid> placeBid(BidPayload payload, User user) {
+        return productService.getProduct(payload.productID)
+                .thenApply(product -> {
+                    Bid bid = new Bid(null, user, product, payload.value);
+                    return bidRepository.create(bid).toCompletableFuture().join();
+                })
                 .thenApplyAsync(Function.identity(), ec.current());
     }
 

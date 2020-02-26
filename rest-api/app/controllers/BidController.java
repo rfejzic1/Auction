@@ -27,7 +27,7 @@ public class BidController extends Controller {
     }
 
     public CompletionStage<Result> getUserBids(String id) {
-        return biddingService.getProductBids(id)
+        return biddingService.getUserBids(id)
                 .thenApplyAsync(bids -> ok(Json.toJson(bids)));
     }
 

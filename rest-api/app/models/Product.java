@@ -55,8 +55,4 @@ public class Product {
 
     @OneToMany(mappedBy = "product", orphanRemoval = true, fetch = FetchType.EAGER)
     public Set<Image> images;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "product")
-    public Set<Bid> bids;
 }

@@ -26,19 +26,19 @@ public class BidJPARepository extends JPARepository<Bid, Long> implements BidRep
     }
 
     @Override
-    public CompletionStage<Stream<Bid>> getProductBids(Product product) {
+    public CompletionStage<Stream<Bid>> getProductBids(String productUUID) {
         return supplyAsync(() -> with(em -> {
             TypedQuery<Bid> query = em.createQuery(getProductBidsQuery, Bid.class);
-            query.setParameter(Constants.Fields.PRODUCT_ID, product.uuid);
+            query.setParameter(Constants.Fields.PRODUCT_ID, productUUID);
             return query.getResultList().stream();
         })).exceptionally(error -> Stream.empty());
     }
 
     @Override
-    public CompletionStage<Stream<Bid>> getUserBids(User user) {
+    public CompletionStage<Stream<Bid>> getUserBids(String userUUID) {
         return supplyAsync(() -> with(em -> {
             TypedQuery<Bid> query = em.createQuery(getUserBidsQuery, Bid.class);
-            query.setParameter(Constants.Fields.USER_ID, user.uuid);
+            query.setParameter(Constants.Fields.USER_ID, userUUID);
             return query.getResultList().stream();
         })).exceptionally(error -> Stream.empty());
     }

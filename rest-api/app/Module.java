@@ -9,5 +9,6 @@ public class Module extends AbstractModule {
         bind(CategoryRepository.class).to(CategoryJPARepository.class).asEagerSingleton();
         bind(SubcategoryRepository.class).to(SubcategoryJPARepository.class).asEagerSingleton();
         bind(ImageRepository.class).to(ImageJPARepository.class).asEagerSingleton();
+        bind(BidRepository.class).to(BidJPARepository.class).asEagerSingleton();
     }
 }

@@ -35,7 +35,7 @@ public class BiddingService {
     public CompletionStage<Bid> placeBid(BidPayload payload, User user) {
         return productService.getProduct(payload.productID)
                 .thenApply(product -> {
-                    Bid bid = new Bid(null, user, product, payload.value);
+                    Bid bid = new Bid(null, payload.value);
                     return bidRepository.create(bid).toCompletableFuture().join();
                 })
                 .thenApplyAsync(Function.identity(), ec.current());

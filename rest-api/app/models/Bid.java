@@ -18,14 +18,6 @@ public class Bid {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id");
-    public User user;
-
-    @ManyToOne
-    @JoinColumn(name = "product_id");
-    public Product product;
-
     @PositiveOrZero
     public BigDecimal value;
 }

@@ -17,10 +17,7 @@ import play.mvc.Http;
 import play.mvc.Result;
 
 import javax.inject.Inject;
-import java.util.UUID;
 import java.util.concurrent.CompletionStage;
-
-import static java.util.concurrent.CompletableFuture.supplyAsync;
 
 @AllArgsConstructor(onConstructor=@__(@Inject))
 public class ProductController extends Controller {
@@ -43,21 +40,14 @@ public class ProductController extends Controller {
     }
 
     public CompletionStage<Result> get(String id) {
-        UUID uuid;
-
-        try {
-            uuid = UUID.fromString(id);
-        } catch (IllegalArgumentException e) {
-            return supplyAsync(() -> status(UNPROCESSABLE_ENTITY, JsonResponseObjects.json422(Constants.Messages.BAD_UUID)));
-        }
-
-        return productService.getProduct(uuid)
+        return productService.getProduct(id)
                 .thenApply(product -> {
                     if (product == null) {
                         return notFound(JsonResponseObjects.json404(Constants.Messages.USER_NOT_FOUND));
                     }
                     return ok(Json.toJson(product));
-                });
+                })
+                .exceptionally(t -> status(UNPROCESSABLE_ENTITY, JsonResponseObjects.json422(Constants.Messages.BAD_UUID)));
     }
 
     public CompletionStage<Result> getCategories() {

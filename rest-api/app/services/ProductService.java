@@ -25,7 +25,9 @@ public class ProductService {
                 .thenApplyAsync(productStream -> productStream.collect(Collectors.toList()), ec.current());
     }
 
-    public CompletionStage<Product> getProduct(UUID uuid) {
+    public CompletionStage<Product> getProduct(String id) {
+        UUID uuid = UUID.fromString(id);
+
         return productRepository.get(uuid)
                 .thenApplyAsync(product -> product.orElse(null), ec.current());
     }

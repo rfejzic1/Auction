@@ -59,6 +59,10 @@ public class ProductService {
         product.owner = user;
         product.auction = makeAuction(payload, product);
 
+        product.images = payload.images.stream()
+                .map(imageURI -> new Image(null, imageURI, product))
+                .collect(Collectors.toList());
+
         return product;
     }
 

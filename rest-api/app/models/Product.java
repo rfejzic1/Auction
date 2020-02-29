@@ -10,7 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.util.Set;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -53,6 +53,6 @@ public class Product {
     @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
     public Auction auction;
 
-    @OneToMany(mappedBy = "product", orphanRemoval = true, fetch = FetchType.EAGER)
-    public Set<Image> images;
+    @OneToMany(mappedBy = "product", orphanRemoval = true, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    public List<Image> images;
 }

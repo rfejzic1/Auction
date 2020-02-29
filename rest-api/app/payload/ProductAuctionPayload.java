@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -20,4 +21,5 @@ public class ProductAuctionPayload {
     public BigDecimal startPrice;
     public Date startDate;
     public Date endDate;
+    public List<String> images;
 }

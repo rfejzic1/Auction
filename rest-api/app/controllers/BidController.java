@@ -26,19 +26,22 @@ public class BidController extends Controller {
                 .thenApplyAsync(bids -> ok(Json.toJson(bids)));
     }
 
-    public CompletionStage<Result> getUserBids(String id) {
-        return biddingService.getUserBids(id)
+    @JWTAuthenticated
+    public CompletionStage<Result> getUserBids(Http.Request request) {
+        User user = request.attrs().get(Constants.TypedKeys.USER);
+
+        return biddingService.getUserBids(user.uuid.toString())
                 .thenApplyAsync(bids -> ok(Json.toJson(bids)));
     }
 
     @JWTAuthenticated
-    public CompletionStage<Result> placeBid(Http.Request request) {
+    public CompletionStage<Result> placeBid(String id, Http.Request request) {
         JsonNode json = request.body().asJson();
         BidPayload payload = Json.fromJson(json, BidPayload.class);
 
         User user = request.attrs().get(Constants.TypedKeys.USER);
 
-        return biddingService.placeBid(payload, user)
+        return biddingService.placeBid(id, user, payload.value)
                 .thenApplyAsync(bid -> ok(Json.toJson(bid)))
                 .exceptionally(t -> status(UNPROCESSABLE_ENTITY, JsonResponseObjects.json422(Constants.Messages.BAD_UUID)));
     }

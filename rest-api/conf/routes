@@ -2,18 +2,17 @@ GET     /                           controllers.HomeController.index
 GET     /users                      controllers.UserController.index
 GET     /profile                    controllers.UserController.profile(request: Request)
 GET     /refresh                    controllers.UserController.refresh(request: Request)
+GET     /bids                       controllers.BidController.getUserBids(request: Request)
 
 POST    /register                   controllers.UserController.register(request: Request)
 POST    /login                      controllers.UserController.login(request: Request)
 
-GET     /products                   controllers.ProductController.getProducts(category ?= null, subcategory ?= null)
+GET     /products/:id/bids          controllers.BidController.getProductBids(id)
+POST    /products/:id/bids          controllers.BidController.placeBid(id, request: Request)
 GET     /products/:id               controllers.ProductController.get(id)
+GET     /products                   controllers.ProductController.getProducts(category ?= null, subcategory ?= null)
 POST    /products                   controllers.ProductController.sell(request: Request)
 
 GET     /categories                 controllers.ProductController.getCategories
-
-GET     /bids/product/:id           controllers.BidController.getProductBids(id)
-GET     /bids/user/:id              controllers.BidController.getUserBids(id)
-POST    /bids                       controllers.BidController.placeBid(request: Request)
 
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

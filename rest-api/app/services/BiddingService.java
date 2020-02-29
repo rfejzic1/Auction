@@ -9,6 +9,7 @@ import repositories.BidRepository;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.concurrent.CompletionStage;
 import java.util.function.Function;
@@ -32,10 +33,10 @@ public class BiddingService {
                 .thenApplyAsync(bidStream -> bidStream.collect(Collectors.toList()), ec.current());
     }
 
-    public CompletionStage<Bid> placeBid(BidPayload payload, User user) {
-        return productService.getProduct(payload.productID)
+    public CompletionStage<Bid> placeBid(String productID, User user, BigDecimal value) {
+        return productService.getProduct(productID)
                 .thenApply(product -> {
-                    Bid bid = new Bid(null, payload.value);
+                    Bid bid = new Bid(null, product, user, value);
                     return bidRepository.create(bid).toCompletableFuture().join();
                 })
                 .thenApplyAsync(Function.identity(), ec.current());

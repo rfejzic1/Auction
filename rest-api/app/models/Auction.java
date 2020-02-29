@@ -17,6 +17,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "auctions")
 public class Auction {
+    @JsonIgnore
     @Id
     private UUID uuid;
 

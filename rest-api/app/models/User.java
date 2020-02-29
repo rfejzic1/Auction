@@ -55,4 +55,8 @@ public class User {
 
     @NotBlank
     public String phoneNumber;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    public Set<Bid> bids;
 }

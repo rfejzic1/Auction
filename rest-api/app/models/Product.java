@@ -11,6 +11,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Data
@@ -55,4 +56,8 @@ public class Product {
 
     @OneToMany(mappedBy = "product", orphanRemoval = true, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     public List<Image> images;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "product")
+    public Set<Bid> bids;
 }

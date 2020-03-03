@@ -43,6 +43,6 @@ public class BidController extends Controller {
 
         return biddingService.placeBid(id, user, payload.value)
                 .thenApplyAsync(bid -> ok(Json.toJson(bid)))
-                .exceptionally(t -> status(UNPROCESSABLE_ENTITY, JsonResponseObjects.json422(Constants.Messages.BAD_UUID)));
+                .exceptionally(t -> status(UNPROCESSABLE_ENTITY, JsonResponseObjects.json422(t.getMessage())));
     }
 }

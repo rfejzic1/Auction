@@ -17,7 +17,7 @@ import static java.util.concurrent.CompletableFuture.supplyAsync;
 
 @Singleton
 public class BidJPARepository extends JPARepository<Bid, Long> implements BidRepository {
-    private final String getProductBidsQuery = "select b from Bid b where cast(b.product.uuid as string)=:product_id";
+    private final String getProductBidsQuery = "select b from Bid b where cast(b.product.uuid as string)=:product_id order by b.value desc";
     private final String getUserBidsQuery = "select b from Bid b where cast(b.user.uuid as string)=:user_id";
 
     @Inject

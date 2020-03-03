@@ -34,12 +34,24 @@ public class BiddingService {
     }
 
     public CompletionStage<Bid> placeBid(String productID, User user, BigDecimal value) {
-        return productService.getProduct(productID)
-                .thenApply(product -> {
-                    Bid bid = new Bid(null, product, user, value);
-                    return bidRepository.create(bid).toCompletableFuture().join();
-                })
-                .thenApplyAsync(Function.identity(), ec.current());
-    }
+        return bidRepository.getProductBids(productID)
+                .thenApplyAsync(bidStream -> {
+                    boolean notHighestBid = bidStream.anyMatch(bid -> bid.value.compareTo(value) >= 0);
 
+                    if (notHighestBid) {
+                        throw new RuntimeException("Bid not the highest for this product");
+                    }
+
+                    return productService.getProduct(productID)
+                            .thenApply(product -> {
+                                if (product == null) {
+                                    throw new IllegalArgumentException("No product with UUID '" + productID + "'");
+                                }
+
+                                Bid bid = new Bid(null, product, user, value);
+                                return bidRepository.create(bid).toCompletableFuture().join();
+                            })
+                            .thenApplyAsync(Function.identity(), ec.current()).toCompletableFuture().join();
+                });
+    }
 }

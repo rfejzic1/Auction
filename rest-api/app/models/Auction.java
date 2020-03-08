@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.Date;
 import java.util.UUID;
 
@@ -27,11 +28,9 @@ public class Auction {
     public Product product;
 
     @NotNull
-    @Temporal(value = TemporalType.TIMESTAMP)
     public Date startDate;
 
     @NotNull
-    @Temporal(value = TemporalType.TIMESTAMP)
     public Date endDate;
 
     @NotNull

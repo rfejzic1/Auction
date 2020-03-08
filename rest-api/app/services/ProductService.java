@@ -11,6 +11,7 @@ import javax.inject.Singleton;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CompletionStage;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Singleton
@@ -33,18 +34,20 @@ public class ProductService {
     }
 
     public CompletionStage<List<Product>> getProductsByCategory(String category) {
-        return productRepository.findByCategory(category);
+        return productRepository.findByCategory(category)
+                .thenApplyAsync(productStream -> productStream.collect(Collectors.toList()), ec.current());
     }
 
     public CompletionStage<List<Product>> getProductsBySubcategory(String category, String subcategory) {
-        return productRepository.findBySubcategory(category, subcategory);
+        return productRepository.findBySubcategory(category, subcategory)
+                .thenApplyAsync(productStream -> productStream.collect(Collectors.toList()), ec.current());
     }
 
     public CompletionStage<Product> sellProduct(ProductAuctionPayload payload, User user) {
         Product product = makeProduct(payload, user);
 
         return productRepository.create(product)
-                .thenApplyAsync(newProduct -> newProduct, ec.current());
+                .thenApplyAsync(Function.identity(), ec.current());
     }
 
     private Product makeProduct(ProductAuctionPayload payload, User user) {

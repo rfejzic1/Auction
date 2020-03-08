@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CompletionStage;
+import java.util.stream.Stream;
 
 import static java.util.concurrent.CompletableFuture.supplyAsync;
 
@@ -26,22 +27,22 @@ public class ProductJPARepository extends JPARepository<Product, UUID> implement
     }
 
     @Override
-    public CompletionStage<List<Product>> findByCategory(String category) {
+    public CompletionStage<Stream<Product>> findByCategory(String category) {
         return supplyAsync(() -> with(em -> {
             TypedQuery<Product> query = em.createQuery(findByCategoryQuery, Product.class);
             query.setParameter(Constants.Fields.CATEGORY, category);
-            return query.getResultList();
-        })).exceptionally(error -> new ArrayList<>());
+            return query.getResultList().stream();
+        })).exceptionally(error -> Stream.empty());
     }
 
     @Override
-    public CompletionStage<List<Product>> findBySubcategory(String category, String subcategory) {
+    public CompletionStage<Stream<Product>> findBySubcategory(String category, String subcategory) {
         return supplyAsync(() -> with(em -> {
             TypedQuery<Product> query = em.createQuery(findBySubcategoryQuery, Product.class);
             query.setParameter(Constants.Fields.CATEGORY, category);
             query.setParameter(Constants.Fields.SUBCATEGORY, subcategory);
-            return query.getResultList();
-        })).exceptionally(error -> new ArrayList<>());
+            return query.getResultList().stream();
+        })).exceptionally(error -> Stream.empty());
     }
 
 }

@@ -48,6 +48,10 @@ public class BiddingService {
                                     throw new IllegalArgumentException("No product with UUID '" + productID + "'");
                                 }
 
+                                if (value.compareTo(product.auction.startPrice) < 0) {
+                                    throw new RuntimeException("Bid value must be greater than the starting price");
+                                }
+
                                 Bid bid = new Bid(null, product, user, value);
                                 return bidRepository.create(bid).toCompletableFuture().join();
                             })

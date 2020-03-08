@@ -14,10 +14,10 @@ const randomImage = images => {
 }
 
 const ProductHighlight = ({ product }) => {
-  const uri = randomImage(product.images);
-  const startPrice = product.startPrice;
+    const uri = randomImage(product.images);
+    const startPrice = product.startPrice;
 
-  return (
+    return (
         <div className="product-highlight">
             <div className='details'>
                 <div className='name'>
@@ -29,7 +29,7 @@ const ProductHighlight = ({ product }) => {
                 <div className='description'>
                     {product.description}
                 </div>
-                <BidButton className='outlined-primary uppercase' product={product} />
+                <BidButton text='Bid now' className='outlined-primary uppercase' product={product} />
             </div>
             <img src={uri} alt="Shoes"/>
         </div>

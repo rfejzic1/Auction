@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 import TextField from '../Controls/TextField';
-import Button from '../Controls/Button';
 import FormGroup from '../Controls/FormGroup';
 import WishlistButton from '../Common/WishlistButton';
 import axios from 'axios';
 import config from '../../config';
+import BidButton from '../Common/BidButton';
 
 const getBids = async (productID, setBids) => {
     try {
@@ -42,10 +40,7 @@ const ProductDetails = ({ product }) => {
             <p className='price'>Start's from ${startPrice.toFixed(2)}</p>
             <br/>
             <TextField />
-            <Button className='uppercase outlined-primary'>
-                Place bid
-                <FontAwesomeIcon icon={faChevronRight}/>
-            </Button>
+            <BidButton text='Place Bid' onClick={() => alert('You bid!')} className='outlined-primary uppercase' product={product} />
             <br/>
             <span className='bid-info'>Enter ${highestBid} or more</span>
             <FormGroup>

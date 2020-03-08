@@ -8,7 +8,7 @@ const WishlistButton = () => {
     return (
         <Button > 
             Whishlist
-            <FontAwesomeIcon icon={faHeart}/>
+            <FontAwesomeIcon className='icon-right' icon={faHeart}/>
         </Button>
     )
 }

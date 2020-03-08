@@ -14,7 +14,7 @@ const ProductCard = ({ product }) => {
                 <img src={image} alt="Product"/>
                 <div className="overlay">
                     <WishlistButton block product={product} />
-                    <BidButton block product={product} />
+                    <BidButton hammer text='Bid' product={product} />
                 </div>
                 <span className='product-name'>
                     {product.name}

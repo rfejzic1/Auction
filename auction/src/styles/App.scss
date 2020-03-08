@@ -135,6 +135,12 @@ $footer-height: 280px;
 
 .outlined-primary {
     border: 2px solid $primary;
+    box-shadow: 0px 0px 2px 1px rgba($color: $dark-1, $alpha: 0.15);
+    transition: box-shadow 50ms ease-in-out;
+
+    &:hover {
+        box-shadow: 0px 0px 4px 2px rgba($color: $dark-1, $alpha: 0.15);
+    }
 }
 
 .text-light {
@@ -474,6 +480,7 @@ h1 {
     height: $height;
     background-color: #fafafa;
     padding-bottom: 2px;
+    color: $dark-1;
 
     .product-highlight {
         display: flex;
@@ -482,7 +489,33 @@ h1 {
 
         width: 100%;
         height: $height;
-        background-color: palegoldenrod;
+        
+        .details {
+            width: 100%;
+            margin: 48px;
+
+            .name {
+                font-size: 36px;
+                font-weight: bold;
+            }
+
+            .price {
+                font-size: 20px;
+                color: $primary;
+            }
+
+            .name, .price, .description {
+                margin: 8px 0px;
+            }
+        }
+    }
+
+    img {
+        max-width: 320px;
+        max-height: 320px;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
     }
 }
 
@@ -559,4 +592,42 @@ h1 {
     svg {
         margin-left: 8px;
     }
+}
+
+.home-section {
+    color: $dark-1;
+    position: relative;
+
+    .header, .tab {
+        display: inline-block;
+        font-size: 20px;
+        padding: 16px 0px;
+        margin-right: 16px;
+    }
+
+    hr {
+        transform: translateY(-2px);
+        z-index: -10;
+        border: 1px solid #d8d8d8;
+    }
+
+    .tab {
+        cursor: pointer;
+    }
+
+    .active {
+        border-bottom: 2px solid $primary;
+    }
+
+    .tiled-gallery {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        padding: 16px 0px;
+    }
+
+    .cols-4 {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
 }

@@ -66,7 +66,7 @@ public class ProductController extends Controller {
 
         User user = request.attrs().get(Constants.TypedKeys.USER);
         return productService.sellProduct(payload, user)
-            .thenApply(product -> ok(Json.toJson(product)));
+                .thenApply(product -> ok(Json.toJson(makeProductResponse(product))));
     }
 
     private List<ProductResponse> makeProductResponses(List<Product> products) {

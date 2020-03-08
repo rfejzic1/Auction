@@ -11,7 +11,7 @@ import config from '../config';
 import ProductCard from './Shop/ProductCard';
 import Divider from './Common/Divider';
 
-const getProducts = async ({ category, subcategory }, setProducts) => {
+const getProducts = async ({ category, subcategory }) => {
     try {    
         const res = await axios({
             baseURL: config.API_URL,
@@ -21,21 +21,32 @@ const getProducts = async ({ category, subcategory }, setProducts) => {
                 subcategory
             }
         })
-        setProducts(res.data);
+        return res.data;
     } catch (err) {
-        setProducts([]);
+        return [];
     }
 };
 
 const Shop = () => {
     const location = useLocation();
-    const { category, subcategory } = queryString.parse(location.search);
+    const { category, subcategory, search } = queryString.parse(location.search);
 
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        getProducts({ category, subcategory }, setProducts);
-    }, [category, subcategory]);
+        getProducts({ category, subcategory })
+            .then(products => {
+                if (search) {
+                    const regexString = search.split(',').map(word => `${word}`).join('|');
+                    const regex = new RegExp(regexString, 'gi');
+                    products = products.filter(product => product.name.match(regex));
+                }
+
+                setProducts(products);
+            })
+            .catch(err => console.log(err));
+        
+    }, [category, subcategory, search]);
 
     return (
         <PageLayout>

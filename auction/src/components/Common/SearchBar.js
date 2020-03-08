@@ -7,12 +7,17 @@ import {
 
 import TextField from '../Controls/TextField';
 
-const SearchBar = props => {
-    const { name, placeholder } = props;
+const SearchBar = ({ name, placeholder, handleSearch }) => {
+    const onSearch = e => {
+        if (e.key === 'Enter' && e.target.value) {
+            handleSearch(e.target.value);
+        }
+    }
+    
     return (
         <div className="search-bar">
-            <TextField name={name} placeholder={placeholder} className='search-field'/>
-            <FontAwesomeIcon icon={faSearch} />
+            <TextField onKeyPress={onSearch} name={name} placeholder={placeholder} className='search-field'/>
+            <FontAwesomeIcon onClick={onSearch} icon={faSearch} />
         </div>
     )
 }

@@ -27,34 +27,31 @@ const ProductPage = () => {
     const params = useParams();
     const { uuid: productUUID } = params;
 
-    const [product, setProduct] = useState({});
-
-    const images = [
-        'https://assets.adidas.com/images/w_600,f_auto,q_auto:sensitive,fl_lossy/985126faac9345fbafa8a8dd008d1a68_9366/Duramo_9_Shoes_Black_BB7066_01_standard.jpg',
-        'https://images.sg.content-cdn.io/cdn//in-resources/c4744b13-9b67-4f22-bf8b-9463f15cd7a6/Images/ProductImages/Source/BB7066-C.jpg',
-        'https://www.efootwear.eu/media/catalog/product/cache/image/650x650/0/0/0000200462745_01_wj.jpg',
-        'https://pa.namshicdn.com/product/49/3904/v1/4-zoom-desktop.jpg'
-    ];
+    const [product, setProduct] = useState(null);
 
     useEffect(() => {
         getProduct(productUUID, setProduct);
-    }, [productUUID, product]);
+    }, [productUUID]);
 
     return (
         <>
             {
-                product == null ?
-                    <Page404 />
-                :
+                product ?
                     <PageLayout>
                         <Breadcrumbs current='Single Product' path='Shop/' />
                         <Divider smaller />
                         <Wrapper flex normal >
-                            <ProductGallery images={images}/>
-                            <ProductDetails product={product} />
+                            {
+                                product && <>
+                                    <ProductGallery images={product.images}/>
+                                    <ProductDetails product={product} />
+                                </>
+                            }
                         </Wrapper>
                         <Divider />
                     </PageLayout>
+                :
+                    <Page404 />
             }
         </>
     )

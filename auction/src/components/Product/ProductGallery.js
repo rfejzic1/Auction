@@ -8,7 +8,7 @@ const Thumbnail = ({ url, selectImage }) => {
 }
 
 const ProductGallery = ({ images }) => {
-    const [currentImage, setCurrentImage] = useState(images[0]);
+    const [currentImage, setCurrentImage] = useState(images && images[0] && images[0].uri);
 
     const selectImage = url => {
         setCurrentImage(url);
@@ -20,7 +20,7 @@ const ProductGallery = ({ images }) => {
                 <img src={currentImage} alt='Product'/>
             </div>
             <div className='thumbnails'>
-                { images.map((imageURL, index) => <Thumbnail selectImage={selectImage} key={index} url={imageURL} />) }
+                { images.map((image, index) => <Thumbnail selectImage={selectImage} key={index} url={image.uri} />) }
             </div>
         </div>
     )

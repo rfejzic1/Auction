@@ -13,7 +13,6 @@ import Footer from './Common/Footer';
 import '../styles/App.scss';
 
 import UserContextProvider from '../services/UserContext';
-import SecureRoute from './Common/SecureRoute';
 
 import { setAPIBaseURL } from '../services/SessionService';
 import config from '../config';
@@ -32,7 +31,7 @@ function App() {
 						<Route exact path='/login' component={Login} />
 						<Route exact path='/register' component={Register} />
 						<Route exact path='/shop' component={Shop} />
-						<SecureRoute exact path='/shop/:uuid' component={ProductPage}/>
+						<Route exact path='/shop/:uuid' component={ProductPage}/>
 						<Route component={Page404}/>
 					</Switch>
 				</div>

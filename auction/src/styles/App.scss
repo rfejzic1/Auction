@@ -1,5 +1,5 @@
-$dark-1: #2a2a2a;
-$primary: #9400d8;
+$dark-1: #252525;
+$primary: #8367D8;
 $gmail-red: #d74437;
 $facebook-blue: #504693;
 
@@ -26,6 +26,7 @@ $footer-height: 280px;
 .flex-normal {
     justify-content: start;
     align-items: flex-start;
+    flex-wrap: nowrap;
 }
 
 .topBar {
@@ -415,6 +416,7 @@ h1 {
 }
 
 .categories {
+    min-width: 240px;
     background-color: white;
     box-shadow: 2px 2px 1px 1px rgba($color: $dark-1, $alpha: 0.15);
 
@@ -468,14 +470,24 @@ h1 {
 }
 
 .jumbotron {
-    min-height: 420px;
+    $height: 420px;
+    height: $height;
     background-color: #fafafa;
     padding-bottom: 2px;
+
+    .product-highlight {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        width: 100%;
+        height: $height;
+        background-color: palegoldenrod;
+    }
 }
 
 .shop {
     display: flex;
-
 
     aside {
         display: inline-block;
@@ -500,6 +512,7 @@ h1 {
 
     position: relative;
     width: 100%;
+    min-height: $height;
 
     img {
         background-color: #ececec;
@@ -525,7 +538,6 @@ h1 {
         display: flex;
         justify-content: space-around;
         align-items: center;
-
         position: absolute;
         overflow: hidden;
 
@@ -540,7 +552,6 @@ h1 {
 
     &:hover {
         .overlay {
-            // height: $height;
             opacity: 1;
         }
     }

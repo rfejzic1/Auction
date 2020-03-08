@@ -1,11 +1,8 @@
 import React from 'react';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
-
 import Wrapper from '../Common/Wrapper';
 import CategoryList from './CategoryList';
-import Button from '../Controls/Button';
+import BidButton from '../Common/BidButton';
 
 const randomImage = images => {
     if (images && images.length <= 0) {
@@ -32,10 +29,7 @@ const ProductHighlight = ({ product }) => {
                 <div className='description'>
                     {product.description}
                 </div>
-                <Button className='outlined-primary uppercase'>
-                    Bid Now
-                    <FontAwesomeIcon icon={faChevronRight} />
-                </Button>
+                <BidButton className='outlined-primary uppercase' product={product} />
             </div>
             <img src={uri} alt="Shoes"/>
         </div>

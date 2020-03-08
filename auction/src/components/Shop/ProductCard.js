@@ -1,5 +1,6 @@
 import React from 'react';
 import WishlistButton from '../Common/WishlistButton';
+import BidButton from '../Common/BidButton';
 
 const ProductCard = ({ product }) => {
     const { images } = product;
@@ -12,7 +13,8 @@ const ProductCard = ({ product }) => {
             <>
                 <img src={image} alt="Product"/>
                 <div className="overlay">
-                    <WishlistButton product={product} />
+                    <WishlistButton block product={product} />
+                    <BidButton block product={product} />
                 </div>
                 <span className='product-name'>
                     {product.name}

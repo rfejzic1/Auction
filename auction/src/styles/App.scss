@@ -98,6 +98,10 @@ $footer-height: 280px;
     }
 }
 
+.block-button {
+    display: block;
+}
+
 .btn-primary {
     @extend %btn-filled;
     background-color: $primary;
@@ -569,8 +573,10 @@ h1 {
 
     .overlay {
         display: flex;
-        justify-content: space-around;
-        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        flex-wrap: wrap;
+        align-content: center;
         position: absolute;
         overflow: hidden;
 

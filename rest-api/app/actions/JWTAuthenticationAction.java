@@ -57,12 +57,12 @@ public class JWTAuthenticationAction extends Action<JWTAuthenticated> {
         return userRepository
                 .findByEmail(email)
                 .thenApplyAsync(user -> {
-                    if(user == null) {
-                        return unauthorized(jsonUnauthorized());
+                    if(user != null) {
+                        return delegate.call(request.addAttr(TypedKeys.USER, user))
+                                .toCompletableFuture().join();
                     }
 
-                    return delegate.call(request.addAttr(TypedKeys.USER, user))
-                            .toCompletableFuture().join();
+                    return unauthorized(jsonUnauthorized());
                 }, ec.current());
     }
 }

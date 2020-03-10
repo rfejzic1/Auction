@@ -44,16 +44,16 @@ public class BiddingService {
 
                     return productService.getProduct(productID)
                             .thenApply(product -> {
-                                if (product == null) {
-                                    throw new IllegalArgumentException("No product with UUID '" + productID + "'");
+                                if (product != null) {
+                                    if (value.compareTo(product.auction.startPrice) < 0) {
+                                        throw new RuntimeException("Bid value must be greater than the starting price");
+                                    }
+
+                                    Bid bid = new Bid(null, product, user, value);
+                                    return bidRepository.create(bid).toCompletableFuture().join();
                                 }
 
-                                if (value.compareTo(product.auction.startPrice) < 0) {
-                                    throw new RuntimeException("Bid value must be greater than the starting price");
-                                }
-
-                                Bid bid = new Bid(null, product, user, value);
-                                return bidRepository.create(bid).toCompletableFuture().join();
+                                throw new IllegalArgumentException("No product with UUID '" + productID + "'");
                             })
                             .thenApplyAsync(Function.identity(), ec.current()).toCompletableFuture().join();
                 });

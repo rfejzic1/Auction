@@ -46,10 +46,10 @@ public class ProductController extends Controller {
     public CompletionStage<Result> get(String id) {
         return productService.getProduct(id)
                 .thenApply(product -> {
-                    if (product == null) {
-                        return notFound(JsonResponseObjects.json404(Constants.Messages.USER_NOT_FOUND));
+                    if (product != null) {
+                        return ok(Json.toJson(makeProductResponse(product)));
                     }
-                    return ok(Json.toJson(makeProductResponse(product)));
+                    return notFound(JsonResponseObjects.json404(Constants.Messages.USER_NOT_FOUND));
                 })
                 .exceptionally(t -> status(UNPROCESSABLE_ENTITY, JsonResponseObjects.json422(Constants.Messages.BAD_UUID)));
     }

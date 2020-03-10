@@ -33,12 +33,12 @@ public class CategorizationService {
     public CompletionStage<Category> findOrCreateCategoryByName(String name) {
         return findCategoryByName(name)
                 .thenApply(category -> {
-                    if (category == null) {
-                        category = new Category(null, name, new HashSet<>());
-                        return categoryRepository.create(category).toCompletableFuture().join();
+                    if (category != null) {
+                        return category;
                     }
 
-                    return category;
+                    category = new Category(null, name, new HashSet<>());
+                    return categoryRepository.create(category).toCompletableFuture().join();
                 })
                 .thenApplyAsync(Function.identity(), ec.current());
     }
@@ -46,15 +46,15 @@ public class CategorizationService {
     public CompletionStage<Subcategory> findOrCreateSubcategoryWithCategoryByName(String subcategoryName, String categoryName) {
         return findSubcategoryByName(subcategoryName)
                 .thenApply(subcategory -> {
-                    if (subcategory == null) {
-                        Category category = findOrCreateCategoryByName(categoryName).toCompletableFuture().join();
-                        Subcategory newSubcategory = new Subcategory(null, subcategoryName, category);
-                        category.subcategories.add(newSubcategory);
-
-                        return subcategoryRepository.create(newSubcategory).toCompletableFuture().join();
+                    if (subcategory != null) {
+                        return subcategory;
                     }
 
-                    return subcategory;
+                    Category category = findOrCreateCategoryByName(categoryName).toCompletableFuture().join();
+                    Subcategory newSubcategory = new Subcategory(null, subcategoryName, category);
+                    category.subcategories.add(newSubcategory);
+
+                    return subcategoryRepository.create(newSubcategory).toCompletableFuture().join();
                 })
                 .thenApplyAsync(Function.identity(), ec.current());
     }

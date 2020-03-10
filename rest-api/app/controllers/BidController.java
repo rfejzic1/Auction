@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import common.Constants;
 import common.JsonResponseObjects;
 import models.User;
-import payload.BidPayload;
 import play.mvc.Http;
 import services.BiddingService;
 import lombok.AllArgsConstructor;
@@ -15,6 +14,7 @@ import play.mvc.Controller;
 import play.mvc.Result;
 
 import javax.inject.Inject;
+import java.math.BigDecimal;
 import java.util.concurrent.CompletionStage;
 
 @AllArgsConstructor(onConstructor=@__(@Inject))
@@ -37,11 +37,11 @@ public class BidController extends Controller {
     @JWTAuthenticated
     public CompletionStage<Result> placeBid(String id, Http.Request request) {
         JsonNode json = request.body().asJson();
-        BidPayload payload = Json.fromJson(json, BidPayload.class);
+        BigDecimal value = json.get("value").decimalValue();
 
         User user = request.attrs().get(Constants.TypedKeys.USER);
 
-        return biddingService.placeBid(id, user, payload.value)
+        return biddingService.placeBid(id, user, value)
                 .thenApplyAsync(bid -> ok(Json.toJson(bid)))
                 .exceptionally(t -> status(UNPROCESSABLE_ENTITY, JsonResponseObjects.json422(t.getMessage())));
     }

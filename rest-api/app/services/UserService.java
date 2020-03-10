@@ -18,6 +18,7 @@ import javax.inject.Singleton;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CompletionStage;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static common.Constants.KEY;
@@ -30,7 +31,7 @@ public class UserService {
 
     public CompletionStage<List<User>> getAll() {
         return userRepository.getAll()
-                .thenApplyAsync(userStream -> userStream.collect(Collectors.toList()), ec.current());
+                .thenApplyAsync(Function.identity(), ec.current());
     }
 
     public CompletionStage<UserTokenResponse> loginUser(LoginPayload payload) {

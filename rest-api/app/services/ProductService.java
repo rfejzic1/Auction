@@ -23,7 +23,7 @@ public class ProductService {
 
     public CompletionStage<List<Product>> getAll() {
         return productRepository.getAll()
-                .thenApplyAsync(productStream -> productStream.collect(Collectors.toList()), ec.current());
+                .thenApplyAsync(Function.identity(), ec.current());
     }
 
     public CompletionStage<Product> getProduct(String id) {

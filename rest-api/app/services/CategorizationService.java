@@ -61,6 +61,6 @@ public class CategorizationService {
 
     public CompletionStage<List<Category>> getCategories() {
         return categoryRepository.getAll()
-                .thenApplyAsync(categoryStream -> categoryStream.collect(Collectors.toList()), ec.current());
+                .thenApplyAsync(Function.identity(), ec.current());
     }
 }

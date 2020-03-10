@@ -27,22 +27,22 @@ public class ProductJPARepository extends JPARepository<Product, UUID> implement
     }
 
     @Override
-    public CompletionStage<Stream<Product>> findByCategory(String category) {
+    public CompletionStage<List<Product>> findByCategory(String category) {
         return supplyAsync(() -> with(em -> {
             TypedQuery<Product> query = em.createQuery(findByCategoryQuery, Product.class);
             query.setParameter(Constants.Fields.CATEGORY, category);
-            return query.getResultList().stream();
-        })).exceptionally(error -> Stream.empty());
+            return query.getResultList();
+        })).exceptionally(error -> new ArrayList<>());
     }
 
     @Override
-    public CompletionStage<Stream<Product>> findBySubcategory(String category, String subcategory) {
+    public CompletionStage<List<Product>> findBySubcategory(String category, String subcategory) {
         return supplyAsync(() -> with(em -> {
             TypedQuery<Product> query = em.createQuery(findBySubcategoryQuery, Product.class);
             query.setParameter(Constants.Fields.CATEGORY, category);
             query.setParameter(Constants.Fields.SUBCATEGORY, subcategory);
-            return query.getResultList().stream();
-        })).exceptionally(error -> Stream.empty());
+            return query.getResultList();
+        })).exceptionally(error -> new ArrayList<>());
     }
 
 }

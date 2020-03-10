@@ -35,12 +35,12 @@ public class ProductService {
 
     public CompletionStage<List<Product>> getProductsByCategory(String category) {
         return productRepository.findByCategory(category)
-                .thenApplyAsync(productStream -> productStream.collect(Collectors.toList()), ec.current());
+                .thenApplyAsync(Function.identity(), ec.current());
     }
 
     public CompletionStage<List<Product>> getProductsBySubcategory(String category, String subcategory) {
         return productRepository.findBySubcategory(category, subcategory)
-                .thenApplyAsync(productStream -> productStream.collect(Collectors.toList()), ec.current());
+                .thenApplyAsync(Function.identity(), ec.current());
     }
 
     public CompletionStage<Product> sellProduct(ProductAuctionPayload payload, User user) {

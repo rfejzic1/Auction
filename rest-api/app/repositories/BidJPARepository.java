@@ -10,6 +10,8 @@ import play.db.jpa.JPAApi;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.persistence.TypedQuery;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CompletionStage;
 import java.util.stream.Stream;
 
@@ -26,20 +28,20 @@ public class BidJPARepository extends JPARepository<Bid, Long> implements BidRep
     }
 
     @Override
-    public CompletionStage<Stream<Bid>> getProductBids(String productUUID) {
+    public CompletionStage<List<Bid>> getProductBids(String productUUID) {
         return supplyAsync(() -> with(em -> {
             TypedQuery<Bid> query = em.createQuery(getProductBidsQuery, Bid.class);
             query.setParameter(Constants.Fields.PRODUCT_ID, productUUID);
-            return query.getResultList().stream();
-        })).exceptionally(error -> Stream.empty());
+            return query.getResultList();
+        })).exceptionally(error -> new ArrayList<>());
     }
 
     @Override
-    public CompletionStage<Stream<Bid>> getUserBids(String userUUID) {
+    public CompletionStage<List<Bid>> getUserBids(String userUUID) {
         return supplyAsync(() -> with(em -> {
             TypedQuery<Bid> query = em.createQuery(getUserBidsQuery, Bid.class);
             query.setParameter(Constants.Fields.USER_ID, userUUID);
-            return query.getResultList().stream();
-        })).exceptionally(error -> Stream.empty());
+            return query.getResultList();
+        })).exceptionally(error -> new ArrayList<>());
     }
 }

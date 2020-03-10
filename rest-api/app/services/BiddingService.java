@@ -3,7 +3,6 @@ package services;
 import lombok.RequiredArgsConstructor;
 import models.Bid;
 import models.User;
-import payload.BidPayload;
 import play.libs.concurrent.HttpExecutionContext;
 import repositories.BidRepository;
 
@@ -13,7 +12,6 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.concurrent.CompletionStage;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 @Singleton
 @RequiredArgsConstructor(onConstructor=@__(@Inject))
@@ -25,18 +23,18 @@ public class BiddingService {
 
     public CompletionStage<List<Bid>> getProductBids(String productUUID) {
         return bidRepository.getProductBids(productUUID)
-                .thenApplyAsync(bidStream -> bidStream.collect(Collectors.toList()), ec.current());
+                .thenApplyAsync(Function.identity(), ec.current());
     }
 
     public CompletionStage<List<Bid>> getUserBids(String userUUID) {
         return bidRepository.getUserBids(userUUID)
-                .thenApplyAsync(bidStream -> bidStream.collect(Collectors.toList()), ec.current());
+                .thenApplyAsync(Function.identity(), ec.current());
     }
 
     public CompletionStage<Bid> placeBid(String productID, User user, BigDecimal value) {
         return bidRepository.getProductBids(productID)
-                .thenApplyAsync(bidStream -> {
-                    boolean notHighestBid = bidStream.anyMatch(bid -> bid.value.compareTo(value) >= 0);
+                .thenApplyAsync(bids -> {
+                    boolean notHighestBid = bids.stream().anyMatch(bid -> bid.value.compareTo(value) >= 0);
 
                     if (notHighestBid) {
                         throw new RuntimeException("Bid not the highest for this product");

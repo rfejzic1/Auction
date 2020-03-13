@@ -6,9 +6,10 @@ import play.db.jpa.JPAApi;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.util.UUID;
 
 @Singleton
-public class ImageJPARepository extends JPARepository<Image, Long> implements ImageRepository {
+public class ImageJPARepository extends JPARepository<Image, UUID> implements ImageRepository {
 
     @Inject
     public ImageJPARepository(JPAApi jpaApi, DatabaseExecutionContext executionContext) {

@@ -10,12 +10,13 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.persistence.TypedQuery;
 import java.util.ArrayList;
+import java.util.UUID;
 import java.util.concurrent.CompletionStage;
 
 import static java.util.concurrent.CompletableFuture.supplyAsync;
 
 @Singleton
-public class SubcategoryJPARepository extends JPARepository<Subcategory, Long> implements SubcategoryRepository {
+public class SubcategoryJPARepository extends JPARepository<Subcategory, UUID> implements SubcategoryRepository {
     private final String findByNameQuery = "select s from Subcategory s where name = :name";
 
     @Inject

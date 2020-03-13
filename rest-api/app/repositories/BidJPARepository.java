@@ -2,8 +2,6 @@ package repositories;
 
 import common.Constants;
 import models.Bid;
-import models.Product;
-import models.User;
 import models.utils.DatabaseExecutionContext;
 import play.db.jpa.JPAApi;
 
@@ -12,13 +10,14 @@ import javax.inject.Singleton;
 import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.CompletionStage;
-import java.util.stream.Stream;
+
 
 import static java.util.concurrent.CompletableFuture.supplyAsync;
 
 @Singleton
-public class BidJPARepository extends JPARepository<Bid, Long> implements BidRepository {
+public class BidJPARepository extends JPARepository<Bid, UUID> implements BidRepository {
     private final String getProductBidsQuery = "select b from Bid b where cast(b.product.uuid as string)=:product_id order by b.value desc";
     private final String getUserBidsQuery = "select b from Bid b where cast(b.user.uuid as string)=:user_id";
 

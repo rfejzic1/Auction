@@ -2,5 +2,7 @@ package repositories;
 
 import models.Image;
 
-public interface ImageRepository extends Repository<Image, Long> {
+import java.util.UUID;
+
+public interface ImageRepository extends Repository<Image, UUID> {
 }

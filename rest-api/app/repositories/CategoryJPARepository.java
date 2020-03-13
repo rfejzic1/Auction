@@ -8,12 +8,13 @@ import play.db.jpa.JPAApi;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.persistence.TypedQuery;
+import java.util.UUID;
 import java.util.concurrent.CompletionStage;
 
 import static java.util.concurrent.CompletableFuture.supplyAsync;
 
 @Singleton
-public class CategoryJPARepository extends JPARepository<Category, Long> implements CategoryRepository {
+public class CategoryJPARepository extends JPARepository<Category, UUID> implements CategoryRepository {
     private final String findByNameQuery = "select c from Category c where name = :name";
 
     @Inject

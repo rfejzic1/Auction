@@ -3,11 +3,12 @@ package models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import models.utils.UUIDGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.PositiveOrZero;
-import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Data
 @AllArgsConstructor
@@ -16,8 +17,8 @@ import java.math.BigDecimal;
 @Table(name = "bids")
 public class Bid {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    @UUIDGenerator
+    public UUID id;
 
     @ManyToOne
     @JoinColumn(name = "product_id")

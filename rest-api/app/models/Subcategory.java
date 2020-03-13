@@ -4,10 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import models.utils.UUIDGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
@@ -16,8 +18,8 @@ import javax.validation.constraints.NotBlank;
 @Table(name = "subcategories")
 public class Subcategory {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long id;
+    @UUIDGenerator
+    public UUID id;
 
     @NotBlank
     @Max(30)

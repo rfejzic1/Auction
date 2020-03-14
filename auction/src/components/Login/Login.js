@@ -7,13 +7,16 @@ import { faGooglePlus, faFacebookSquare } from '@fortawesome/free-brands-svg-ico
 import { UserContext } from '../../services/UserContext';
 import { login } from '../../services/SessionService';
 
-import TextField from '../Controls/TextField';
-import Label from '../Controls/Label';
-import Button from '../Controls/Button';
-import Container from '../Common/Container';
-import Divider from '../Common/Divider';
-import FormGroup from '../Controls/FormGroup';
-import Breadcrumbs from '../Common/Breadcrumbs';
+import {
+    TextField,
+    Label,
+    Button,
+    Container,
+    Divider,
+    FormGroup,
+    Breadcrumbs
+} from '../Common';
+
 import PageLayout from '../PageLayout';
 
 const Login = () => {

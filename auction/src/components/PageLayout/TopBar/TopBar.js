@@ -1,11 +1,11 @@
 import React , { useContext } from 'react'
 import { Link } from 'react-router-dom';
 
-import { UserContext } from '../../services/UserContext';
-import { logout } from '../../services/SessionService';
+import { UserContext } from '../../../services/UserContext';
+import { logout } from '../../../services/SessionService';
 
-import Social from './Social';
-import Wrapper from './Wrapper';
+import Social from '../../Common/Social';
+import Wrapper from '../../Common/Wrapper';
 
 const TopBar = () => {
     const { userData, dispatch } = useContext(UserContext);

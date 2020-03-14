@@ -5,7 +5,7 @@ import {
     faSearch
 } from '@fortawesome/free-solid-svg-icons';
 
-import TextField from '../Controls/TextField';
+import TextField from '../../../Common/TextField/TextField';
 
 const SearchBar = ({ name, placeholder, handleSearch }) => {
     const onSearch = e => {

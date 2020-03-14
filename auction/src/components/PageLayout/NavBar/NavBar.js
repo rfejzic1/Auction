@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink, Link, useHistory } from 'react-router-dom';
 
-import Wrapper from './Wrapper';
+import Wrapper from '../../Common/Wrapper/Wrapper';
 import SearchBar from './SearchBar';
 
 const NavBar = () => {

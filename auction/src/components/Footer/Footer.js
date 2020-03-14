@@ -1,9 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import Social from '../Common/Social';
-import TextField from '../Controls/TextField';
-import Button from '../Controls/Button';
+import { Button, TextField, Social } from '../Common';
 
 const Column = ({ children }) => {
     return <div className="column">{children}</div>

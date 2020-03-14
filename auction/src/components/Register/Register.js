@@ -1,17 +1,21 @@
 import React, { useState, useContext } from 'react';
 import { Link, useLocation, Redirect } from 'react-router-dom';
 
-import TextField from '../Controls/TextField';
-import Label from '../Controls/Label';
-import Button from '../Controls/Button';
-import FormGroup from '../Controls/FormGroup';
-import Container from '../Common/Container';
-import Divider from '../Common/Divider';
-import Breadcrumbs from '../Common/Breadcrumbs';
-import PageLayout from '../PageLayout';
-
 import { UserContext } from '../../services/UserContext';
 import { register } from '../../services/SessionService';
+
+import {
+    TextField,
+    Label,
+    Button,
+    Container,
+    Divider,
+    FormGroup,
+    Breadcrumbs
+} from '../Common';
+
+import PageLayout from '../PageLayout';
+
 
 const Register = () => {
     const { userData, dispatch } = useContext(UserContext);

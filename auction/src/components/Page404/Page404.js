@@ -1,9 +1,7 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom';
 
-import Button from '../Controls/Button';
-import Wrapper from '../Common/Wrapper';
-import Divider from '../Common/Divider';
+import { Button, Wrapper, Divider } from '../Common';
 
 const Page404 = () => {
     const history = useHistory();

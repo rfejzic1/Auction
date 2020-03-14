@@ -1,5 +1,5 @@
 import React from 'react'
-import Wrapper from './Wrapper';
+import Wrapper from '../Wrapper';
 
 const Breadcrumbs = props => {
     const { current, path } = props;

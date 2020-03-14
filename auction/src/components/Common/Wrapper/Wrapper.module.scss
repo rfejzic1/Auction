@@ -1,0 +1,23 @@
+.wrapper {
+    max-width: 968px;
+    width: 100%;
+    margin: 0px auto;
+    padding: 0px 24px;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.flexAround {
+    justify-content: space-around;
+}
+
+.flexNormal {
+    justify-content: start;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+}

@@ -1,33 +1,6 @@
-$dark-1: #252525;
-$primary: #8367D8;
-$gmail-red: #d74437;
-$facebook-blue: #504693;
+@import 'src/styles/colors';
 
 $footer-height: 280px;
-
-.wrapper {
-    max-width: 968px;
-    width: 100%;
-    margin: 0px auto;
-    padding: 0px 24px;
-}
-
-.flex {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.flex-around {
-    justify-content: space-around;
-}
-
-.flex-normal {
-    justify-content: start;
-    align-items: flex-start;
-    flex-wrap: nowrap;
-}
 
 .topBar {
     background-color: $dark-1;

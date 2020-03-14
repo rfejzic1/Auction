@@ -1,0 +1,30 @@
+.productGallery {
+    max-width: 380px;
+    width: 100%;
+}
+
+.mainImage {
+    width: 100%;
+    text-align: center;
+
+    img {
+        max-width: 100%;
+        height: 400px;
+        object-fit: contain;
+    }
+}
+
+.thumbnails {
+    $size: 90px;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+
+    img {
+        object-fit: cover;
+        width: $size;
+        height: $size;
+        margin: 4px 0px;
+    }
+}

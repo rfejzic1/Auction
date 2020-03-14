@@ -2,12 +2,21 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import classNames from 'classnames';
 
-import PageLayout from '../PageLayout';
-import Divider from '../Common/Divider';
-import Wrapper from '../Common/Wrapper';
+import { Divider, Wrapper } from '../Common';
 import Jumbotron from './Jumbotron';
-import config from '../../config';
+import PageLayout from '../PageLayout';
 import ProductCard from '../Shop/ProductCard';
+
+import config from '../../config';
+
+import {
+    tiledGallery,
+    cols4 as cols4Class,
+    header,
+    homeSection,
+    tab,
+    active as activeClass
+} from './Home.module.scss';
 
 const getProducts = async setProducts => {
     try {
@@ -23,8 +32,8 @@ const getProducts = async setProducts => {
 
 const TiledGallery = ({ products, cols4, limit }) => {
     const bodyClasses = classNames(
-        'tiled-gallery',
-        { 'cols-4': cols4 }
+        tiledGallery,
+        { [cols4Class]: cols4 }
     );
 
     products = products.filter((_, index) => index < limit);
@@ -40,8 +49,8 @@ const TiledGallery = ({ products, cols4, limit }) => {
 
 const Section = ({ title, products, limit, cols4 }) => {
     return (
-        <div className='home-section'>
-            <div className="header">
+        <div className={homeSection}>
+            <div className={header}>
                 {title}
             </div>
             <hr/>
@@ -54,12 +63,12 @@ const TabbedSection = ({ tabs, limit, cols4 }) => {
     const [currentTab, setCurrentTab] = useState(Object.keys(tabs)[0]);
 
     const classes = active => classNames(
-        'tab',
-        { active }
+        tab,
+        { [activeClass]: active }
     );
 
     return (
-        <div className='home-section'>
+        <div className={homeSection}>
             <div>
                 {
                     Object.keys(tabs).map((tabName, index) => {

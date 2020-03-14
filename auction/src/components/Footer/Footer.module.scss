@@ -1,0 +1,49 @@
+@import "src/styles/colors";
+
+$footer-height: 280px;
+
+.footer {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    background-color: $dark-1;
+    color: white;
+
+    min-height: $footer-height;
+    padding: 48px;
+    font-size: 14px;
+
+    span, a {
+        color: white;
+        text-decoration: none;
+        display: block;
+        margin-top: 8px;
+        opacity: 0.8;
+    }
+
+    a:hover {
+        opacity: 1;
+    }
+}
+
+.column {
+    display: inline-block;
+    min-width: 240px;
+    max-width: 340px;
+    margin: 0px 16px;
+    min-height: 160px;
+}
+
+.title {
+    opacity: 0.5;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 16px;
+}
+
+.textFieldDark {
+    background-color: #3b3b33;
+    color: rgba($color: white, $alpha: 0.4);
+    border: none;
+}

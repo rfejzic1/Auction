@@ -1,0 +1,25 @@
+@import "src/styles/colors";
+
+.breadcrumbsBar {
+    background-color: #fafafa;
+    padding: 12px;
+    color: $dark-1;
+    text-transform: uppercase;
+
+    h2 {
+        display: inline-block;
+        font-weight: 400;
+        font-size: 16px;
+        letter-spacing: 0.63px;
+    }
+
+    span {
+        color: #9B9B9B;
+        font-size: 14px;
+        margin-left: 8px;
+    }
+}
+
+.current {
+    color: $dark-1;
+}

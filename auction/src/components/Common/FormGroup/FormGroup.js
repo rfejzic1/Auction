@@ -1,12 +1,15 @@
 import React from 'react'
 import classNames from 'classnames';
 
+import { formGroup, flex as flexClass, flexAround } from './FormGroup.module.scss';
+
 const FormGroup = ({ children, flex, around }) => {
     const classes = classNames(
-        'form-group',
-        { 'flex': flex },
-        { 'flex-around': around }
-    )
+        formGroup,
+        { [flexClass]: flex },
+        { [flexAround]: around }
+    );
+    
     return (
         <div className={classes}>
             {children}

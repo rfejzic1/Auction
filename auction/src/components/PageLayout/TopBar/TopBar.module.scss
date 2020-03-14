@@ -1,0 +1,16 @@
+@import 'src/styles/colors';
+
+.topBar {
+    background-color: $dark-1;
+    color: #9b9b9b;
+    padding: 4px 0px;
+    font-size: 12px;
+    word-spacing: 14px;
+
+    a {
+        color: white;
+        font-weight: bold;
+        word-spacing: normal;
+        text-decoration: none;
+    }
+}

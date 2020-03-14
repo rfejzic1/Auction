@@ -1,25 +1,32 @@
 import React from 'react';
-import WishlistButton from '../../Common/WishlistButton';
-import BidButton from '../../Common/BidButton';
+
+import { BidButton, WishlistButton } from '../../Common';
+
+import {
+    productCard,
+    productName,
+    productPrice,
+    overlay
+} from './ProductCard.module.scss';
 
 const ProductCard = ({ product }) => {
     const { images } = product;
     const image = images && images[0] && images[0].uri;
 
     return (
-        <div className='product-card'>
+        <div className={productCard}>
         {
             product &&
             <>
                 <img src={image} alt="Product"/>
-                <div className="overlay">
+                <div className={overlay}>
                     <WishlistButton block product={product} />
                     <BidButton hammer text='Bid' product={product} />
                 </div>
-                <span className='product-name'>
+                <span className={productName}>
                     {product.name}
                 </span>
-                <span className='product-price'>
+                <span className={productPrice}>
                     {`Starts from $${product.startPrice.toFixed(2)}`}
                 </span>
             </>

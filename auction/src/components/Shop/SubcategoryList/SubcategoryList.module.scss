@@ -1,0 +1,55 @@
+@import "src/styles/colors";
+
+.categories {
+    min-width: 240px;
+    background-color: white;
+    box-shadow: 2px 2px 1px 1px rgba($color: $dark-1, $alpha: 0.15);
+}
+
+%list-item {
+    font-size: 16px;
+    padding: 12px;
+    display: block;
+}
+
+.categories > a, .itemHeader {
+    @extend %list-item;
+    color: $dark-1;
+    text-decoration: none;
+    border-bottom: 1px solid #ececec;
+    transition: border 50ms ease-out;
+    cursor: pointer;
+
+    &:hover {
+        border-left: 2px solid $primary;
+    }
+}
+
+.subcategories {
+    overflow: hidden;
+    max-height: 0px;
+
+    a {
+        @extend %list-item;
+        text-decoration: none;
+        color: #9b9b9b;
+        padding-left: 18px;
+        transition: color 50ms ease-in-out, padding 50ms ease-out;
+
+        &:hover {
+            padding-left: 20px;
+            color: $primary;
+        }
+    }
+}
+
+.open {
+    max-height: 100%;
+}
+
+.categoriesHeader {
+    @extend %list-item;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: $primary;
+}

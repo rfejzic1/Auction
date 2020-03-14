@@ -1,10 +1,12 @@
 import React from 'react'
 import classNames from 'classnames';
 
+import { divider, dividerSmaller } from './Divider.module.scss';
+
 const Divider = ({ smaller }) => {
     const classes = classNames(
-        'divider',
-        { 'divider-smaller': smaller }
+        divider,
+        { [dividerSmaller]: smaller }
     )
 
     return (

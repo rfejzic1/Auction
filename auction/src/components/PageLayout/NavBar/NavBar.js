@@ -4,6 +4,12 @@ import { NavLink, Link, useHistory } from 'react-router-dom';
 import Wrapper from '../../Common/Wrapper/Wrapper';
 import SearchBar from './SearchBar';
 
+import {
+    navBar,
+    navLinks,
+    logo
+} from './NavBar.module.scss';
+
 const NavBar = () => {
     const history = useHistory();
 
@@ -13,11 +19,11 @@ const NavBar = () => {
     };
 
     return (
-        <nav className='nav-bar'>
+        <nav className={navBar}>
             <Wrapper flex>
-                <Link to='/' className='logo'>Auction</Link>
+                <Link to='/' className={logo}>Auction</Link>
                 <SearchBar handleSearch={handleSearch} name='search' placeholder='e.g. laptops'/>
-                <ul className='nav-links'>
+                <ul className={navLinks}>
                     <NavLink exact to='/'>HOME</NavLink>
                     <NavLink to='/shop'>SHOP</NavLink>
                     <NavLink to='/myaccount'>MY ACCOUNT</NavLink>

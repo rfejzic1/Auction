@@ -3,13 +3,14 @@ import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import queryString from 'query-string';
 
+import { Wrapper, Grid, Divider } from '../Common';
 import PageLayout from '../PageLayout'
-import Wrapper from '../Common/Wrapper';
-import Grid from '../Common/Grid';
 import SubcategoryList from './SubcategoryList';
-import config from '../../config';
 import ProductCard from './ProductCard';
-import Divider from '../Common/Divider';
+
+import config from '../../config';
+
+import { shop } from './Shop.module.scss';
 
 const getProducts = async ({ category, subcategory }) => {
     try {    
@@ -52,7 +53,7 @@ const Shop = () => {
         <PageLayout>
             <Divider smaller/>
             <Wrapper>
-                <div className='shop'>
+                <div className={shop}>
                     <aside>
                         <SubcategoryList defaultCategory={category}/>
                     </aside>

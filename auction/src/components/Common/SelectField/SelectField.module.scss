@@ -1,0 +1,10 @@
+@import "../input";
+
+.selectField {
+    @extend %input-basic;
+    appearance: none;
+    padding-right: 24px;
+    background: url('/src/resources/angle-down-solid.svg') no-repeat;
+    background-position: right 8px top 10px;
+    background-size: 10px;
+}

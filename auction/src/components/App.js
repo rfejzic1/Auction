@@ -10,6 +10,7 @@ import ProductPage from './ProductPage';
 import Footer from './Footer';
 
 import '../styles/App.scss';
+import { main } from './App.module.scss';
 
 import UserContextProvider from '../services/UserContext';
 
@@ -24,7 +25,7 @@ function App() {
   	return (
 		<UserContextProvider>
 			<Router>
-				<div className="main">
+				<div className={main}>
 					<Switch>
 						<Route exact path='/' component={Home} />
 						<Route exact path='/login' component={Login} />

@@ -1,0 +1,14 @@
+.shop {
+    display: flex;
+
+    aside {
+        display: inline-block;
+        max-width: 240px;
+        width: 100%;
+    }
+
+    main {
+        width: 100%;
+        margin: 0px 16px;
+    }
+}

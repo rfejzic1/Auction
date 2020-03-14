@@ -1,0 +1,5 @@
+@import "../input";
+
+.textField {
+    @extend %input-basic;
+}

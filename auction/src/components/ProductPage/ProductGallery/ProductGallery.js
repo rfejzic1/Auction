@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
 
+import {
+    productGallery,
+    mainImage,
+    thumbnails
+} from './ProductGallery.module.scss';
+
 const Thumbnail = ({ url, selectImage }) => {
     const handleSelectImage = () => selectImage(url);
     return (
@@ -15,11 +21,11 @@ const ProductGallery = ({ images }) => {
     }
 
     return (
-        <div className='product-gallery'>
-            <div className="main-image">
+        <div className={productGallery}>
+            <div className={mainImage}>
                 <img src={currentImage} alt='Product'/>
             </div>
-            <div className='thumbnails'>
+            <div className={thumbnails}>
                 { images.map((image, index) => <Thumbnail selectImage={selectImage} key={index} url={image.uri} />) }
             </div>
         </div>

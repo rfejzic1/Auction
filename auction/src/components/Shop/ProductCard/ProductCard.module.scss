@@ -1,0 +1,52 @@
+$height: 280px;
+
+.productCard {
+    position: relative;
+    width: 100%;
+    min-height: $height;
+
+    img {
+        background-color: #ececec;
+        width: 100%;
+        height: $height;
+        object-fit: contain;
+    }
+
+    &:hover {
+        .overlay {
+            opacity: 1;
+        }
+    }
+    
+}
+
+.productName {
+    display: block;
+    font-weight: 700;
+    font-size: 20px;
+    margin-top: 4px;
+}
+
+.productPrice {
+    display: inline-block;
+    margin-top: 4px;
+    font-size: 14px;
+}
+
+.overlay {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: center;
+    position: absolute;
+    overflow: hidden;
+
+    top: 0px;
+    width: 100%;
+    height: $height;
+    opacity: 0;
+
+    transition: opacity 100ms ease-in-out;
+    background-color: #cfb7e5;
+}

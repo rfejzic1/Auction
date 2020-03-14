@@ -1,14 +1,22 @@
 import React from 'react'
 import classNames from 'classnames';
 
+import {
+    button as buttonClass,
+    btnPrimary,
+    btnGmail,
+    btnFacebook,
+    fullWidth as fullWidthClass
+} from './Button.module.scss';
+
 const Button = props => {
     const { type, fullWidth, onClick, className } = props;
     const classes = classNames(
-        'button',
-        { 'btn-primary': type === 'primary' },
-        { 'btn-gmail': type === 'gmail' },
-        { 'btn-facebook': type === 'facebook' },
-        { 'full-width': fullWidth },
+        buttonClass,
+        { [btnPrimary]: type === 'primary' },
+        { [btnGmail]: type === 'gmail' },
+        { [btnFacebook]: type === 'facebook' },
+        { [fullWidthClass]: fullWidth },
         className
     );
 

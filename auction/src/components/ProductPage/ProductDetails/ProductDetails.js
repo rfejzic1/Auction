@@ -3,6 +3,8 @@ import axios from 'axios';
 
 import { TextField, FormGroup, WishlistButton, BidButton } from '../../Common';
 
+import { productDetails, price, info } from './ProductDetails.module.scss';
+
 import config from '../../../config';
 
 const getBids = async (productID, setBids) => {
@@ -65,24 +67,24 @@ const ProductDetails = ({ product }) => {
     };
 
     return (
-        <div className='product-details'>
+        <div className={productDetails}>
             <h2>{product.name}</h2>
-            <p className='price'>Starts at ${startPrice.toFixed(2)}</p>
+            <p className={price}>Starts at ${startPrice.toFixed(2)}</p>
             <br/>
             <TextField onChange={handleValueUpdate} />
             <BidButton text='Place Bid' onClick={handleBid} className='outlined-primary uppercase' product={product} />
             <br/>
-            <span className='bid-info'>
+            <span className={info}>
                 {
                     bids.length > 0 ? `Enter more than $${highestBid}` : `Enter $${highestBid || startPrice} or more`
                 }
             </span>
             <FormGroup>
-                <span className='bid-info'>Highest bid: <span className='primary-bold' >{highestBid ? `$${highestBid}` : 'none'}</span></span>
+                <span className={info}>Highest bid: <span className='primary-bold' >{highestBid ? `$${highestBid}` : 'none'}</span></span>
                 <br/>
-                <span className="bid-info">No bids: {bids.length}</span>
+                <span className={info}>No bids: {bids.length}</span>
                 <br/>
-                <span className="bid-info">Expires at {displayDate(product.endDate)}</span>
+                <span className={info}>Expires at {displayDate(product.endDate)}</span>
             </FormGroup>
             <WishlistButton product={product}/>
             <br/>

@@ -4,6 +4,11 @@ import axios from 'axios';
 
 import config from '../../../../config';
 
+import {
+    categories as categoriesClass,
+    categoriesHeader
+} from './CategoryList.module.scss';
+
 const getCategories = async setCategories => {
     try {
         const res = await axios({
@@ -24,8 +29,8 @@ const CategoryList = () => {
     }, []);
 
     return (
-        <ul className='categories'>
-            <span className='categories-header'>Categories</span>
+        <ul className={categoriesClass}>
+            <span className={categoriesHeader}>Categories</span>
             {
                 categories.map((category, index) => {
                     return <Link key={index} to={`/shop?category=${category.name}`} >{category.name}</Link>;

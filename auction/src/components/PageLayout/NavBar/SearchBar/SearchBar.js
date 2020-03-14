@@ -1,11 +1,11 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import {
-    faSearch
-} from '@fortawesome/free-solid-svg-icons';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
-import TextField from '../../../Common/TextField/TextField';
+import { TextField } from '../../../Common';
+
+import { searchBar, searchField } from './SearchBar.module.scss';
 
 const SearchBar = ({ name, placeholder, handleSearch }) => {
     const onSearch = e => {
@@ -15,8 +15,8 @@ const SearchBar = ({ name, placeholder, handleSearch }) => {
     }
     
     return (
-        <div className="search-bar">
-            <TextField onKeyPress={onSearch} name={name} placeholder={placeholder} className='search-field'/>
+        <div className={searchBar}>
+            <TextField onKeyPress={onSearch} name={name} placeholder={placeholder} className={searchField}/>
             <FontAwesomeIcon onClick={onSearch} icon={faSearch} />
         </div>
     )

@@ -3,6 +3,14 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import classNames from 'classnames';
 
+import {
+    categories as categoriesClass,
+    categoriesHeader,
+    itemHeader,
+    open as openClass,
+    subcategories as subcategoriesClass
+} from './SubcategoryList.module.scss';
+
 import config from '../../../config';
 
 const getCategories = async setCategories => {
@@ -28,15 +36,15 @@ const ListItem = ({ category, isOpen }) => {
     const { subcategories } = category;
 
     const classes = classNames(
-        'subcategories',
-        { 'open': open }
+        subcategoriesClass,
+        { [openClass]: open }
     );
 
     const handleSetOpen = () => setOpen(!open);
 
     return (
         <>
-        <span className='item-header' onClick={handleSetOpen}>{category.name}</span>
+        <span className={itemHeader} onClick={handleSetOpen}>{category.name}</span>
         <ul className={classes}>
             {
                 subcategories.map((subcategory, index) => {
@@ -56,8 +64,8 @@ const SubcategoryList = ({ defaultCategory }) => {
     }, []);
 
     return (
-        <ul className='categories'>
-            <span className='categories-header'>Categories</span>
+        <ul className={categoriesClass}>
+            <span className={categoriesHeader}>Categories</span>
             {
                 categories.map((category, index) => {
                     return <ListItem key={index} isOpen={defaultCategory === category.name} category={category}/>;

@@ -1,0 +1,29 @@
+@import "src/styles/colors";
+
+.navBar {
+    padding: 8px 0px;
+}
+
+.navLinks {
+    a {
+        text-decoration: none;
+        color: $dark-1;
+        font-weight: 300;
+        margin-left: 24px;
+        font-size: 14px;
+    }
+
+    .active {
+        color: $primary;
+        font-weight: 700;
+    }
+}
+
+.logo {
+    color: $primary;
+    font-weight: 300;
+    font-size: 22px;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.84px;
+}

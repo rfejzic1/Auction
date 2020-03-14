@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 
-import TextField from '../Controls/TextField';
-import FormGroup from '../Controls/FormGroup';
-import WishlistButton from '../Common/WishlistButton';
+import TextField from '../../Controls/TextField';
+import FormGroup from '../../Controls/FormGroup';
+import WishlistButton from '../../Common/WishlistButton';
 import axios from 'axios';
-import config from '../../config';
-import BidButton from '../Common/BidButton';
+import config from '../../../config';
+import BidButton from '../../Common/BidButton';
 
 const getBids = async (productID, setBids) => {
     try {

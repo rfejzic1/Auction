@@ -1,6 +1,6 @@
 import React from 'react';
-import WishlistButton from '../Common/WishlistButton';
-import BidButton from '../Common/BidButton';
+import WishlistButton from '../../Common/WishlistButton';
+import BidButton from '../../Common/BidButton';
 
 const ProductCard = ({ product }) => {
     const { images } = product;

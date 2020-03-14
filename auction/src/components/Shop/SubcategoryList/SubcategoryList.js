@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import classNames from 'classnames';
 
-import config from '../../config';
+import config from '../../../config';
 
 const getCategories = async setCategories => {
     try {

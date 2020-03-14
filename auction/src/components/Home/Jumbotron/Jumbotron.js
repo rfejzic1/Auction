@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Wrapper from '../Common/Wrapper';
+import Wrapper from '../../Common/Wrapper';
 import CategoryList from './CategoryList';
-import BidButton from '../Common/BidButton';
+import BidButton from '../../Common/BidButton';
 
 const randomImage = images => {
     if (images && images.length <= 0) {

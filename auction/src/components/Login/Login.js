@@ -4,17 +4,17 @@ import { Link, Redirect, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGooglePlus, faFacebookSquare } from '@fortawesome/free-brands-svg-icons';
 
-import { UserContext } from '../services/UserContext';
-import { login } from '../services/SessionService';
+import { UserContext } from '../../services/UserContext';
+import { login } from '../../services/SessionService';
 
-import TextField from './Controls/TextField';
-import Label from './Controls/Label';
-import Button from './Controls/Button';
-import Container from './Common/Container';
-import Divider from './Common/Divider';
-import FormGroup from './Controls/FormGroup';
-import Breadcrumbs from './Common/Breadcrumbs';
-import PageLayout from './PageLayout';
+import TextField from '../Controls/TextField';
+import Label from '../Controls/Label';
+import Button from '../Controls/Button';
+import Container from '../Common/Container';
+import Divider from '../Common/Divider';
+import FormGroup from '../Controls/FormGroup';
+import Breadcrumbs from '../Common/Breadcrumbs';
+import PageLayout from '../PageLayout';
 
 const Login = () => {
     const { userData, dispatch } = useContext(UserContext);

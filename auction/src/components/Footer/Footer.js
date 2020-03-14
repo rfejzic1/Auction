@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import Social from './Social';
+import Social from '../Common/Social';
 import TextField from '../Controls/TextField';
 import Button from '../Controls/Button';
 

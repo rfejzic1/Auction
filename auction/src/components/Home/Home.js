@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import classNames from 'classnames';
 
-import PageLayout from './PageLayout';
-import Divider from './Common/Divider';
-import Wrapper from './Common/Wrapper';
-import Jumbotron from './Home/Jumbotron';
-import config from '../config';
-import ProductCard from './Shop/ProductCard';
+import PageLayout from '../PageLayout';
+import Divider from '../Common/Divider';
+import Wrapper from '../Common/Wrapper';
+import Jumbotron from './Jumbotron';
+import config from '../../config';
+import ProductCard from '../Shop/ProductCard';
 
 const getProducts = async setProducts => {
     try {

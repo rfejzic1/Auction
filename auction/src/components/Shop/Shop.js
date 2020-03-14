@@ -3,13 +3,13 @@ import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import queryString from 'query-string';
 
-import PageLayout from './PageLayout'
-import Wrapper from './Common/Wrapper';
-import Grid from './Common/Grid';
-import SubcategoryList from './Home/SubcategoryList';
-import config from '../config';
-import ProductCard from './Shop/ProductCard';
-import Divider from './Common/Divider';
+import PageLayout from '../PageLayout'
+import Wrapper from '../Common/Wrapper';
+import Grid from '../Common/Grid';
+import SubcategoryList from '../Home/SubcategoryList';
+import config from '../../config';
+import ProductCard from './ProductCard';
+import Divider from '../Common/Divider';
 
 const getProducts = async ({ category, subcategory }) => {
     try {    

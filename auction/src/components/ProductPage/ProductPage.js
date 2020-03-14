@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
-import Wrapper from './Common/Wrapper';
-import Breadcrumbs from './Common/Breadcrumbs';
-import Divider from './Common/Divider';
-import PageLayout from './PageLayout';
-import config from '../config';
-import Page404 from './Page404';
-import ProductGallery from './Product/ProductGallery';
-import ProductDetails from './Product/ProductDetails';
+import Wrapper from '../Common/Wrapper';
+import Breadcrumbs from '../Common/Breadcrumbs';
+import Divider from '../Common/Divider';
+import PageLayout from '../PageLayout';
+import config from '../../config';
+import Page404 from '../Page404';
+import ProductGallery from './ProductGallery';
+import ProductDetails from './ProductDetails';
 
 const getProduct = async (uuid, setProduct) => {
     try {

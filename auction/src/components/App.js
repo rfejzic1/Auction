@@ -7,8 +7,7 @@ import Register from './Register';
 import Shop from './Shop';
 import Page404 from './Page404';
 import ProductPage from './ProductPage';
-
-import Footer from './Common/Footer';
+import Footer from './Footer';
 
 import '../styles/App.scss';
 

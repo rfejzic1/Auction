@@ -1,7 +1,6 @@
 package models;
 
 import lombok.*;
-import models.utils.UUIDGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;

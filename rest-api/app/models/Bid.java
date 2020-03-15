@@ -3,7 +3,6 @@ package models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import models.utils.UUIDGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.PositiveOrZero;

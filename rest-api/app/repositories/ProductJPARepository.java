@@ -2,7 +2,7 @@ package repositories;
 
 import common.Constants;
 import models.Product;
-import models.utils.DatabaseExecutionContext;
+import common.DatabaseExecutionContext;
 import play.db.jpa.JPAApi;
 
 import javax.inject.Inject;
@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CompletionStage;
-import java.util.stream.Stream;
 
 import static java.util.concurrent.CompletableFuture.supplyAsync;
 

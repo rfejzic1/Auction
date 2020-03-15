@@ -2,7 +2,7 @@ package repositories;
 
 import common.Constants;
 import models.User;
-import models.utils.DatabaseExecutionContext;
+import common.DatabaseExecutionContext;
 import play.db.jpa.JPAApi;
 
 import javax.inject.Inject;

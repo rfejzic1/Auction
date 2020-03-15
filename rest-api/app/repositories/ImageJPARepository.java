@@ -1,7 +1,7 @@
 package repositories;
 
 import models.Image;
-import models.utils.DatabaseExecutionContext;
+import common.DatabaseExecutionContext;
 import play.db.jpa.JPAApi;
 
 import javax.inject.Inject;

@@ -1,15 +1,13 @@
 package repositories;
 
 import common.Constants;
-import models.Product;
 import models.Subcategory;
-import models.utils.DatabaseExecutionContext;
+import common.DatabaseExecutionContext;
 import play.db.jpa.JPAApi;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.persistence.TypedQuery;
-import java.util.ArrayList;
 import java.util.UUID;
 import java.util.concurrent.CompletionStage;
 

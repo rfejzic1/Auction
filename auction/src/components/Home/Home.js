@@ -112,10 +112,10 @@ const Home = () => {
     return (
         <PageLayout>
             {
-                products
+                products && products.length
             &&
                 <>
-                    <Jumbotron product={products[1]} />
+                    <Jumbotron product={products[0]} />
                     <Wrapper>
                         <Section title='Feature Collection' products={products} limit={3} />
                         <Divider />

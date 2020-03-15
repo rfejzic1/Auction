@@ -21,9 +21,7 @@ import java.util.UUID;
 @Table(name = "products")
 public class Product {
     @Id
-    @NotNull
-    @UUIDGenerator
-    @GeneratedValue(generator = "UUID")
+    @GeneratedValue
     public UUID uuid;
 
     @NotBlank

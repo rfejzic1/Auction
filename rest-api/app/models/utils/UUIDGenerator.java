@@ -1,16 +1,6 @@
 package models.utils;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
 
-@GenericGenerator(
-        name = "UUID",
-        strategy = "org.hibernate.id.UUIDGenerator",
-        parameters = {
-                @Parameter(
-                        name = "uuid_gen_strategy_class",
-                        value = "org.hibernate.id.uuid.CustomVersionOneStrategy"
-                )
-        }
-)
+@GenericGenerator(name = "UUID", strategy = "uuid2")
 public @interface UUIDGenerator {}

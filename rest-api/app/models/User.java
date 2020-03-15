@@ -22,9 +22,7 @@ import java.util.UUID;
 )
 public class User {
     @Id
-    @NotNull
-    @UUIDGenerator
-    @GeneratedValue(generator = "UUID")
+    @GeneratedValue
     public UUID uuid;
 
     @Email

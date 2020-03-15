@@ -18,7 +18,7 @@ import java.util.UUID;
 public class Image {
 
     @Id
-    @UUIDGenerator
+    @GeneratedValue
     public UUID id;
 
     @NotBlank

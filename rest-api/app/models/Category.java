@@ -18,7 +18,7 @@ import java.util.UUID;
 public class Category {
 
     @Id
-    @UUIDGenerator
+    @GeneratedValue
     public UUID id;
 
     @NotBlank

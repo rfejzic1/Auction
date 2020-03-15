@@ -18,7 +18,7 @@ import java.util.UUID;
 @Table(name = "subcategories")
 public class Subcategory {
     @Id
-    @UUIDGenerator
+    @GeneratedValue
     public UUID id;
 
     @NotBlank

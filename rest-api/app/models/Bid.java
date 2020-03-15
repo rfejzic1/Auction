@@ -17,7 +17,7 @@ import java.util.UUID;
 @Table(name = "bids")
 public class Bid {
     @Id
-    @UUIDGenerator
+    @GeneratedValue
     public UUID id;
 
     @ManyToOne

@@ -24,6 +24,7 @@ public class Constants {
         public static final String CATEGORY = "category";
         public static final String PRODUCT_ID = "product_id";
         public static final String USER_ID = "user_id";
+        public static final String VALUE = "value";
     }
 
     public static final class Queries {

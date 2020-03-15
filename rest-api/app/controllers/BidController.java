@@ -37,7 +37,7 @@ public class BidController extends Controller {
     @JWTAuthenticated
     public CompletionStage<Result> placeBid(String id, Http.Request request) {
         JsonNode json = request.body().asJson();
-        BigDecimal value = json.get("value").decimalValue();
+        BigDecimal value = json.get(Constants.Fields.VALUE).decimalValue();
 
         User user = request.attrs().get(Constants.TypedKeys.USER);
 

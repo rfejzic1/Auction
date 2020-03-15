@@ -3,6 +3,7 @@ package services;
 import lombok.RequiredArgsConstructor;
 import models.*;
 import payload.ProductAuctionPayload;
+import payload.ProductResponse;
 import play.libs.concurrent.HttpExecutionContext;
 import repositories.ProductRepository;
 
@@ -80,4 +81,29 @@ public class ProductService {
 
         return auction;
     }
+
+    public List<ProductResponse> makeProductResponses(List<Product> products) {
+        return products.stream()
+                .map(this::makeProductResponse)
+                .collect(Collectors.toList());
+    }
+
+    public ProductResponse makeProductResponse(Product product) {
+        ProductResponse response = new ProductResponse();
+
+        response.uuid = product.uuid;
+        response.owner = product.owner.uuid;
+
+        response.name = product.name;
+        response.description = product.description;
+        response.images = product.images;
+
+        response.startDate = product.auction.startDate.getTime();
+        response.endDate = product.auction.endDate.getTime();
+        response.startPrice = product.auction.startPrice;
+        response.status = product.auction.status;
+
+        return response;
+    }
+
 }

@@ -4,11 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import models.utils.UUIDGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.Date;
+import java.util.Set;
 import java.util.UUID;
 
 @Data
@@ -21,9 +21,7 @@ import java.util.UUID;
 )
 public class User {
     @Id
-    @NotNull
-    @UUIDGenerator
-    @GeneratedValue(generator = "UUID")
+    @GeneratedValue
     public UUID uuid;
 
     @Email
@@ -54,4 +52,8 @@ public class User {
 
     @NotBlank
     public String phoneNumber;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    public Set<Bid> bids;
 }

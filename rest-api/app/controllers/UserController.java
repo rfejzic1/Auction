@@ -4,6 +4,7 @@ import actions.JWTAuthenticated;
 import com.fasterxml.jackson.databind.JsonNode;
 import common.Constants;
 import lombok.AllArgsConstructor;
+import models.User;
 import payload.LoginPayload;
 import payload.RegistrationPayload;
 import payload.UserTokenResponse;
@@ -17,6 +18,7 @@ import javax.inject.Inject;
 import java.util.concurrent.CompletionStage;
 
 import static common.JsonResponseObjects.json500;
+import static java.util.concurrent.CompletableFuture.supplyAsync;
 
 @AllArgsConstructor(onConstructor=@__(@Inject))
 public class UserController extends Controller {
@@ -49,5 +51,18 @@ public class UserController extends Controller {
         return Json.newObject()
                 .put(Constants.Fields.TOKEN, userTokenResponse.token)
                 .putPOJO(Constants.Fields.USER, userTokenResponse.user);
+    }
+
+    @JWTAuthenticated
+    public CompletionStage<Result> profile(Http.Request request) {
+        User user = request.attrs().get(Constants.TypedKeys.USER);
+        return supplyAsync(() -> ok(Json.toJson(user)));
+    }
+
+    @JWTAuthenticated
+    public CompletionStage<Result> refresh(Http.Request request) {
+        User user = request.attrs().get(Constants.TypedKeys.USER);
+        UserTokenResponse response = userService.getUserTokenResponse(user);
+        return supplyAsync(() -> ok(Json.toJson(response)));
     }
 }

@@ -2,15 +2,15 @@ package repositories;
 
 import common.Constants;
 import lombok.AllArgsConstructor;
-import models.utils.DatabaseExecutionContext;
+import common.DatabaseExecutionContext;
 import play.db.jpa.JPAApi;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletionStage;
 import java.util.function.Function;
-import java.util.stream.Stream;
 
 import static java.util.concurrent.CompletableFuture.supplyAsync;
 
@@ -21,7 +21,7 @@ public abstract class JPARepository<T, ID> implements Repository<T, ID> {
     private final Class<T> genericClassType;
 
     @Override
-    public CompletionStage<Stream<T>> getAll() {
+    public CompletionStage<List<T>> getAll() {
         return supplyAsync(() -> with(this::findAll), executionContext);
     }
 
@@ -49,10 +49,10 @@ public abstract class JPARepository<T, ID> implements Repository<T, ID> {
         return jpaApi.withTransaction(function);
     }
 
-    private Stream<T> findAll(EntityManager em) {
+    private List<T> findAll(EntityManager em) {
         String findAllQuery = String.format(Constants.Queries.FIND_ALL, genericClassType.getSimpleName());
         TypedQuery<T> query = em.createQuery(findAllQuery, genericClassType);
-        return query.getResultList().stream();
+        return query.getResultList();
     }
 
     private Optional<T> findIt(EntityManager em, ID id) {

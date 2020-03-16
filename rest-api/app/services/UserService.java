@@ -18,6 +18,7 @@ import javax.inject.Singleton;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CompletionStage;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static common.Constants.KEY;
@@ -30,7 +31,7 @@ public class UserService {
 
     public CompletionStage<List<User>> getAll() {
         return userRepository.getAll()
-                .thenApplyAsync(userStream -> userStream.collect(Collectors.toList()), ec.current());
+                .thenApplyAsync(Function.identity(), ec.current());
     }
 
     public CompletionStage<UserTokenResponse> loginUser(LoginPayload payload) {
@@ -44,7 +45,7 @@ public class UserService {
                     boolean passwordsMatch = BCrypt.checkpw(payload.password, user.password);
 
                     if(passwordsMatch) {
-                        return new UserTokenResponse(createJWT(user), user);
+                        return getUserTokenResponse(user);
                     }
 
                     throw new RuntimeException(Constants.Messages.UNAUTHENTICATED);
@@ -67,6 +68,10 @@ public class UserService {
         return userRepository
                 .create(user)
                 .thenApplyAsync(u -> new UserTokenResponse(createJWT(u), u), ec.current());
+    }
+
+    public UserTokenResponse getUserTokenResponse(User user) {
+        return new UserTokenResponse(createJWT(user), user);
     }
 
     private String createJWT(User user) {

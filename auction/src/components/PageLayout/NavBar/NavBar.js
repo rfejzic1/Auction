@@ -14,8 +14,14 @@ const NavBar = () => {
     const history = useHistory();
 
     const handleSearch = search => {
-        search = search.trim().split(' ').map(word => word.trim()).filter(word => word !== '').join(',');
-        history.push(`/shop?search=${search}`);
+        const searchTerms = search
+            .trim()
+            .split(' ')
+            .map(word => word.trim())
+            .filter(word => word !== '')
+            .join(',');
+        
+        history.push(`/shop?search=${searchTerms}`);
     };
 
     return (

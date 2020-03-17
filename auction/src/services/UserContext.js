@@ -26,24 +26,25 @@ const userDataReducer = (state, action) => {
 function setInitialSessionState(dispatch) {
     const token = Cookies.get('token');
 
-    if(token == null) {
-        dispatch({ type: 'LOGOUT' });
-        return;
+    if(token != null) {
+        axios({
+            baseURL: config.API_URL,
+            url: `/refresh`,
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        .then(res => {
+            setUserLoginState(res, dispatch);
+        })
+        .catch(() => {
+            dispatch({ type: 'LOGOUT' });
+        });
+        
+        return;        
     }
 
-    axios({
-        baseURL: config.API_URL,
-        url: `/refresh`,
-        headers: {
-            'Authorization': `Bearer ${token}`
-        }
-    })
-    .then(res => {
-        setUserLoginState(res, dispatch);
-    })
-    .catch(() => {
-        dispatch({ type: 'LOGOUT' });
-    });
+    dispatch({ type: 'LOGOUT' });
 }
 
 const UserContextProvider = ({ children }) => {

@@ -59,32 +59,32 @@ const Section = ({ title, products, limit, cols4 }) => {
     );
 };
 
-const TabbedSection = ({ tabs, limit, cols4 }) => {
-    const [currentTab, setCurrentTab] = useState(Object.keys(tabs)[0]);
+const TabbedSection = ({ tabsData, limit, cols4 }) => {
+    const [currentTab, setCurrentTab] = useState(Object.keys(tabsData)[0]);
 
     const classes = active => classNames(
         tab,
         { [activeClass]: active }
     );
 
+    const tabs = Object.keys(tabsData).map((tabName, index) => {
+        return (
+            <span
+                key={index}
+                onClick={() => setCurrentTab(tabName)}
+                className={classes(tabName === currentTab)}>
+                    {tabName}
+            </span>
+        );
+    });
+
     return (
         <div className={homeSection}>
             <div>
-                {
-                    Object.keys(tabs).map((tabName, index) => {
-                        return (
-                            <span
-                                key={index}
-                                onClick={() => setCurrentTab(tabName)}
-                                className={classes(tabName === currentTab)}>
-                                    {tabName}
-                            </span>
-                        )
-                    })
-                }
+                {tabs}
             </div>
             <hr/>
-            <TiledGallery products={tabs[currentTab]} limit={limit} cols4={cols4} />
+            <TiledGallery products={tabsData[currentTab]} limit={limit} cols4={cols4} />
         </div>
     );
 };
@@ -109,32 +109,30 @@ const Home = () => {
         return products.filter(product => milisToDays(product.endDate - now) <= 2);
     };
 
-    return (
-        <PageLayout>
-            {
-                products && products.length
-            &&
-                <>
-                    <Jumbotron product={products[0]} />
-                    <Wrapper>
-                        <Section title='Feature Collection' products={products} limit={3} />
-                        <Divider />
-                        <Section title='Feature Products' cols4 products={products} limit={4} />
-                        <Divider />
-                        <TabbedSection
-                            cols4
-                            limit={4}
-                            tabs={{
-                                'New Arrivals': filterNewArrivals(products),
-                                'Last Chance': filterLastChanceProducts(products)
-                            }}
-                        />
-                    </Wrapper>
-                </>
-            }
-            <Divider/>
-        </PageLayout>
-    )
+    if (products && products.length > 0) {
+        return (
+            <PageLayout>
+                <Jumbotron product={products[0]} />
+                <Wrapper>
+                    <Section title='Feature Collection' products={products} limit={3} />
+                    <Divider />
+                    <Section title='Feature Products' cols4 products={products} limit={4} />
+                    <Divider />
+                    <TabbedSection
+                        cols4
+                        limit={4}
+                        tabsData={{
+                            'New Arrivals': filterNewArrivals(products),
+                            'Last Chance': filterLastChanceProducts(products)
+                        }}
+                    />
+                </Wrapper>
+                <Divider/>
+            </PageLayout>
+        );
+    }
+
+    return null;
 }
 
 export default Home;

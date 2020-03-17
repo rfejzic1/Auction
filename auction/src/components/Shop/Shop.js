@@ -38,7 +38,11 @@ const Shop = () => {
         getProducts({ category, subcategory })
             .then(products => {
                 if (search) {
-                    const regexString = search.split(',').map(word => `${word}`).join('|');
+                    const regexString = search
+                        .split(',')
+                        .map(word => `${word}`)
+                        .join('|');
+                    
                     const regex = new RegExp(regexString, 'gi');
                     products = products.filter(product => product.name.match(regex));
                 }

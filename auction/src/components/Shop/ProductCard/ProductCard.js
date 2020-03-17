@@ -13,11 +13,9 @@ const ProductCard = ({ product }) => {
     const { images } = product;
     const image = images && images[0] && images[0].uri;
 
-    return (
-        <div className={productCard}>
-        {
-            product &&
-            <>
+    if (product) {
+        return (
+            <div className={productCard}>
                 <img src={image} alt="Product"/>
                 <div className={overlay}>
                     <WishlistButton block product={product} />
@@ -29,10 +27,11 @@ const ProductCard = ({ product }) => {
                 <span className={productPrice}>
                     {`Starts from $${product.startPrice.toFixed(2)}`}
                 </span>
-            </>
-        }
-        </div>
-    )
+            </div>
+        );
+    }
+
+    return null;
 };
 
 export default ProductCard;

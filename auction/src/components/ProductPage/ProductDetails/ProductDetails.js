@@ -7,7 +7,7 @@ import { productDetails, price, info } from './ProductDetails.module.scss';
 
 import config from '../../../config';
 
-const getBids = async (productID, setBids) => {
+const getBids = async(productID, setBids) => {
     try {
         const res = await axios({
             baseURL: config.API_URL,
@@ -19,7 +19,7 @@ const getBids = async (productID, setBids) => {
     }
 };
 
-const placeBid = async (productID, value) => {
+const placeBid = async(productID, value) => {
     try {
         await axios({
             baseURL: config.API_URL,
@@ -31,7 +31,7 @@ const placeBid = async (productID, value) => {
         });
     } catch (e) {
         if(e.response.data.status === 422) {
-            alert('Bid is not the highest!');
+            console.log('Bid is not the highest!');
         } else {
             console.log(e.response);
         }

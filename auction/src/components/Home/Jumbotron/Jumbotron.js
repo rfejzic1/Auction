@@ -13,12 +13,12 @@ import {
 } from './Jumbotron.module.scss';
 
 const randomImage = images => {
-    if (images && images.length <= 0) {
-        return null;
+    if (images && images.length > 0) {
+        const randomIndex = Math.floor(Math.random() * (images.length - 1));
+        return images[randomIndex].uri;
     }
 
-    const randomIndex = Math.floor(Math.random() * (images.length - 1));
-    return images[randomIndex].uri;
+    return null;    
 }
 
 const ProductHighlight = ({ product }) => {

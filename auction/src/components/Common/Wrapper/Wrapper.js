@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 import {
     wrapper,
-    flex as flexx,
+    flex as flexClass,
     flexAround,
     flexNormal
 } from './Wrapper.module.scss';
@@ -11,7 +11,7 @@ import {
 const Wrapper = ({ children, flex, around, normal }) => {
     const classes = classNames(
         wrapper,
-        { [flexx]: flex },
+        { [flexClass]: flex },
         { [flexAround]: around },
         { [flexNormal]: normal }
     );

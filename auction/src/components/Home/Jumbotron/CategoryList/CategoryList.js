@@ -28,14 +28,14 @@ const CategoryList = () => {
         getCategories(setCategories);
     }, []);
 
+    const categoriesLinks = categories.map((category, index) => {
+        return <Link key={index} to={`/shop?category=${category.name}`} >{category.name}</Link>;
+    });
+
     return (
         <ul className={categoriesClass}>
             <span className={categoriesHeader}>Categories</span>
-            {
-                categories.map((category, index) => {
-                    return <Link key={index} to={`/shop?category=${category.name}`} >{category.name}</Link>;
-                })
-            }
+            {categoriesLinks}
             <Link to={`/categories`}>All Categories</Link>
         </ul>
     );

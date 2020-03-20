@@ -54,17 +54,20 @@ const Login = () => {
                             <FormGroup>
                                 <Button 
                                     onClick={handleLogin} 
-                                    type='primary' 
+                                    fill='primary' 
+                                    outline='none'
+                                    strong
+                                    fat
                                     fullWidth>
                                         Login
                                 </Button>
                             </FormGroup>
                             <FormGroup flex>
-                                <Button type='gmail'>
+                                <Button fill='gmail' outline='none' strong>
                                     <FontAwesomeIcon icon={faGooglePlus}/>
                                     <span>{' Login with Gmail'}</span>
                                 </Button>
-                                <Button type='facebook'>
+                                <Button fill='facebook' outline='none' strong>
                                     <FontAwesomeIcon icon={faFacebookSquare}/>
                                     <span>{' Login with Facebook'}</span>
                                 </Button>

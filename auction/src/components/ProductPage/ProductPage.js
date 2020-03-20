@@ -2,14 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
-import Wrapper from '../Common/Wrapper';
-import Breadcrumbs from '../Common/Breadcrumbs';
-import Divider from '../Common/Divider';
+import { Wrapper, Breadcrumbs, Divider } from '../Common';
 import PageLayout from '../PageLayout';
-import config from '../../config';
 import Page404 from '../Page404';
 import ProductGallery from './ProductGallery';
 import ProductDetails from './ProductDetails';
+
+import config from '../../config';
 
 const getProduct = async (uuid, setProduct) => {
     try {
@@ -43,7 +42,7 @@ const ProductPage = () => {
                         <Wrapper flex normal >
                             {
                                 product && <>
-                                    <ProductGallery images={product.images}/>
+                                    <ProductGallery images={product.images} />
                                     <ProductDetails product={product} />
                                 </>
                             }

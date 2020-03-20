@@ -6,9 +6,14 @@ import SearchBar from './SearchBar';
 
 import {
     navBar,
-    navLinks,
-    logo
+    navLink,
+    logo,
+    active
 } from './NavBar.module.scss';
+
+const StyledLink = ({ children, ...props}) => {
+    return <NavLink className={navLink} activeClassName={active} {...props}>{children}</NavLink>
+}
 
 const NavBar = () => {
     const history = useHistory();
@@ -29,10 +34,10 @@ const NavBar = () => {
             <Wrapper flex>
                 <Link to='/' className={logo}>Auction</Link>
                 <SearchBar handleSearch={handleSearch} name='search' placeholder='e.g. laptops'/>
-                <ul className={navLinks}>
-                    <NavLink exact to='/'>HOME</NavLink>
-                    <NavLink to='/shop'>SHOP</NavLink>
-                    <NavLink to='/myaccount'>MY ACCOUNT</NavLink>
+                <ul>
+                    <StyledLink exact to='/'>HOME</StyledLink>
+                    <StyledLink to='/shop'>SHOP</StyledLink>
+                    <StyledLink to='/myaccount'>MY ACCOUNT</StyledLink>
                 </ul>
             </Wrapper>
         </nav>

@@ -4,19 +4,24 @@
     padding: 8px 0px;
 }
 
-.navLinks {
-    a {
-        text-decoration: none;
-        color: $dark-1;
-        font-weight: 300;
-        margin-left: 24px;
-        font-size: 14px;
-    }
+.navLink {
+    display: inline-block;
+    padding: 8px;
+    text-decoration: none;
+    color: $dark-1;
+    font-weight: 300;
+    margin-left: 8px;
+    font-size: 14px;
+    transition: all 100ms ease-in-out;
 
-    .active {
-        color: $primary;
-        font-weight: 700;
+    &:hover {
+        transform: scale(1.05);
     }
+}
+
+.active {
+    color: $primary;
+    font-weight: 700;
 }
 
 .logo {

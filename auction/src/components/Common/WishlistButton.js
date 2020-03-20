@@ -4,10 +4,10 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 import Button from './Button';
 
-const WishlistButton = () => {
+const WishlistButton = ({...props}) => {
     return (
-        <Button > 
-            Whishlist
+        <Button {...props}> 
+            Wishlist
             <FontAwesomeIcon className='icon-right' icon={faHeart}/>
         </Button>
     )

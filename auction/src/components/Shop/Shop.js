@@ -50,7 +50,6 @@ const Shop = () => {
                 setProducts(products);
             })
             .catch(err => console.log(err));
-        
     }, [category, subcategory, search]);
 
     return (

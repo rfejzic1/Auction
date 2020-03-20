@@ -18,8 +18,8 @@ const ProductCard = ({ product }) => {
             <div className={productCard}>
                 <img src={image} alt="Product"/>
                 <div className={overlay}>
-                    <WishlistButton block product={product} />
-                    <BidButton hammer text='Bid' product={product} />
+                    <WishlistButton block product={product} fill='light' outline='none'/>
+                    <BidButton hammer text='Bid' fill='light' outline='none' product={product}/>
                 </div>
                 <span className={productName}>
                     {product.name}

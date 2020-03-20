@@ -68,7 +68,10 @@ const Register = () => {
                             <FormGroup>
                                 <Button 
                                     onClick={handleRegister}
-                                    type='primary' 
+                                    fill='primary'
+                                    outline='none'
+                                    strong
+                                    fat
                                     fullWidth>
                                         Register
                                 </Button>

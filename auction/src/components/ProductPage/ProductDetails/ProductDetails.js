@@ -1,9 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import { TextField, FormGroup, WishlistButton, BidButton } from '../../Common';
+import {
+    TextField,
+    FormGroup,
+    WishlistButton,
+    BidButton,
+    Divider
+} from '../../Common';
 
-import { productDetails, price, info } from './ProductDetails.module.scss';
+import { 
+    productDetails,
+    price,
+    info,
+    highestBid as highestBidClass
+} from './ProductDetails.module.scss';
 
 import config from '../../../config';
 
@@ -55,7 +66,7 @@ const ProductDetails = ({ product }) => {
     }, [product.uuid]);
     
     const displayDate = milis => {
-        return new Date(milis).toString();
+        return new Date(milis).toDateString();
     };
 
     const handleValueUpdate = e => {
@@ -70,28 +81,26 @@ const ProductDetails = ({ product }) => {
         <div className={productDetails}>
             <h2>{product.name}</h2>
             <p className={price}>Starts at ${startPrice.toFixed(2)}</p>
-            <br/>
-            <TextField onChange={handleValueUpdate} />
-            <BidButton text='Place Bid' onClick={handleBid} className='outlined-primary uppercase' product={product} />
-            <br/>
-            <span className={info}>
-                {
-                    bids.length > 0 ? `Enter more than $${highestBid}` : `Enter $${highestBid || startPrice} or more`
-                }
-            </span>
-            <FormGroup>
-                <span className={info}>Highest bid: <span className='primary-bold' >{highestBid ? `$${highestBid}` : 'none'}</span></span>
-                <br/>
+            <FormGroup margin='none'>
+                <TextField onChange={handleValueUpdate} />
+                <BidButton text='Place Bid' outline='primary' fat onClick={handleBid} product={product}/>
+                <span className={info}>
+                    {
+                        bids.length > 0 ? `Enter more than $${highestBid}` : `Enter $${highestBid || startPrice} or more`
+                    }
+                </span>
+            </FormGroup>
+            <FormGroup margin='larger'>
+                <span className={info}>Highest bid: <span className={highestBidClass}>{highestBid ? `$${highestBid}` : 'none'}</span></span>
                 <span className={info}>No bids: {bids.length}</span>
-                <br/>
                 <span className={info}>Expires at {displayDate(product.endDate)}</span>
             </FormGroup>
-            <WishlistButton product={product}/>
-            <br/>
-            <br/>
-            <span>Details:</span>
-            <hr/>
-            <p>{product.description}</p>
+            <WishlistButton product={product} outline='gray' fat />
+            <FormGroup>
+                <span>Details:</span>
+                <Divider visible/>
+                <p>{product.description}</p>
+            </FormGroup>
         </div>
     )
 }

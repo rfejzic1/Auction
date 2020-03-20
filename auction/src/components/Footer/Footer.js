@@ -1,5 +1,8 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 import { Button, TextField, Social } from '../Common';
 
@@ -28,7 +31,10 @@ const Footer = () => {
                 <span className={title}>Newsletter</span>
                 <span>Enter your email address and get notified about new products. We hate spam!</span>
                 <TextField  className={textFieldDark} name='newsletter' placeholder='Your Email address'/>
-                <Button className='btn-dark'>GO</Button>
+                <Button fill='dark' outline='primary' fat>
+                    GO
+                    <FontAwesomeIcon icon={faChevronRight} />
+                </Button>
             </Column>
         </footer>
     )

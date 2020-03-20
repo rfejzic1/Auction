@@ -26,5 +26,11 @@
         width: $size;
         height: $size;
         margin: 4px 0px;
+        transition: transform 75ms ease-in-out;
+
+        &:hover {
+            transform: scale(1.05);
+        }
     }
+
 }

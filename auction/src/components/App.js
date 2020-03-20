@@ -9,7 +9,6 @@ import Page404 from './Page404';
 import ProductPage from './ProductPage';
 import Footer from './Footer';
 
-import '../styles/App.scss';
 import { main } from './App.module.scss';
 
 import UserContextProvider from '../services/UserContext';

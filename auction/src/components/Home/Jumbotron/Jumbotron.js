@@ -37,7 +37,7 @@ const ProductHighlight = ({ product }) => {
                 <div className={description}>
                     {product.description}
                 </div>
-                <BidButton text='Bid now' className='outlined-primary uppercase' product={product} />
+                <BidButton text='Bid now' outline='primary' fat product={product} />
             </div>
             <img src={uri} alt='Product'/>
         </div>

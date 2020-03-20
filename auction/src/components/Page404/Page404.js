@@ -16,7 +16,7 @@ const Page404 = () => {
 
     return (
         <>
-        <Divider/>
+        <Divider />
         <Wrapper flex around>
             <h1 className={logo}>Auction</h1>
             <span className={header}>404</span>

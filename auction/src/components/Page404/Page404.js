@@ -21,9 +21,7 @@ const Page404 = () => {
             <h1 className={logo}>Auction</h1>
             <span className={header}>404</span>
             <span className={message}>Oops! Looks like the page is Not Found...</span>
-            <Button className={goBackButton} onClick={goBack}>
-                Go Back
-            </Button>
+            <Button className={goBackButton} text='Go Back' onClick={goBack}/>
         </Wrapper>
         </>
     )

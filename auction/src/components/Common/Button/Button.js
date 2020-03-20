@@ -1,6 +1,8 @@
 import React from 'react'
 import classNames from 'classnames';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import {
     button as buttonClass,
     fillLight as fillLightClass,
@@ -13,10 +15,25 @@ import {
     outlinePrimary as outlinePrimaryClass,
     fullWidth as fullWidthClass,
     fat as fatClass,
-    strong as strongClass
+    strong as strongClass,
+    iconRight as iconRightClass,
+    iconLeft as iconLeftClass
 } from './Button.module.scss';
 
-const Button = ({ children, outline, fill, fat, strong, fullWidth, onClick, className }) => {
+const Button = props => {
+    const {
+        outline,
+        fill,
+        fat,
+        strong,
+        fullWidth,
+        className,
+        text,
+        iconLeft,
+        iconRight,
+        onClick
+    } = props;
+
     const classes = classNames(
         buttonClass,
         { [fillLightClass]: fill === 'light' },
@@ -35,7 +52,9 @@ const Button = ({ children, outline, fill, fat, strong, fullWidth, onClick, clas
 
     return (
         <button onClick={onClick} className={classes} type="button" >
-            {children}
+            {iconLeft && <FontAwesomeIcon className={iconLeftClass} icon={iconLeft}/>}
+            {text}
+            {iconRight && <FontAwesomeIcon className={iconRightClass} icon={iconRight}/>}
         </button>
     )
 }

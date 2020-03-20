@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { Link, Redirect, useLocation } from 'react-router-dom';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGooglePlus, faFacebookSquare } from '@fortawesome/free-brands-svg-icons';
 
 import { UserContext } from '../../services/UserContext';
@@ -58,19 +57,22 @@ const Login = () => {
                                     outline='none'
                                     strong
                                     fat
-                                    fullWidth>
-                                        Login
-                                </Button>
+                                    fullWidth
+                                    text='Login'/>
                             </FormGroup>
-                            <FormGroup flex>
-                                <Button fill='gmail' outline='none' strong>
-                                    <FontAwesomeIcon icon={faGooglePlus}/>
-                                    <span>{' Login with Gmail'}</span>
-                                </Button>
-                                <Button fill='facebook' outline='none' strong>
-                                    <FontAwesomeIcon icon={faFacebookSquare}/>
-                                    <span>{' Login with Facebook'}</span>
-                                </Button>
+                            <FormGroup flex around>
+                                <Button
+                                    fill='gmail'
+                                    outline='none'
+                                    strong
+                                    text='Login with Gmail'
+                                    iconLeft={faGooglePlus}/>
+                                <Button
+                                    fill='facebook'
+                                    outline='none'
+                                    strong
+                                    text='Login with Facebook'
+                                    iconLeft={faFacebookSquare}/>
                             </FormGroup>
                             <FormGroup flex around>
                                 <Link to='#'>Forgot password?</Link>

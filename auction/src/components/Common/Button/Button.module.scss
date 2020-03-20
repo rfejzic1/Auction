@@ -2,6 +2,7 @@
 
 $padding-v: 12px;
 $padding-h: 20px;
+$icon-margin: 8px;
 
 .button {
     @extend %input-basic;
@@ -37,14 +38,14 @@ $padding-h: 20px;
 .fillGmail {
     @extend %btn-filled;
     background-color: $gmail-red;
-    max-width: 230px;
+    max-width: 235px;
     width: 100%;
 }
 
 .fillFacebook {
     @extend %btn-filled;
     background-color: $facebook-blue;
-    max-width: 230px;
+    max-width: 235px;
     width: 100%;
 }
 
@@ -75,4 +76,12 @@ $padding-h: 20px;
 .strong {
     text-transform: uppercase;
     font-weight: 700;
+}
+
+.iconLeft {
+    margin-right: $icon-margin;
+}
+
+.iconRight {
+    margin-left: $icon-margin;
 }

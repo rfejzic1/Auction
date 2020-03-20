@@ -72,9 +72,8 @@ const Register = () => {
                                     outline='none'
                                     strong
                                     fat
-                                    fullWidth>
-                                        Register
-                                </Button>
+                                    fullWidth
+                                    text='Register'/>
                             </FormGroup>
 
                             <FormGroup flex around>

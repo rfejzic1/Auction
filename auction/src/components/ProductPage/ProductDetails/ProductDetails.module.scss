@@ -1,0 +1,40 @@
+@import "src/styles/colors";
+
+.productDetails {
+    padding: 16px 32px;
+    color: $dark-1;
+
+    h2 {
+        font-size: 40px;
+        font-weight: 400;
+        margin-bottom: 16px;
+    }
+
+    hr {
+        background-color: $dark-1;
+        margin: 8px 0px;
+    }
+}
+
+p {
+    color: $dark-1;
+}
+
+.price {
+    display: inline-block;
+    color: $primary;
+    font-size: 20px;
+    margin-bottom: 16px;
+}
+
+.highestBid {
+    color: $primary;
+    font-weight: 700;
+}
+
+.info {
+    display: block;
+    font-size: 14px;
+    color: #9b9b9b;
+    margin: 8px 0px;
+}

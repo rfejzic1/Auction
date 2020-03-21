@@ -1,0 +1,22 @@
+@import "src/styles/colors";
+
+.searchBar {
+    display: inline-block;
+    position: relative;
+    justify-self: center;
+    align-self: center;
+    width: 420px;
+
+    .searchField {
+        width: 100%;
+        padding-right: 42px;
+        box-shadow: 0 0 2px 1px rgba($color: $dark-1, $alpha: 0.1);
+    }
+
+    svg {
+        transform-origin: center;
+        position: absolute;
+        right: 16px;
+        top: 18px
+    }
+}

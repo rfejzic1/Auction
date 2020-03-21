@@ -1,0 +1,87 @@
+@import "../input";
+
+$padding-v: 12px;
+$padding-h: 20px;
+$icon-margin: 8px;
+
+.button {
+    @extend %input-basic;
+    min-width: 96px;
+    padding: $padding-v $padding-h;
+    transition: all 100ms ease-in-out;
+
+    &:hover {
+        opacity: 0.8;
+        transform: scale(1.05);
+    }
+
+    &:focus {
+        opacity: 0.9;
+    }
+}
+
+%btn-filled {
+    color: white;
+}
+
+.fillLight {
+    @extend %btn-filled;
+    background-color: white;
+    color: $dark-1;
+}
+
+.fillPrimary {
+    @extend %btn-filled;
+    background-color: $primary;
+}
+
+.fillGmail {
+    @extend %btn-filled;
+    background-color: $gmail-red;
+    max-width: 235px;
+    width: 100%;
+}
+
+.fillFacebook {
+    @extend %btn-filled;
+    background-color: $facebook-blue;
+    max-width: 235px;
+    width: 100%;
+}
+
+.fillDark {
+    @extend %btn-filled;
+    background-color: $dark-1;
+}
+
+.outlineNone {
+    border: none;
+}
+
+.outlineGray {
+    border: 1px solid #ececec;
+    padding: ($padding-v - 1px) $padding-h;
+}
+
+.outlinePrimary {
+    border: 1px solid $primary;
+    padding: ($padding-v - 1px) $padding-h;
+}
+
+.fat {
+    border-width: 2px;
+    box-shadow: 2px 2px 1px 1px rgba($color: $dark-1, $alpha: 0.15);
+}
+
+.strong {
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.iconLeft {
+    margin-right: $icon-margin;
+}
+
+.iconRight {
+    margin-left: $icon-margin;
+}

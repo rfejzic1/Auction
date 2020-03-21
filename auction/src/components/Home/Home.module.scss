@@ -1,0 +1,38 @@
+@import "src/styles/colors";
+
+.homeSection {
+    color: $dark-1;
+    position: relative;
+
+    hr {
+        transform: translateY(-2px);
+        z-index: -10;
+        border: 1px solid #d8d8d8;
+    }
+}
+
+.header, .tab {
+    display: inline-block;
+    font-size: 20px;
+    padding: 16px 0px;
+    margin-right: 16px;
+}
+
+.tab {
+    cursor: pointer;
+}
+
+.active {
+    border-bottom: 2px solid $primary;
+}
+
+.tiledGallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    padding: 16px 0px;
+}
+
+.cols4 {
+    grid-template-columns: repeat(4, 1fr);
+}

@@ -1,0 +1,15 @@
+.divider {
+    display: block;
+    opacity: 0;
+    margin: 32px 0px;
+    border: none;
+    border-top: 3px solid #ececec;
+}
+
+.visible {
+    opacity: 1;
+}
+
+.dividerSmaller {
+    margin: 16px 0px;
+}

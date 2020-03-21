@@ -1,0 +1,12 @@
+.social {
+    a {
+        display: inline !important;
+        font-size: 20px !important;
+        color: rgba($color: white, $alpha: 0.4) !important;
+        margin-right: 4px !important;
+
+        &:hover {
+            color: rgba($color: white, $alpha: 0.6) !important;
+        }
+    }
+}

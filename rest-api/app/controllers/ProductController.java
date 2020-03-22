@@ -7,6 +7,7 @@ import models.Product;
 import models.User;
 import payload.Page;
 import payload.ProductAuctionPayload;
+import payload.ProductFilter;
 import services.CategorizationService;
 import services.ProductService;
 
@@ -28,19 +29,13 @@ public class ProductController extends Controller {
     private final ProductService productService;
     private final CategorizationService categorizationService;
 
-    public CompletionStage<Result> getProducts(String category, String subcategory, String orderBy, Integer page, Integer size) {
+    public CompletionStage<Result> getProducts(String category, String subcategory, String orderBy, Integer page, Integer size, Integer minPrice, Integer maxPrice) {
         Page pageData = productService.makePage(orderBy, page, size);
+        ProductFilter productFilter = productService.makeFilter(category, subcategory, minPrice, maxPrice);
 
         Function<List<Product>, Result> productsToJsonMapper = products -> ok(Json.toJson(productService.makeProductResponses(products)));
 
-        if (category != null) {
-            if (subcategory != null) {
-                return productService.getProductsBySubcategory(category, subcategory, pageData).thenApply(productsToJsonMapper);
-            }
-            return productService.getProductsByCategory(category, pageData).thenApply(productsToJsonMapper);
-        }
-
-        return productService.getProducts(pageData).thenApply(productsToJsonMapper);
+        return productService.getProducts(productFilter, pageData).thenApply(productsToJsonMapper);
     }
 
     public CompletionStage<Result> get(String id) {

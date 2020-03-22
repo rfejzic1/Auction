@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import models.*;
 import payload.Page;
 import payload.ProductAuctionPayload;
+import payload.ProductFilter;
 import payload.ProductResponse;
 import play.libs.concurrent.HttpExecutionContext;
 import repositories.ProductRepository;
@@ -33,18 +34,8 @@ public class ProductService {
                 .thenApplyAsync(product -> product.orElse(null), ec.current());
     }
 
-    public CompletionStage<List<Product>> getProducts(Page page) {
-        return productRepository.getProducts(page)
-                .thenApplyAsync(Function.identity(), ec.current());
-    }
-
-    public CompletionStage<List<Product>> getProductsByCategory(String category, Page page) {
-        return productRepository.findByCategory(category, page)
-                .thenApplyAsync(Function.identity(), ec.current());
-    }
-
-    public CompletionStage<List<Product>> getProductsBySubcategory(String category, String subcategory, Page page) {
-        return productRepository.findBySubcategory(category, subcategory, page)
+    public CompletionStage<List<Product>> getProducts(ProductFilter filter, Page page) {
+        return productRepository.getProducts(filter, page)
                 .thenApplyAsync(Function.identity(), ec.current());
     }
 
@@ -128,5 +119,9 @@ public class ProductService {
         }
 
         return new Page(orderByOption, pageNumber, pageSize);
+    }
+
+    public ProductFilter makeFilter(String category, String subcategory, Integer minPrice, Integer maxPrice) {
+        return new ProductFilter(category, subcategory, minPrice, maxPrice);
     }
 }

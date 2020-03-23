@@ -10,6 +10,9 @@ public class Constants {
         public static final String NOT_FOUND = "Resource not found";
         public static final String BAD_UUID = "Bad UUID";
         public static final String USER_NOT_FOUND = "User not found";
+        public static final String BAD_ORDER_BY = "No such ordering option";
+        public static final String NEGATIVE_PAGE_NUMBER = "Negative page number";
+        public static final String BAD_PAGE_SIZE = "Bad page size";
     }
 
     public static final class Fields {
@@ -25,6 +28,9 @@ public class Constants {
         public static final String PRODUCT_ID = "product_id";
         public static final String USER_ID = "user_id";
         public static final String VALUE = "value";
+        public static final String AUCTION = "auction";
+        public static final String START_PRICE = "startPrice";
+        public static final String START_DATE = "startDate";
     }
 
     public static final class Queries {
@@ -37,4 +43,7 @@ public class Constants {
 
     public static final String KEY = "auction-secret";
     public static final String BEARER_REGEX = "Bearer .+";
+    public static final Integer MIN_PAGE_SIZE = 1;
+    public static final Integer DEFAULT_PAGE_SIZE = 8;
+    public static final Integer MAX_PAGE_SIZE = 32;
 }

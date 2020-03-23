@@ -10,7 +10,7 @@ POST    /login                      controllers.UserController.login(request: Re
 GET     /products/:id/bids          controllers.BidController.getProductBids(id)
 POST    /products/:id/bids          controllers.BidController.placeBid(id, request: Request)
 GET     /products/:id               controllers.ProductController.get(id)
-GET     /products                   controllers.ProductController.getProducts(category ?= null, subcategory ?= null)
+GET     /products                   controllers.ProductController.getProducts(category ?= null, subcategory ?= null, orderBy ?= null, page: Integer ?= 0, size: Integer ?= 8, minPrice: Integer ?= null, maxPrice: Integer ?= null)
 POST    /products                   controllers.ProductController.sell(request: Request)
 
 GET     /categories                 controllers.ProductController.getCategories

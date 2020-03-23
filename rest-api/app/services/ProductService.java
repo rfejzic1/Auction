@@ -1,8 +1,12 @@
 package services;
 
+import common.Constants;
+import common.OrderByOption;
 import lombok.RequiredArgsConstructor;
 import models.*;
+import payload.Page;
 import payload.ProductAuctionPayload;
+import payload.ProductFilter;
 import payload.ProductResponse;
 import play.libs.concurrent.HttpExecutionContext;
 import repositories.ProductRepository;
@@ -22,10 +26,6 @@ public class ProductService {
     private final HttpExecutionContext ec;
     private final CategorizationService categorizationService;
 
-    public CompletionStage<List<Product>> getAll() {
-        return productRepository.getAll()
-                .thenApplyAsync(Function.identity(), ec.current());
-    }
 
     public CompletionStage<Product> getProduct(String id) {
         UUID uuid = UUID.fromString(id);
@@ -34,13 +34,8 @@ public class ProductService {
                 .thenApplyAsync(product -> product.orElse(null), ec.current());
     }
 
-    public CompletionStage<List<Product>> getProductsByCategory(String category) {
-        return productRepository.findByCategory(category)
-                .thenApplyAsync(Function.identity(), ec.current());
-    }
-
-    public CompletionStage<List<Product>> getProductsBySubcategory(String category, String subcategory) {
-        return productRepository.findBySubcategory(category, subcategory)
+    public CompletionStage<List<Product>> getProducts(ProductFilter filter, Page page) {
+        return productRepository.getProducts(filter, page)
                 .thenApplyAsync(Function.identity(), ec.current());
     }
 
@@ -106,4 +101,27 @@ public class ProductService {
         return response;
     }
 
+    public Page makePage(String orderBy, Integer pageNumber, Integer pageSize) {
+        OrderByOption orderByOption;
+
+        try {
+            orderByOption = Enum.valueOf(OrderByOption.class, orderBy);
+        } catch (IllegalArgumentException | NullPointerException err) {
+            orderByOption = OrderByOption.NAME;
+        }
+
+        if (pageNumber < 0) {
+            pageNumber = 0;
+        }
+
+        if(pageSize < Constants.MIN_PAGE_SIZE || pageSize > Constants.MAX_PAGE_SIZE) {
+            pageSize = Constants.DEFAULT_PAGE_SIZE;
+        }
+
+        return new Page(orderByOption, pageNumber, pageSize);
+    }
+
+    public ProductFilter makeFilter(String category, String subcategory, Integer minPrice, Integer maxPrice) {
+        return new ProductFilter(category, subcategory, minPrice, maxPrice);
+    }
 }

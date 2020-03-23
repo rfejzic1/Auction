@@ -3,8 +3,11 @@ package controllers;
 import actions.JWTAuthenticated;
 import common.Constants;
 import common.JsonResponseObjects;
+import models.Product;
 import models.User;
+import payload.Page;
 import payload.ProductAuctionPayload;
+import payload.ProductFilter;
 import services.CategorizationService;
 import services.ProductService;
 
@@ -17,26 +20,22 @@ import play.mvc.Http;
 import play.mvc.Result;
 
 import javax.inject.Inject;
+import java.util.List;
 import java.util.concurrent.CompletionStage;
+import java.util.function.Function;
 
 @AllArgsConstructor(onConstructor=@__(@Inject))
 public class ProductController extends Controller {
     private final ProductService productService;
     private final CategorizationService categorizationService;
 
-    public CompletionStage<Result> getProducts(String category, String subcategory) {
-        if (category != null) {
-            if (subcategory != null) {
-                return productService.getProductsBySubcategory(category, subcategory)
-                        .thenApply(products -> ok(Json.toJson(productService.makeProductResponses(products))));
-            }
+    public CompletionStage<Result> getProducts(String category, String subcategory, String orderBy, Integer page, Integer size, Integer minPrice, Integer maxPrice) {
+        Page pageData = productService.makePage(orderBy, page, size);
+        ProductFilter productFilter = productService.makeFilter(category, subcategory, minPrice, maxPrice);
 
-            return productService.getProductsByCategory(category)
-                    .thenApply(products -> ok(Json.toJson(productService.makeProductResponses(products))));
-        }
+        Function<List<Product>, Result> productsToJsonMapper = products -> ok(Json.toJson(productService.makeProductResponses(products)));
 
-        return productService.getAll()
-                .thenApply(products -> ok(Json.toJson(productService.makeProductResponses(products))));
+        return productService.getProducts(productFilter, pageData).thenApply(productsToJsonMapper);
     }
 
     public CompletionStage<Result> get(String id) {

@@ -28,7 +28,9 @@ public class Constants {
         public static final String PRODUCT_ID = "product_id";
         public static final String USER_ID = "user_id";
         public static final String VALUE = "value";
-        public static final String COLUMN = "column";
+        public static final String AUCTION = "auction";
+        public static final String START_PRICE = "startPrice";
+        public static final String START_DATE = "startDate";
     }
 
     public static final class Queries {

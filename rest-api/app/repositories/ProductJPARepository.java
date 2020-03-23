@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CompletionStage;
 
+import static common.Constants.Fields.*;
 import static java.util.concurrent.CompletableFuture.supplyAsync;
 
 @Singleton
@@ -51,19 +52,19 @@ public class ProductJPARepository extends JPARepository<Product, UUID> implement
         List<Predicate> predicates = new ArrayList<>();
 
         if (filter.getCategory() != null) {
-            predicates.add(criteriaBuilder.like(root.get("subcategory").get("category").get("name"), filter.getCategory()));
+            predicates.add(criteriaBuilder.like(root.get(SUBCATEGORY).get(CATEGORY).get(NAME), filter.getCategory()));
 
             if(filter.getSubcategory() != null) {
-                predicates.add(criteriaBuilder.like(root.get("subcategory").get("name"), filter.getSubcategory()));
+                predicates.add(criteriaBuilder.like(root.get(SUBCATEGORY).get(NAME), filter.getSubcategory()));
             }
         }
 
         if (filter.getMinPrice() != null) {
-            predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("auction").get("startPrice"), filter.getMinPrice()));
+            predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get(AUCTION).get(START_PRICE), filter.getMinPrice()));
         }
 
         if (filter.getMaxPrice() != null) {
-            predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get("auction").get("startPrice"), filter.getMaxPrice()));
+            predicates.add(criteriaBuilder.lessThanOrEqualTo(root.get(AUCTION).get(START_PRICE), filter.getMaxPrice()));
         }
 
         return predicates.toArray(new Predicate[0]);
@@ -72,11 +73,11 @@ public class ProductJPARepository extends JPARepository<Product, UUID> implement
     private Order getOrder(CriteriaBuilder criteriaBuilder, Root<Product> root, OrderByOption orderByOption) {
         switch(orderByOption) {
             case PRICE_LOWEST:
-                return criteriaBuilder.asc(root.get("auction").get("startPrice"));
+                return criteriaBuilder.asc(root.get(AUCTION).get(START_PRICE));
             case NEWEST:
-                return criteriaBuilder.desc(root.get("auction").get("startDate"));
+                return criteriaBuilder.desc(root.get(AUCTION).get(START_DATE));
             default:
-                return criteriaBuilder.asc(root.get("name"));
+                return criteriaBuilder.asc(root.get(NAME));
         }
     }
 

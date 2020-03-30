@@ -15,6 +15,7 @@ import {
     noProductsMessage,
     viewBar as viewBarClass
 } from './Shop.module.scss';
+import ProductListItem from './ProductListItem/ProductListItem';
 
 const PAGE_SIZE = 9;
 
@@ -63,13 +64,16 @@ const ViewBar = ({ onOrderByChange }) => {
     );
 }
 
-const ProductsView = ({ products, canLoadNewPage, loadNextPage }) => {
+const ProductsView = ({ products, canLoadNewPage, loadNextPage, listView }) => {
     if (products.length > 0) {
         return (
             <>
-                <Grid>
+                <Grid list={listView}>
                     {products.map((product, index) => {
-                        return <ProductCard key={index} product={product} />
+                        return listView ? 
+                        <ProductListItem key={index} product={product} />
+                        :
+                        <ProductCard key={index} product={product} />
                     })}
                 </Grid>
                 <Divider />
@@ -142,6 +146,7 @@ const Shop = () => {
                     <main>
                         <ViewBar onOrderByChange={handleOrderByChange}/>
                         <ProductsView
+                            listView
                             products={products}
                             canLoadNewPage={canLoadNewPage}
                             loadNextPage={loadNextPage}/>

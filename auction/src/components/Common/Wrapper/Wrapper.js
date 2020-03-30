@@ -5,15 +5,17 @@ import {
     wrapper,
     flex as flexClass,
     flexAround,
-    flexNormal
+    flexNormal,
+    noPadding as noPaddingClass
 } from './Wrapper.module.scss';
 
-const Wrapper = ({ children, flex, around, normal }) => {
+const Wrapper = ({ children, flex, around, normal, noPadding }) => {
     const classes = classNames(
         wrapper,
         { [flexClass]: flex },
         { [flexAround]: around },
-        { [flexNormal]: normal }
+        { [flexNormal]: normal },
+        { [noPaddingClass]: noPadding }
     );
 
     return (

@@ -1,10 +1,19 @@
 import React from 'react'
+import classNames from 'classnames';
 
-import { grid } from './Grid.module.scss';
+import { 
+    grid,
+    list as listClass
+} from './Grid.module.scss';
 
-const Grid = ({ children }) => {
+const Grid = ({ children, list }) => {
+    const classes = classNames(
+        grid,
+        { [listClass]: list }
+    );
+
     return (
-        <div className={grid}>
+        <div className={classes}>
             {children}
         </div>
     )

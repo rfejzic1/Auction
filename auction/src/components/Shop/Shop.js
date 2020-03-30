@@ -3,6 +3,8 @@ import { useLocation, Link } from 'react-router-dom';
 import axios from 'axios';
 import queryString from 'query-string';
 
+import { faTh, faList } from '@fortawesome/free-solid-svg-icons';
+
 import { Wrapper, Grid, Divider, Button, SelectField } from '../Common';
 import PageLayout from '../PageLayout'
 import SubcategoryList from './SubcategoryList';
@@ -40,7 +42,9 @@ const getProducts = async ({ category, subcategory, page, orderBy }) => {
     }
 };
 
-const ViewBar = ({ onOrderByChange }) => {
+const ViewBar = ({ onOrderByChange, onViewChange }) => {
+    const [viewList, setViewList] = useState(false);
+
     const orderByOptions = [
         {
             name: 'Sort by name',
@@ -56,10 +60,30 @@ const ViewBar = ({ onOrderByChange }) => {
         }
     ];
     
+    const handleViewButton = isListView => {
+        setViewList(isListView);
+        onViewChange(isListView);
+    }
+
+    const buttonBackgroundFill = isListView => isListView ? 'primary' : 'light';
+
     return (
         <div className={viewBarClass}>
             <SelectField options={orderByOptions} onChange={onOrderByChange}/>
-
+            <span>
+                <Button 
+                    onClick={() => handleViewButton(false)}
+                    text='Grid' iconRight={faTh}
+                    fill={buttonBackgroundFill(!viewList)}
+                    outline='none'
+                    />
+                <Button
+                    onClick={() => handleViewButton(true)}
+                    text='List' iconRight={faList}
+                    fill={buttonBackgroundFill(viewList)}
+                    outline='none'
+                    />
+            </span>
         </div>
     );
 }
@@ -112,6 +136,7 @@ const Shop = () => {
     const [currentPage, setCurrentPage] = useState(0);
     const [canLoadNewPage, setCanLoadNewPage] = useState(true);
     const [orderBy, setOrderBy] = useState('');
+    const [isListView, setIsListView] = useState(false);
 
     const location = useLocation();
     const { category, subcategory } = queryString.parse(location.search);
@@ -135,6 +160,10 @@ const Shop = () => {
         setOrderBy(value);
     };
 
+    const handleViewChange = listView => {
+        setIsListView(listView);
+    }
+
     return (
         <PageLayout>
             <Divider smaller/>
@@ -144,9 +173,12 @@ const Shop = () => {
                         <SubcategoryList defaultCategory={category}/>
                     </aside>
                     <main>
-                        <ViewBar onOrderByChange={handleOrderByChange}/>
+                        <ViewBar 
+                            onOrderByChange={handleOrderByChange}
+                            onViewChange={handleViewChange}
+                            />
                         <ProductsView
-                            listView
+                            listView={isListView}
                             products={products}
                             canLoadNewPage={canLoadNewPage}
                             loadNextPage={loadNextPage}/>

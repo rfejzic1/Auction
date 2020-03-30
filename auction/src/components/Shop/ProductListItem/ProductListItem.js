@@ -18,7 +18,7 @@ const ProductListItem = ({ product }) => {
 
     return (
         <Wrapper flex normal noPadding>
-            <img className={imageClass} src={image}/>
+            <img alt='Product' className={imageClass} src={image}/>
             <div className={detailsClass}>
                 <p className={title}>{name}</p>
                 <p className={descriptionClass}>{description}</p>

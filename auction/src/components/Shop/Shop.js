@@ -130,33 +130,58 @@ const ProductsView = ({ products, canLoadNewPage, loadNextPage, listView }) => {
 } 
 
 const Shop = () => {
+    // const [products, setProducts] = useState([]);
+    // const [isListView, setIsListView] = useState(false);
+    // const [canLoadNewPage, setCanLoadNewPage] = useState(true);
+    // const location = useLocation();
+    // const { category, subcategory } = queryString.parseUrl(location.search);
+    
+    // useEffect(() => {
+    //     getProducts({ category, subcategory })
+    //         .then(loadedProducts => {
+    //             setCanLoadNewPage(loadedProducts.length >= PAGE_SIZE);
+    //             setProducts([...loadedProducts]);
+    //         });
+    // }, [category, subcategory]);
+
     const [products, setProducts] = useState([]);
+    const [currentPage, setCurrentPage] = useState(0);
+    const [canLoadNewPage, setCanLoadNewPage] = useState(true);
+    const [orderBy, setOrderBy] = useState('');
     const [isListView, setIsListView] = useState(false);
-    const canLoadNewPage = false;
 
     const location = useLocation();
-    const { category, subcategory } = queryString.parseUrl(location.search);
-    
+    const { category, subcategory } = queryString.parse(location.search);
+
     useEffect(() => {
-        getProducts({ category, subcategory })
+        getProducts({ category, subcategory, page: currentPage, orderBy })
             .then(loadedProducts => {
+                setCanLoadNewPage(loadedProducts.length >= PAGE_SIZE);
                 setProducts([...loadedProducts]);
-            });
-    }, [category, subcategory]);
+                setCurrentPage(0);
+            })
+            .catch(err => console.log(err));
+    }, [category, subcategory, orderBy]);
+
+    useEffect(() => {
+        getProducts({ category, subcategory, page: currentPage, orderBy })
+            .then(loadedProducts => {
+                setCanLoadNewPage(loadedProducts.length >= PAGE_SIZE);
+                if(currentPage === 0) {
+                    setProducts([...loadedProducts]);
+                } else {
+                    setProducts([...products, ...loadedProducts]);
+                }
+            })
+            .catch(err => console.log(err));
+    }, [currentPage]);
 
     const loadNextPage = () => {
-        
+        setCurrentPage(currentPage + 1);
     };
 
     const handleOrderByChange = ({ value }) => {
-        const orderFunctions = {
-            'NAME': (a, b) => a.name.localeCompare(b.name),
-            'NEWEST': (a, b) => a.startDate - b.startDate,
-            'PRICE_LOWEST': (a, b) => a.startPrice - b.startPrice
-        };
-
-        const orderedProducts = [...products].sort(orderFunctions[value]);
-        setProducts(orderedProducts);
+        setOrderBy(value);
     };
 
     const handleViewChange = listView => {
@@ -190,24 +215,3 @@ const Shop = () => {
 }
 
 export default Shop
-
-
-/*
-    const [products, setProducts] = useState([]);
-    const [currentPage, setCurrentPage] = useState(0);
-    const [canLoadNewPage, setCanLoadNewPage] = useState(true);
-    const [orderBy, setOrderBy] = useState('');
-    const [isListView, setIsListView] = useState(false);
-
-    const location = useLocation();
-    const { category, subcategory } = queryString.parse(location.search);
-
-    useEffect(() => {
-        getProducts({ category, subcategory, page: currentPage, orderBy })
-            .then(loadedProducts => {
-                setCanLoadNewPage(loadedProducts.length >= PAGE_SIZE);
-                setProducts([...products, ...loadedProducts]);
-            })
-            .catch(err => console.log(err));
-    }, [category, subcategory, currentPage, orderBy]);
-*/

@@ -1,0 +1,5 @@
+@import "../input";
+
+.numberField {
+    @extend %input-basic;
+}

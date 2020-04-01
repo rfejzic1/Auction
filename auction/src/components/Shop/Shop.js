@@ -9,6 +9,7 @@ import { Wrapper, Grid, Divider, Button, SelectField } from '../Common';
 import PageLayout from '../PageLayout'
 import SubcategoryList from './SubcategoryList';
 import ProductCard from './ProductCard';
+import PriceFilter from './PriceFilter';
 
 import config from '../../config';
 
@@ -130,20 +131,6 @@ const ProductsView = ({ products, canLoadNewPage, loadNextPage, listView }) => {
 } 
 
 const Shop = () => {
-    // const [products, setProducts] = useState([]);
-    // const [isListView, setIsListView] = useState(false);
-    // const [canLoadNewPage, setCanLoadNewPage] = useState(true);
-    // const location = useLocation();
-    // const { category, subcategory } = queryString.parseUrl(location.search);
-    
-    // useEffect(() => {
-    //     getProducts({ category, subcategory })
-    //         .then(loadedProducts => {
-    //             setCanLoadNewPage(loadedProducts.length >= PAGE_SIZE);
-    //             setProducts([...loadedProducts]);
-    //         });
-    // }, [category, subcategory]);
-
     const [products, setProducts] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
     const [canLoadNewPage, setCanLoadNewPage] = useState(true);
@@ -195,6 +182,7 @@ const Shop = () => {
                 <div className={shop}>
                     <aside>
                         <SubcategoryList defaultCategory={category}/>
+                        <PriceFilter />
                     </aside>
                     <main>
                         <ViewBar 

@@ -22,7 +22,7 @@ import ProductListItem from './ProductListItem/ProductListItem';
 
 const PAGE_SIZE = 9;
 
-const getProducts = async ({ category, subcategory, page, orderBy }) => {
+const getProducts = async ({ category, subcategory, page, orderBy, minPrice, maxPrice }) => {
     try {    
         const res = await axios({
             baseURL: config.API_URL,
@@ -32,7 +32,9 @@ const getProducts = async ({ category, subcategory, page, orderBy }) => {
                 subcategory,
                 page,
                 size: PAGE_SIZE,
-                orderBy
+                orderBy,
+                minPrice,
+                maxPrice
             }
         })
         return res.data;
@@ -136,22 +138,24 @@ const Shop = () => {
     const [canLoadNewPage, setCanLoadNewPage] = useState(true);
     const [orderBy, setOrderBy] = useState('');
     const [isListView, setIsListView] = useState(false);
+    const [minPrice, setMinPrice] = useState(null);
+    const [maxPrice, setMaxPrice] = useState(null);
 
     const location = useLocation();
     const { category, subcategory } = queryString.parse(location.search);
 
     useEffect(() => {
-        getProducts({ category, subcategory, page: currentPage, orderBy })
+        getProducts({ category, subcategory, page: currentPage, orderBy, minPrice, maxPrice })
             .then(loadedProducts => {
                 setCanLoadNewPage(loadedProducts.length >= PAGE_SIZE);
                 setProducts([...loadedProducts]);
                 setCurrentPage(0);
             })
             .catch(err => console.log(err));
-    }, [category, subcategory, orderBy]);
+    }, [category, subcategory, orderBy, minPrice, maxPrice]);
 
     useEffect(() => {
-        getProducts({ category, subcategory, page: currentPage, orderBy })
+        getProducts({ category, subcategory, page: currentPage, orderBy, minPrice, maxPrice })
             .then(loadedProducts => {
                 setCanLoadNewPage(loadedProducts.length >= PAGE_SIZE);
                 if(currentPage === 0) {
@@ -175,6 +179,11 @@ const Shop = () => {
         setIsListView(listView);
     }
 
+    const handlePriceFilter = (minPrice, maxPrice) => {
+        setMinPrice(minPrice);
+        setMaxPrice(maxPrice);
+    };
+
     return (
         <PageLayout>
             <Divider smaller/>
@@ -182,7 +191,7 @@ const Shop = () => {
                 <div className={shop}>
                     <aside>
                         <SubcategoryList defaultCategory={category}/>
-                        <PriceFilter />
+                        <PriceFilter onFilter={handlePriceFilter}/>
                     </aside>
                     <main>
                         <ViewBar 

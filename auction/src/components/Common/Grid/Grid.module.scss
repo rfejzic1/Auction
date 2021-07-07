@@ -3,3 +3,7 @@
     gap: 32px 16px;
     grid-template-columns: repeat(3, 1fr);
 }
+
+.list {
+    grid-template-columns: 1fr;
+}

@@ -11,3 +11,4 @@ export { default as TextField } from './TextField';
 export { default as Wrapper } from './Wrapper';
 export { default as BidButton } from './BidButton';
 export { default as WishlistButton } from './WishlistButton';
+export { default as NumberField } from './NumberField';

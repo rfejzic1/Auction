@@ -1,0 +1,20 @@
+@import "src/styles/colors";
+
+.block {
+    margin: 16px 0px;
+    padding: 12px;
+    width: 100%;
+    box-shadow: 0px 0px 1px 1px rgba($color: $dark-1, $alpha: 0.15);
+}
+
+.header {
+    font-size: 16px;
+    margin-bottom: 12px;
+    color: $primary;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.rangeInput {
+    
+}

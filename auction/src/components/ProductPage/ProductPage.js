@@ -10,47 +10,74 @@ import ProductDetails from './ProductDetails';
 
 import config from '../../config';
 
-const getProduct = async (uuid, setProduct) => {
+const getProduct = async uuid => {
     try {
         const res = await axios({
             url: `/products/${uuid}`,
             baseURL: config.API_URL
         });
-        return setProduct(res.data);
+        return res.data;
     } catch {
-        return setProduct(null);
+        return null;
     }
+};
+
+const useProduct = (uuid) => {
+    const [loading, setLoading] = useState(true);
+    const [product, setProduct] = useState(null);
+
+    useEffect(() => {
+        getProduct(uuid)
+            .then(resProduct => {
+                setLoading(false);
+                setProduct(resProduct);
+            });
+    }, [uuid]);
+
+    return {
+        loading, product
+    };
 }
+
+const Page = ({ children }) => {
+    return (
+        <PageLayout>
+            <Breadcrumbs current='Single Product' path='Shop/' />
+            <Divider smaller />
+            <Wrapper flex normal >
+                {children}
+            </Wrapper>
+            <Divider />
+        </PageLayout>
+    );
+};
 
 const ProductPage = () => {
     const params = useParams();
     const { uuid: productUUID } = params;
-
-    const [product, setProduct] = useState(null);
-
-    useEffect(() => {
-        getProduct(productUUID, setProduct);
-    }, [productUUID]);
+    const { loading, product } = useProduct(productUUID);
 
     return (
         <>
             {
-                product ?
-                    <PageLayout>
-                        <Breadcrumbs current='Single Product' path='Shop/' />
-                        <Divider smaller />
-                        <Wrapper flex normal >
+                loading ?
+                    <Page>
+                        <p>Loading...</p>
+                    </Page>
+                :
+                    (
+                    product ?
+                        <Page>
                             {
                                 product && <>
                                     <ProductGallery images={product.images} />
                                     <ProductDetails product={product} />
                                 </>
                             }
-                        </Wrapper>
-                        <Divider />
-                    </PageLayout>
-                :
-                    <Page404 />
+                        </Page>
+                    :
+                        <Page404 />
+                    )
             }
         </>
     )

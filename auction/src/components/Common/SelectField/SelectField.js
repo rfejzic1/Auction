@@ -10,10 +10,17 @@ const SelectField = props => {
         { [fullWidthClass]: fullWidth }
     );
 
+    const handleOnChange = e => {
+        const { value, text } = e.target.options[e.target.selectedIndex];
+        onChange({
+            value, text
+        });
+    };
+
     return (
-        <select onChange={onChange} className={classes} name={name} id={id}>
+        <select onChange={handleOnChange} className={classes} name={name} id={id}>
             { options.map((option, index) => {
-                return <option value={index}>{option}</option>
+                return <option key={index} value={option.value}>{option.name}</option>
             })}
         </select>
     )

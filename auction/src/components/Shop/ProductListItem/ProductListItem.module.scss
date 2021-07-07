@@ -1,0 +1,36 @@
+@import "src/styles/colors";
+$height: 280px;
+
+.details {
+   margin-left: 32px;
+}
+
+p {
+    margin-bottom: 8px;
+    text-align: justify;
+}
+
+.image {
+    background-color: #ececec;
+    width: 200px;
+    height: $height;
+    object-fit: contain;
+}
+
+.title {
+    font-weight: 700;
+    font-size: 20px;
+    color: $dark-1;
+    margin-bottom: 16px;
+}
+
+.description {
+    color: #9b9b9b;
+    font-size: 14px;
+}
+
+.price {
+    color: $primary;
+    font-size: 20px;
+    margin: 20px 0px;
+}
